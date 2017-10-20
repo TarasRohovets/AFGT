@@ -1,0 +1,42 @@
+﻿@model AFGT.Models.Organizadore
+
+@{
+    ViewBag.Title = @Html.DisplayFor(model => model.NomeOrg);
+}
+
+<h2>@Html.DisplayFor(model => model.NomeOrg)</h2>
+
+<div>
+    <div>
+        <img src="~/Content/Guts_Portrait.jpg" width="200" height="200"/> 
+    </div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <!--Tirei o  Html.DisplayNameFor(model => model.NomeOrg)-->  
+
+        <dd>
+           <b>Name:</b> @Html.DisplayFor(model => model.NomeOrg)
+        </dd>
+
+        <dd>
+           <b>Email: </b> @Html.DisplayFor(model => model.Email)
+        </dd>
+
+
+        <!-- Duvida depois aqui emrelacao aos links das fotos
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkFotoORG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkFotoORG)
+        </dd>
+            -->
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrgID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

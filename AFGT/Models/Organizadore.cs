@@ -22,7 +22,7 @@ namespace AFGT.Models
     
         public int OrgID { get; set; }
         public string NomeOrg { get; set; }
-        public string Email { get; set; }
+        public string Email {get; set; }
         public string Nipc { get; set; }
         public string Password { get; set; }
         public string LinkFotoORG { get; set; }
