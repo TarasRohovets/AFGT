@@ -8,10 +8,10 @@
     <div class="row">
         <div class="col-md-offset-2 col-md-10">
             <input type="text" class="form-control conteudo" />
-            <button class="btn btn-default pesquisa">Ir</button>
-            <select>
-                <option class="search">Artista</option>
-                <option class="search">Genero</option>
+            <button class="btn btn-default">Ir</button>
+            <select id="search">
+                <option value="Artista">Artista</option>
+                <option value="Genero">Genero</option>
             </select>
         </div>
     </div>
@@ -22,50 +22,59 @@
 
 <div class="row">
     <p>Pesquisar por:</p>
-    <select>
-        <option class="option">Data</option>
-        <option class="option">Local</option>
+    <select id="option">
+        <option value="Data">Data</option>
+        <option value="Local">Local</option>
     </select>
     <br>
-   <br> 
-    @{
-        var result = "Data";
-        @Html.Partial(result)
-        
-    }
+   <br>
+   <div class="active" id="Data">
+        @Html.Partial("Data")        
+   </div>
+   <div class="hidden" id="Local">
+        @Html.Partial("Local")
+   </div>
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-        var i;
-        var TipoPesquisa = $('.search').val();
-        var ConteudoPesquisa = $('.conteudo').text;
-        var TipoOpcao = $('.option').val();
 
-        while (!ConteudoPesquisa.length || i == 0) {
+        $('#option').change(function () {
+            var TipoOpcao = $('#option').val();
             if (TipoOpcao == "Local") {
-                result = "Local";
-            } 
-        }
+                $('#Data').removeClass('active').addClass('hidden');
+                $('#Local').removeClass('hidden').addClass('active');
+            } else {
+                $('#Local').removeClass('active').addClass('hidden');
+                $('#Data').removeClass('hidden').addClass('active');
+            }
+        })
 
-        $('button.pesquisa').click(function () {
-            i++;
+        $('button').click(function () {
+            var TipoPesquisa = $('#search').val();
+            var ConteudoPesquisa = $('.conteudo').text;
+            var TipoOpcao = $('#option').val();
+
             switch (TipoPesquisa) {
                 case "Artista":
                     if (TipoOpcao == "Local") {
                         var dist;
+                         "Artista-Local-OK!!"
                     } else {
-                        SortedEvent = Model.Artista.All(ConteudoPesquisa).Data.sort();
+                        "Artista- Data - OK!!";
+                        //SortedEvent = Model.Artista.All(ConteudoPesquisa).Data.sort();
                     }
                     break;
 
                 case "Genero":
                     if (TipoOpcao == "Local") {
                         var dist;
+                        "Genero-Local-OK!!"
                     } else {
-                        SortedEvent = Model.Genero.All(ConteudoPesquisa).Data.sort();
+                        //SortedEvent = Model.Genero.All(ConteudoPesquisa).Data.sort();
+                        "Genero-Local-OK!!"
                     }
                     break;
             }
