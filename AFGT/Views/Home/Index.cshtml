@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-md-offset-2 col-md-10">
             <input type="text" class="form-control conteudo" />
-            <button class="btn btn-default">Ir</button>
+            <button class="btn btn-default pesquisa">Ir</button>
             <select>
                 <option class="search">Artista</option>
                 <option class="search">Genero</option>
@@ -26,59 +26,50 @@
         <option class="option">Data</option>
         <option class="option">Local</option>
     </select>
-    <input type="date" class="form-control tipo" placeholder="dd/mm/aaaa"/> 
-    <input type="text" class="form-control tipo not-showing" placeholder="Localizacao" /> 
     <br>
-    <br>  
+   <br> 
     @{
-        var SortedEvent = Model.Data.sort();
-        foreach (var evento in SortedEvent)
-        {
-            <div class="col-md-4">
-                <p> evento.NomeEvento </p> @*bla bla bla*@
-            </div>
-        }
-    }   
+        var result = "Data";
+        @Html.Partial(result)
+        
+    }
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
+        var i;
         var TipoPesquisa = $('.search').val();
         var ConteudoPesquisa = $('.conteudo').text;
         var TipoOpcao = $('.option').val();
 
-    $('button').click(function () {
-        while (!ConteudoPesquisa.length) {
+        while (!ConteudoPesquisa.length || i == 0) {
             if (TipoOpcao == "Local") {
-                //adicionar a classe do not-showing na data
-                //remover a classe do not-showing
-                //definir a  var dist
-                // definir SortedEvent
-            } else {
-                SortedEvent;
+                result = "Local";
+            } 
+        }
+
+        $('button.pesquisa').click(function () {
+            i++;
+            switch (TipoPesquisa) {
+                case "Artista":
+                    if (TipoOpcao == "Local") {
+                        var dist;
+                    } else {
+                        SortedEvent = Model.Artista.All(ConteudoPesquisa).Data.sort();
+                    }
+                    break;
+
+                case "Genero":
+                    if (TipoOpcao == "Local") {
+                        var dist;
+                    } else {
+                        SortedEvent = Model.Genero.All(ConteudoPesquisa).Data.sort();
+                    }
+                    break;
             }
-        }
-
-        switch (TipoPesquisa) {
-            case "Artista":
-                if (TipoOpcao == "Local") {
-                    var dist;
-                } else {
-                    SortedEvent = Model.Artista.All(ConteudoPesquisa).Data.sort();
-                }
-                break;
-
-            case "Genero":
-                if (TipoOpcao == "Local") {
-                    var dist;
-                } else {
-                    SortedEvent = Model.Genero.All(ConteudoPesquisa).Data.sort();
-                }
-                break;
-        }
-    })
+        })
     </script>
 
 }
