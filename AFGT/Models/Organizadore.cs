@@ -25,8 +25,10 @@ namespace AFGT.Models
         public string Email {get; set; }
         public string Nipc { get; set; }
         public string Password { get; set; }
-        public string LinkFotoORG { get; set; }
-    
+        public string LinkFotoORG { get; set; }    // A photo vai para aqui, tlvz vou ter que mudar para public byte[] UserPhoto { get; set; }
+
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Evento> Eventos { get; set; }
     }

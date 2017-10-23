@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AFGT.Models;
+using System.IO;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace AFGT.Controllers
 {
@@ -15,7 +17,7 @@ namespace AFGT.Controllers
         private afgtEntities db = new afgtEntities();
 
         // GET: Organizadores
-        public ActionResult Index(int? id)
+        public ActionResult Index()
         {
             return View(db.Organizadores.ToList());
         }
@@ -26,19 +28,28 @@ namespace AFGT.Controllers
         }
 
         // GET: Organizadores/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id)    // MENU DO ORGANIZADOR!!!!
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest); 
             }
             Organizadore organizadore = db.Organizadores.Find(id);
+
             if (organizadore == null)
             {
                 return HttpNotFound();
             }
+            
             return View(organizadore);
         }
+        
+
+
+
+
+
+
 
         // GET: Organizadores/Create
         public ActionResult Create()
@@ -83,16 +94,94 @@ namespace AFGT.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrgID,NomeOrg,Email,Nipc,Password,LinkFotoORG")] Organizadore organizadore)
+        public ActionResult Edit([Bind(Include = "OrgID,NomeOrg,Email,Nipc,Password")] Organizadore organizadore)//, byte[] LinkFotoORG)
         {
             if (ModelState.IsValid)
             {
+                ////
+                //if (organizadore != null) //organizadore(id)  ???
+                //{
+                //    int userId = organizadore.OrgID;  //no tutorial e string
+                //    if (organizadore == null)
+                //    {
+                //        string fileName = HttpContext.Server.MapPath(@"~/Content/Images1/NoPhoto.png");
+
+                //        byte[] imageData = null;
+                //        FileInfo fileInfo = new FileInfo(fileName);
+                //        long imageFileLength = fileInfo.Length;
+                //        FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                //        BinaryReader br = new BinaryReader(fs);
+                //        imageData = br.ReadBytes((int)imageFileLength);
+
+                //        return File(imageData, "image/png");
+                //    }
+                //    ///////////
+
+                //}
+                //else
+                //{
+                //    string fileName = HttpContext.Server.MapPath(@"~/Content/Images1/NoPhoto.png");
+
+                //    byte[] imageData = null;
+                //    FileInfo fileInfo = new FileInfo(fileName);
+                //    long imageFileLength = fileInfo.Length;
+                //    FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                //    BinaryReader br = new BinaryReader(fs);
+                //    imageData = br.ReadBytes((int)imageFileLength);
+
+                //    return File(imageData, "image/png");
+                //}
+                
+
+                //
                 db.Entry(organizadore).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(organizadore);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPhoto(Organizadore organizadore, byte[] LinkFotoORG)
+        {
+            if (organizadore != null) //organizadore(id)  ???
+            {
+                int userId = organizadore.OrgID;  //no tutorial e string
+                if (organizadore == null)
+                {
+                    string fileName = HttpContext.Server.MapPath(@"~/Content/Images1/NoPhoto.png");
+
+                    byte[] imageData = null;
+                    FileInfo fileInfo = new FileInfo(fileName);
+                    long imageFileLength = fileInfo.Length;
+                    FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fs);
+                    imageData = br.ReadBytes((int)imageFileLength);
+
+                    return File(imageData, "image/png");
+                }
+                ///////////
+
+            }
+            else
+            {
+                string fileName = HttpContext.Server.MapPath(@"~/Content/Images1/NoPhoto.png");
+
+                byte[] imageData = null;
+                FileInfo fileInfo = new FileInfo(fileName);
+                long imageFileLength = fileInfo.Length;
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+                imageData = br.ReadBytes((int)imageFileLength);
+
+                return File(imageData, "image/png");
+            }
+
+            return null;
+        }
+
+
+
 
         // GET: Organizadores/Delete/5
         public ActionResult Delete(int? id)
