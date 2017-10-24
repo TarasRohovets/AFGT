@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AFGT.Models.Evento>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista Eventos</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+
+       
+    @foreach (var item in Model)
+    {
+       
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img alt="..." src="~/Content/Images/default.jpg"> <!--falta fazer upload-->
+                    <div class="caption">
+                        <h3>@Html.DisplayFor(modelItem => item.NomeEvento)</h3>
+                        <strong>@Html.DisplayFor(modelItem => item.Data)</strong>
+                        <p>@Html.DisplayFor(modelItem => item.Descricao)</p>
+                        <p>@Html.DisplayFor(modelItem => item.Artistas)</p>
+                        <p>@Html.DisplayFor(modelItem => item.Morada)</p>
+                        <p>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.EventosID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.EventosID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.EventosID })
+                        </p>
+                    </div>
+                </div>
+            </div>
+            }
+
+
+</table>
+
+
+
