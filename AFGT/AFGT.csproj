@@ -193,6 +193,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrganizadoresController.cs" />
     <Compile Include="Global.asax.cs">
@@ -336,10 +337,12 @@
     <Content Include="Views\Organizadores\Details.cshtml" />
     <Content Include="Views\Organizadores\Edit.cshtml" />
     <Content Include="Views\Organizadores\Index.cshtml" />
+    <Content Include="Views\Image\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images1\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

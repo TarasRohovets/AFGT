@@ -89,99 +89,77 @@ namespace AFGT.Controllers
             return View(organizadore);
         }
 
+        //[HttpGet]// A metodo para fazer o ulpoad da foto //Tlvz esse aqui vai set o EDIT GET
+        //public ActionResult Addphoto()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public ActionResult Edit1(Organizadore imageModel)  //Mudei o nome, nome Edit tem que ser igual para GET e POST
+        //{
+        //    return View();
+        //}
+
+            
         // POST: Organizadores/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrgID,NomeOrg,Email,Nipc,Password")] Organizadore organizadore)//, byte[] LinkFotoORG)
+        public ActionResult Edit([Bind(Include = "OrgID,NomeOrg,Email,Nipc,Password")] Organizadore organizadore, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                ////
-                //if (organizadore != null) //organizadore(id)  ???
+                //
+                try
+                {
+                    if(file.ContentLength > 0)
+                    {
+                        string _FileName = Path.GetFileName(file.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/Images"), _FileName);
+                        file.SaveAs(_path);
+                    }
+                    ViewBag.Message = "Mission Succeded, Congtratulations!";
+                    return View(); //////????? qual return eh aqui?
+                }
+                catch{
+                    ViewBag.Message = "Abort!Emergency state!File not uploaded!";
+                    return View();////qual return 
+                }
+
+                using(db)
+                {
+                    string _FileName = Path.GetFileName(file.FileName);
+                    string _path = Path.Combine(Server.MapPath("~/Images"), _FileName);
+                    organizadore.LinkFotoORG = _path;
+
+                    db.Organizadores.Add(organizadore); 
+                }
+
+
+
+                //string fileName = Path.GetFileNameWithoutExtension(organizadore.ImageFile.FileName);
+                //string extension = Path.GetExtension(organizadore.ImageFile.FileName);
+                //fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                //organizadore.LinkFotoORG = "~/Images/" + fileName;
+                //fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                //organizadore.ImageFile.SaveAs(fileName);
+                //using (db)
                 //{
-                //    int userId = organizadore.OrgID;  //no tutorial e string
-                //    if (organizadore == null)
-                //    {
-                //        string fileName = HttpContext.Server.MapPath(@"~/Content/Images1/NoPhoto.png");
-
-                //        byte[] imageData = null;
-                //        FileInfo fileInfo = new FileInfo(fileName);
-                //        long imageFileLength = fileInfo.Length;
-                //        FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-                //        BinaryReader br = new BinaryReader(fs);
-                //        imageData = br.ReadBytes((int)imageFileLength);
-
-                //        return File(imageData, "image/png");
-                //    }
-                //    ///////////
-
+                //    db.Organizadores.Add(organizadore);
+                //    db.SaveChanges();
                 //}
-                //else
-                //{
-                //    string fileName = HttpContext.Server.MapPath(@"~/Content/Images1/NoPhoto.png");
-
-                //    byte[] imageData = null;
-                //    FileInfo fileInfo = new FileInfo(fileName);
-                //    long imageFileLength = fileInfo.Length;
-                //    FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-                //    BinaryReader br = new BinaryReader(fs);
-                //    imageData = br.ReadBytes((int)imageFileLength);
-
-                //    return File(imageData, "image/png");
-                //}
-                
+                //ModelState.Clear();
 
                 //
+
                 db.Entry(organizadore).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(organizadore);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditPhoto(Organizadore organizadore, byte[] LinkFotoORG)
-        {
-            if (organizadore != null) //organizadore(id)  ???
-            {
-                int userId = organizadore.OrgID;  //no tutorial e string
-                if (organizadore == null)
-                {
-                    string fileName = HttpContext.Server.MapPath(@"~/Content/Images1/NoPhoto.png");
-
-                    byte[] imageData = null;
-                    FileInfo fileInfo = new FileInfo(fileName);
-                    long imageFileLength = fileInfo.Length;
-                    FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-                    BinaryReader br = new BinaryReader(fs);
-                    imageData = br.ReadBytes((int)imageFileLength);
-
-                    return File(imageData, "image/png");
-                }
-                ///////////
-
-            }
-            else
-            {
-                string fileName = HttpContext.Server.MapPath(@"~/Content/Images1/NoPhoto.png");
-
-                byte[] imageData = null;
-                FileInfo fileInfo = new FileInfo(fileName);
-                long imageFileLength = fileInfo.Length;
-                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(fs);
-                imageData = br.ReadBytes((int)imageFileLength);
-
-                return File(imageData, "image/png");
-            }
-
-            return null;
-        }
-
-
-
+     
 
         // GET: Organizadores/Delete/5
         public ActionResult Delete(int? id)
