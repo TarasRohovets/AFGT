@@ -196,6 +196,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EventoesController.cs" />
+    <Compile Include="Controllers\GeneroMusicalsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -356,6 +358,16 @@
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <Content Include="Views\Home\Pesquisa.cshtml" />
+    <Content Include="Views\Eventoes\Create.cshtml" />
+    <Content Include="Views\Eventoes\Delete.cshtml" />
+    <Content Include="Views\Eventoes\Details.cshtml" />
+    <Content Include="Views\Eventoes\Edit.cshtml" />
+    <Content Include="Views\Eventoes\Index.cshtml" />
+    <Content Include="Views\GeneroMusicals\Create.cshtml" />
+    <Content Include="Views\GeneroMusicals\Delete.cshtml" />
+    <Content Include="Views\GeneroMusicals\Details.cshtml" />
+    <Content Include="Views\GeneroMusicals\Edit.cshtml" />
+    <Content Include="Views\GeneroMusicals\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
