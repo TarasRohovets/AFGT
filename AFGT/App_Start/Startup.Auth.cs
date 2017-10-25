@@ -60,11 +60,11 @@ namespace AFGT
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "480235220097-ebvq8209eh5dm65die9hfbi229485bmp.apps.googleusercontent.com	",
+                ClientSecret = "oWXIBqKaW_oW0khUcSCreyRK"
+            });
         }
     }
 }
