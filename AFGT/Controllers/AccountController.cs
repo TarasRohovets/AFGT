@@ -198,20 +198,18 @@ namespace AFGT.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-
-
-
-
+                    
                     // ACABAR: PESQUISAR O elemento db da base de dados (propriedade desta classe) e encontrar o user feito (tetris@tetris.com). guardar on NIPC.
-                    var insertedUser = db.AspNetUsers.Find(user.Id);
-                    insertedUser.NIPC = model.NIPC;
-                    Organizadore orgd = new Organizadore() { Nipc = insertedUser.NIPC};
+                   
+                   
+                  
+                    Organizadore orgd = new Organizadore() {OrgID=user.Id, NomeOrg = model.UserName, Nipc = model.NIPC};
                         
                     db.Organizadores.Add(orgd);
                     //alternativa     insertedUser = IEnumerable<AspNetUser> Enumerable<AspNetUser>.Where(Func<AspNetUser.NIPC, bool> predicate);

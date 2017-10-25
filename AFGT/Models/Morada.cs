@@ -12,20 +12,19 @@ namespace AFGT.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Organizadore
+    public partial class Morada
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Organizadore()
+        public Morada()
         {
             this.Eventos = new HashSet<Evento>();
         }
     
-        public int OrgID { get; set; }
-        public string NomeOrg { get; set; }
-        public int Nipc { get; set; }
-        public string LinkFotoORG { get; set; }
+        public int MoradaID { get; set; }
+        public string Endereco { get; set; }
+        public string Cidade { get; set; }
+        public string CodPostal { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Evento> Eventos { get; set; }
     }

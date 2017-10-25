@@ -23,14 +23,14 @@ namespace AFGT.Models
     
         public int EventosID { get; set; }
         public int OrgID { get; set; }
+        public int MoradaID { get; set; }
         public string NomeEvento { get; set; }
-        public string Morada { get; set; }
         public string Descricao { get; set; }
         public System.DateTime Data { get; set; }
         public string Artistas { get; set; }
         public string Link { get; set; }
-        public int MoradaID { get; set; }
     
+        public virtual Morada Morada { get; set; }
         public virtual Organizadore Organizadore { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Like> Likes { get; set; }

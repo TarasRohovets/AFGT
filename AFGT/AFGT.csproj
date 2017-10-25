@@ -242,6 +242,9 @@
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Morada.cs">
+      <DependentUpon>DataBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Organizadore.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
