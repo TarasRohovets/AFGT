@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="afgtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="afgtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -75,6 +75,7 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="LinkFotoUser" Type="nvarchar" MaxLength="250" />
+          <Property Name="NIPC" Type="nchar" MaxLength="9" Nullable="false" />
         </EntityType>
         <EntityType Name="Eventos">
           <Key>
@@ -82,12 +83,12 @@
           </Key>
           <Property Name="EventosID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OrgID" Type="int" Nullable="false" />
+          <Property Name="MoradaID" Type="int" Nullable="false" />
           <Property Name="NomeEvento" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Morada" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Descricao" Type="nvarchar" MaxLength="350" Nullable="false" />
           <Property Name="Data" Type="datetime" Nullable="false" />
           <Property Name="Artistas" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Link" Type="nvarchar" MaxLength="50" />
+          <Property Name="Link" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="EventosArtistas">
           <Key>
@@ -118,10 +119,10 @@
             <PropertyRef Name="OrgID" />
           </Key>
           <Property Name="OrgID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NomeOrg" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Nipc" Type="char" MaxLength="9" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="NomeOrg" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nipc" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="15" />
           <Property Name="LinkFotoORG" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="SearchHistory">
@@ -342,8 +343,7 @@
             <End Role="SearchHistory" EntitySet="SearchHistory" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="afgtModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -419,6 +419,7 @@
           <NavigationProperty Name="Likes" Relationship="Self.FK_Likes_AspNetUsers" FromRole="AspNetUsers" ToRole="Likes" />
           <NavigationProperty Name="SearchHistories" Relationship="Self.FK_SearchHistory_AspNetUsers" FromRole="AspNetUsers" ToRole="SearchHistory" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="NIPC" Type="String" Nullable="false" MaxLength="9" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Evento">
           <Key>
@@ -431,10 +432,11 @@
           <Property Name="Descricao" Type="String" MaxLength="350" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Artistas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Link" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Organizadore" Relationship="Self.FK_Eventos_Organizadores" FromRole="Eventos" ToRole="Organizadores" />
           <NavigationProperty Name="Likes" Relationship="Self.FK_Likes_Eventos" FromRole="Eventos" ToRole="Likes" />
           <NavigationProperty Name="Artistas1" Relationship="Self.EventosArtistas" FromRole="Eventos" ToRole="Artistas" />
+          <Property Name="MoradaID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="GeneroMusical">
           <Key>
@@ -460,10 +462,10 @@
             <PropertyRef Name="OrgID" />
           </Key>
           <Property Name="OrgID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NomeOrg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Nipc" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NomeOrg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nipc" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="LinkFotoORG" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Eventos" Relationship="Self.FK_Eventos_Organizadores" FromRole="Organizadores" ToRole="Eventos" />
         </EntityType>
@@ -688,6 +690,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="afgtModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="NIPC" ColumnName="NIPC" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
@@ -707,10 +710,10 @@
           <EntitySetMapping Name="Eventos">
             <EntityTypeMapping TypeName="afgtModel.Evento">
               <MappingFragment StoreEntitySet="Eventos">
+                <ScalarProperty Name="MoradaID" ColumnName="MoradaID" />
                 <ScalarProperty Name="EventosID" ColumnName="EventosID" />
                 <ScalarProperty Name="OrgID" ColumnName="OrgID" />
                 <ScalarProperty Name="NomeEvento" ColumnName="NomeEvento" />
-                <ScalarProperty Name="Morada" ColumnName="Morada" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="Artistas" ColumnName="Artistas" />

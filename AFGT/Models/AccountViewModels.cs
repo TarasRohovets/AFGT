@@ -64,7 +64,7 @@ namespace AFGT.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        
         [Display(Name = "UserRoles")]
         public string UserRoles { get; set; }
 
@@ -73,7 +73,7 @@ namespace AFGT.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        
         [Display(Name = "UserName")]
         public string UserName { get; set; }
 

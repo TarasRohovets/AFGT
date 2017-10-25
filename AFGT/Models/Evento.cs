@@ -29,6 +29,7 @@ namespace AFGT.Models
         public System.DateTime Data { get; set; }
         public string Artistas { get; set; }
         public string Link { get; set; }
+        public int MoradaID { get; set; }
     
         public virtual Organizadore Organizadore { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

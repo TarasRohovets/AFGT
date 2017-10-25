@@ -208,9 +208,14 @@ namespace AFGT.Controllers
 
 
 
-                                /// ACABAR: PESQUISAR O elemento db da base de dados (propriedade desta classe) e encontrar o user feito (tetris@tetris.com). guardar on NIPC.
-
-
+                    // ACABAR: PESQUISAR O elemento db da base de dados (propriedade desta classe) e encontrar o user feito (tetris@tetris.com). guardar on NIPC.
+                    var insertedUser = db.AspNetUsers.Find(user.Id);
+                    insertedUser.NIPC = model.NIPC;
+                    Organizadore orgd = new Organizadore() { Nipc = insertedUser.NIPC};
+                        
+                    db.Organizadores.Add(orgd);
+                    //alternativa     insertedUser = IEnumerable<AspNetUser> Enumerable<AspNetUser>.Where(Func<AspNetUser.NIPC, bool> predicate);
+                    db.SaveChanges();
 
 
 
