@@ -89,6 +89,9 @@ namespace AFGT.Controllers
             return View(organizadore);
         }
 
+
+        
+        
         //[HttpGet]// A metodo para fazer o ulpoad da foto //Tlvz esse aqui vai set o EDIT GET
         //public ActionResult Addphoto()
         //{
@@ -116,50 +119,33 @@ namespace AFGT.Controllers
                     if(file.ContentLength > 0)
                     {
                         string _FileName = Path.GetFileName(file.FileName);
-                        string _path = Path.Combine(Server.MapPath("~/Images"), _FileName);
+                        string _path = Path.Combine(Server.MapPath("/Images"), _FileName);
                         file.SaveAs(_path);
+
+
+                        organizadore.LinkFotoORG = _path;
+                        db.Entry(organizadore).State = EntityState.Modified;
+                        db.SaveChanges();
+        
                     }
-                    ViewBag.Message = "Mission Succeded, Congtratulations!";
-                    return View(); //////????? qual return eh aqui?
+                    @ViewBag.Message = "Mission Succeded, Congtratulations!";
+                    return View(organizadore); //////????? qual return eh aqui?
                 }
                 catch{
-                    ViewBag.Message = "Abort!Emergency state!File not uploaded!";
-                    return View();////qual return 
+                    @ViewBag.Message = "Abort!Emergency state!File not uploaded!";
+                    return View(organizadore);////qual return 
                 }
+               
+              
 
-                using(db)
-                {
-                    string _FileName = Path.GetFileName(file.FileName);
-                    string _path = Path.Combine(Server.MapPath("~/Images"), _FileName);
-                    organizadore.LinkFotoORG = _path;
-
-                    db.Organizadores.Add(organizadore); 
-                }
-
-
-
-                //string fileName = Path.GetFileNameWithoutExtension(organizadore.ImageFile.FileName);
-                //string extension = Path.GetExtension(organizadore.ImageFile.FileName);
-                //fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                //organizadore.LinkFotoORG = "~/Images/" + fileName;
-                //fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
-                //organizadore.ImageFile.SaveAs(fileName);
-                //using (db)
-                //{
-                //    db.Organizadores.Add(organizadore);
-                //    db.SaveChanges();
-                //}
-                //ModelState.Clear();
-
-                //
-
-                db.Entry(organizadore).State = EntityState.Modified;
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(organizadore);
         }
-     
+
+        
+        
+
 
         // GET: Organizadores/Delete/5
         public ActionResult Delete(int? id)

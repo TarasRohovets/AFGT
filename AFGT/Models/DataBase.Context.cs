@@ -34,6 +34,7 @@ namespace AFGT.Models
         public virtual DbSet<Evento> Eventos { get; set; }
         public virtual DbSet<GeneroMusical> GeneroMusicals { get; set; }
         public virtual DbSet<Like> Likes { get; set; }
+        public virtual DbSet<Morada> Moradas { get; set; }
         public virtual DbSet<Organizadore> Organizadores { get; set; }
         public virtual DbSet<SearchHistory> SearchHistories { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
