@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AFGT.Models.Evento>
+﻿@model AFGT.Models.GeneroMusical
 
 @{
     ViewBag.Title = "Home Page";
@@ -8,16 +8,27 @@
     <h1>AFGT</h1>
     <p class="lead">AFGT guia-te pelo o que ouves! xD</p>
     <div class="row">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="text" class="form-control conteudo" placeholder="O que procuras?" />
-            <select id="search">
-                <option value="Artista">Artista</option>
-                <option value="GeneroMusical">Genero</option>
-            </select>
-            <button class="btn btn-default">Ir</button>
+        <div class="form-group active" id="Artista">
+            <div class="col-md-10">
+                <input type="text" class="form-control" placeholder="O que procuras?" />
+            </div>
+         </div>
+            <div class="form-group hidden" id="Genero">
+                @Html.LabelFor(model => model.NomeEstilo, "Genero", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("GeneroMusical", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.NomeEstilo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-2 col-md-10">
+                <select id="search">
+                    <option value="Artista">Artista</option>
+                    <option value="GeneroMusical">Genero</option>
+                </select>
+                <button class="btn btn-default">Ir</button>
+            </div>
         </div>
     </div>
-</div>
 
 <div class="row">
     <p>Ordenar por:</p>
@@ -48,6 +59,17 @@
             } else {
                 $('#Local').removeClass('active').addClass('hidden');
                 $('#Data').removeClass('hidden').addClass('active');
+            }
+        })
+
+        $('#search').change(function () {
+            var TipoSearch = $('#search').val();
+            if (TipoSearch == "Local") {
+                $('#Artista').removeClass('active').addClass('hidden');
+                $('#Genero').removeClass('hidden').addClass('active');
+            } else {
+                $('#Artista').removeClass('active').addClass('hidden');
+                $('#Genero').removeClass('hidden').addClass('active');
             }
         })
 
