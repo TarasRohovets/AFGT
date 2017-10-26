@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using AFGT.Models;
 using System.IO;
 using System.Web.UI.WebControls;
+using Microsoft.AspNet.Identity;
+
 namespace AFGT.Controllers
 {
     public class EventoesController : Controller
@@ -50,17 +52,59 @@ namespace AFGT.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EventosID,OrgID,NomeEvento,Morada,Descricao,Data,Artistas,Link")] Evento evento)
+        public ActionResult Create([Bind(Include = "NomeEvento,Descricao,Data,Artistas,Link")] Evento evento, HttpPostedFileBase file, [Bind(Include = "Endereco,Cidade,CodPostal")] Morada morada)
         {
+            var path = "";
+            if (file != null)
+            {
+                if (file.ContentLength > 0)
+                {
+                    //verifica se o ficheiro é imagem
+                    if(Path.GetExtension(file.FileName).ToLower()==".jpg" ||
+                        Path.GetExtension(file.FileName).ToLower() == ".png" ||
+                        Path.GetExtension(file.FileName).ToLower() == ".jpeg")
+                    {
+                        path = Path.Combine(Server.MapPath("~/Content/Images"), file.FileName);
+                        file.SaveAs(path);
+                        evento.Link = path;
+                    }
+                }
+            } else
+            {
+                evento.Link = "~/Content/Images/default.jpg";
+            }
+           
+            /*Verificar morada inserida*/
+            var x = db.Moradas.FirstOrDefault(m => m.Endereco == morada.Endereco &&  m.CodPostal == morada.CodPostal && m.Cidade == morada.Cidade);
+
+            //x == null// não existe na base de dados
+
+            if ( x != null)
+            {
+                evento.MoradaID = x.MoradaID;
+               
+
+            }
+            else
+            {
+                
+                db.Moradas.Add(morada);
+                db.SaveChanges();
+                evento.MoradaID = morada.MoradaID;
+            }
+            /*Fim de verificaçao morada inserida*/
+
+            //evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());
+            evento.OrgID = 1;
                 db.Eventos.Add(evento);
                 db.SaveChanges();
                 return RedirectToAction("Index");
           
            
             ViewBag.OrgID = new SelectList(db.Organizadores, "OrgID", "NomeOrg", evento.OrgID);
-            return View(evento);
+            //return View(evento);
         }
-
+        
         // GET: Eventoes/Edit/5
         public ActionResult Edit(int? id)
         {

@@ -195,6 +195,7 @@
     <Compile Include="Controllers\EventoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MoradasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -243,6 +244,9 @@
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Morada.cs">
+      <DependentUpon>DataBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Organizadore.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
@@ -336,6 +340,11 @@
     <Content Include="Views\Eventoes\Details.cshtml" />
     <Content Include="Views\Eventoes\Edit.cshtml" />
     <Content Include="Views\Eventoes\Index.cshtml" />
+    <Content Include="Views\Moradas\Create.cshtml" />
+    <Content Include="Views\Moradas\Delete.cshtml" />
+    <Content Include="Views\Moradas\Details.cshtml" />
+    <Content Include="Views\Moradas\Edit.cshtml" />
+    <Content Include="Views\Moradas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

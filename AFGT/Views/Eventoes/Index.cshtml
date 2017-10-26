@@ -14,16 +14,23 @@
        
     @foreach (var item in Model)
     {
-       
+        if(item.Data > System.DateTime.Now) { 
+         
             <div class="col-sm-4">
                 <div class="thumbnail">
                     <img alt="..." src="~/Content/Images/default.jpg"> <!--falta fazer upload-->
                     <div class="caption">
-                        <h3>@Html.DisplayFor(modelItem => item.NomeEvento)</h3>
-                        <strong>@Html.DisplayFor(modelItem => item.Data)</strong>
+                        <h2>@Html.DisplayFor(modelItem => item.NomeEvento)</h2>
+                        <h3>@Html.DisplayFor(modelItem => item.Data)</h3>
+                        <br/>
+                        <strong>@Html.LabelFor(modelItem => item.Descricao)</strong>
                         <p>@Html.DisplayFor(modelItem => item.Descricao)</p>
+                        <strong>@Html.LabelFor(modelItem => item.Artistas)</strong>
                         <p>@Html.DisplayFor(modelItem => item.Artistas)</p>
-                        <p>@Html.DisplayFor(modelItem => item.Morada)</p>
+                        <strong>@Html.LabelFor(modelItem => item.Morada)</strong>
+                        <p>@Html.DisplayFor(modelItem => item.Morada.Endereco)</p>
+                        <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) @Html.DisplayFor(modelItem => item.Morada.CodPostal)</p>
+                       
                         <p>
                             @Html.ActionLink("Edit", "Edit", new { id = item.EventosID }) |
                             @Html.ActionLink("Details", "Details", new { id = item.EventosID }) |
@@ -32,7 +39,8 @@
                     </div>
                 </div>
             </div>
-            }
+        }
+    }
 
 
 </table>
