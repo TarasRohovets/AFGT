@@ -17,7 +17,8 @@ namespace AFGT.Controllers
         // GET: GeneroMusicals
         public ActionResult Index()
         {
-            return View(db.GeneroMusicals.ToList());
+            ViewBag.GeneroMusicalID = new SelectList(db.GeneroMusicals.ToList(), "GeneroMusicalID", "NomeEstilo");
+            return View();
         }
 
         // GET: GeneroMusicals/Details/5

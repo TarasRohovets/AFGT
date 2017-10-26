@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AFGT.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +9,10 @@ namespace AFGT.Controllers
 {
     public class HomeController : Controller
     {
+        private afgtEntities db = new afgtEntities();
         public ActionResult Index()
         {
+            ViewBag.Generos = new SelectList(db.GeneroMusicals.ToList(), "GeneroMusicalID", "NomeEstilo");
             return View();
         }
 

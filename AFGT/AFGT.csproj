@@ -357,10 +357,6 @@
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <Content Include="Views\Home\Pesquisa.cshtml" />
-    <Content Include="Views\GeneroMusicals\Create.cshtml" />
-    <Content Include="Views\GeneroMusicals\Delete.cshtml" />
-    <Content Include="Views\GeneroMusicals\Details.cshtml" />
-    <Content Include="Views\GeneroMusicals\Edit.cshtml" />
     <Content Include="Views\GeneroMusicals\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
