@@ -1,8 +1,13 @@
-﻿@model IEnumerable<AFGT.Models.Evento>
+﻿@model AFGT.Models.Evento
 
 <h1>Teste Local</h1>
 
-<div class="row">
-    <input type="text" class="form-control tipo not-showing" placeholder="Localizacao" /> 
-    <!----ver questao da api do local><!---->
+<div class="form-group">
+    @Html.Label("Cidade")
+    <div class="col-md-10">
+        @Html.TextBox("PointA")
+        @Html.ValidationMessageFor(model => model.Morada, "", new { @class = "text-danger" })
+    </div>
 </div>
+
+        

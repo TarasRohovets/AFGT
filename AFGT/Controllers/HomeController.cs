@@ -10,9 +10,9 @@ namespace AFGT.Controllers
     public class HomeController : Controller
     {
         private afgtEntities db = new afgtEntities();
+
         public ActionResult Index()
         {
-            //ViewBag.Generos = new SelectList(db.GeneroMusicals.ToList(), "GeneroMusicalID", "NomeEstilo");
             return View();
         }
 
@@ -42,10 +42,9 @@ namespace AFGT.Controllers
             return View((object)Evento);
         }
 
-        public ActionResult Local()
-        {
-            List<Models.Evento> Evento = new List<Models.Evento>();
-            return View((object)Evento);
+        public ActionResult Local(String PointA)
+        {                       
+            return View(db.Eventos.Where(model => model.Morada.Cidade == PointA || PointA == null).ToList());
         }
     }
 }
