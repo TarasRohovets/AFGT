@@ -1,6 +1,4 @@
-﻿@model AFGT.Models.GeneroMusical
-
-@{
+﻿@{
     ViewBag.Title = "Home Page";
 }
 
@@ -14,15 +12,7 @@
             </div>
          </div>
             <div class="col-md-10 hidden" id="Genero">
-                <div class="form-group">
-                    <div class="col-md-10">
-                        @Html.LabelFor(model => model.NomeEstilo, "Estilo Musical", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownList("Generos", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.GeneroMusicalID, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
+                @Html.Action("Index", "GeneroMusicals", new { id = ViewBag.GeneroMusicalID})
             </div>
             <div class="col-md-offset-2 col-md-10">
                 <select id="search">

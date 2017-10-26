@@ -12,7 +12,7 @@ namespace AFGT.Controllers
         private afgtEntities db = new afgtEntities();
         public ActionResult Index()
         {
-            ViewBag.Generos = new SelectList(db.GeneroMusicals.ToList(), "GeneroMusicalID", "NomeEstilo");
+            //ViewBag.Generos = new SelectList(db.GeneroMusicals.ToList(), "GeneroMusicalID", "NomeEstilo");
             return View();
         }
 
