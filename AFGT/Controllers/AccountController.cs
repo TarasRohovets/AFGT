@@ -78,7 +78,7 @@ namespace AFGT.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -205,14 +205,14 @@ namespace AFGT.Controllers
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     
-                    // ACABAR: PESQUISAR O elemento db da base de dados (propriedade desta classe) e encontrar o user feito (tetris@tetris.com). guardar on NIPC.
+                    
                    
                    
                   
                     Organizadore orgd = new Organizadore() {OrgID=user.Id, NomeOrg = model.UserName, Nipc = model.NIPC};
                         
                     db.Organizadores.Add(orgd);
-                    //alternativa     insertedUser = IEnumerable<AspNetUser> Enumerable<AspNetUser>.Where(Func<AspNetUser.NIPC, bool> predicate);
+                   
                     db.SaveChanges();
 
 
