@@ -18,6 +18,7 @@ namespace AFGT.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private afgtEntities db = new afgtEntities();
+       // AspNetUser AspNetUser = new AspNetUser(); //
 
         public ManageController()
         {
@@ -67,19 +68,25 @@ namespace AFGT.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId<int>();
+            AspNetUser aspNetUser = db.AspNetUsers.Find(userId);
             var model = new IndexViewModel
             {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId())
+                //HasPassword = HasPassword(),
+                //PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                //TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                //Logins = await UserManager.GetLoginsAsync(userId),
+                //BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId()),
+
+                UserName = aspNetUser.UserName
             };
+               //  LinkFotoUser = AspNetUser.LinkFotoUser; //LinkFoto nao ve noindexView
+    
+             
             return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "OrgID,NomeOrg,Email,Nipc,Password")] Organizadore organizadore, HttpPostedFileBase file)
+        public ActionResult Index([Bind(Include = "OrgID,NomeOrg,Email,Nipc,Password")] AspNetUser AspNetUser, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
@@ -93,25 +100,25 @@ namespace AFGT.Controllers
                         file.SaveAs(_path);
 
 
-                        organizadore.LinkFotoORG = "/Images/" + _FileName;
-                        db.Entry(organizadore).State = EntityState.Modified;
+                        AspNetUser.LinkFotoUser = "/Images/" + _FileName;
+                        db.Entry(AspNetUser).State = EntityState.Modified;
                         db.SaveChanges();
 
                     }
                     @ViewBag.Message = "Mission Succeded, Congtratulations!";
-                    return View(organizadore); //////????? qual return eh aqui?
+                    return View(AspNetUser); //////????? qual return eh aqui?
                 }
                 catch
                 {
                     @ViewBag.Message = "Abort!Emergency state!File not uploaded!";
-                    return View(organizadore);////qual return 
+                    return View(AspNetUser);////qual return 
                 }
 
 
 
                 return RedirectToAction("Index");
             }
-            return View(organizadore);
+            return View(AspNetUser);
         }
 
 
