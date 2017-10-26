@@ -119,11 +119,11 @@ namespace AFGT.Controllers
                     if(file.ContentLength > 0)
                     {
                         string _FileName = Path.GetFileName(file.FileName);
-                        string _path = Path.Combine(Server.MapPath("/Images"), _FileName);
+                        string _path = Path.Combine(Server.MapPath("~/Images/"), _FileName);
                         file.SaveAs(_path);
 
 
-                        organizadore.LinkFotoORG = _path;
+                        organizadore.LinkFotoORG = "/Images/" + _FileName;
                         db.Entry(organizadore).State = EntityState.Modified;
                         db.SaveChanges();
         

@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AFGT.Models;
+using System.IO;
+using System.Data.Entity;
 
 namespace AFGT.Controllers
 {
@@ -15,6 +17,7 @@ namespace AFGT.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private afgtEntities db = new afgtEntities();
 
         public ManageController()
         {
@@ -74,6 +77,43 @@ namespace AFGT.Controllers
             };
             return View(model);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index([Bind(Include = "OrgID,NomeOrg,Email,Nipc,Password")] Organizadore organizadore, HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                //
+                try
+                {
+                    if (file.ContentLength > 0)
+                    {
+                        string _FileName = Path.GetFileName(file.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/Images/"), _FileName);
+                        file.SaveAs(_path);
+
+
+                        organizadore.LinkFotoORG = "/Images/" + _FileName;
+                        db.Entry(organizadore).State = EntityState.Modified;
+                        db.SaveChanges();
+
+                    }
+                    @ViewBag.Message = "Mission Succeded, Congtratulations!";
+                    return View(organizadore); //////????? qual return eh aqui?
+                }
+                catch
+                {
+                    @ViewBag.Message = "Abort!Emergency state!File not uploaded!";
+                    return View(organizadore);////qual return 
+                }
+
+
+
+                return RedirectToAction("Index");
+            }
+            return View(organizadore);
+        }
+
 
         //
         // POST: /Manage/RemoveLogin
