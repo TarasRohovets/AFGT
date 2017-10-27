@@ -86,8 +86,7 @@ namespace AFGT.Controllers
 
             }
             else
-            {
-                
+            {                
                 db.Moradas.Add(morada);
                 db.SaveChanges();
                 evento.MoradaID = morada.MoradaID;
