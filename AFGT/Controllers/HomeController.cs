@@ -44,7 +44,7 @@ namespace AFGT.Controllers
 
         public ActionResult Local(String PointA)
         {                       
-            return View(db.Eventos.Where(model => model.Morada.Cidade == PointA || PointA == null).ToList());
+            return View(db.Eventos.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).ToList());
         }
     }
 }

@@ -3,10 +3,11 @@
 <h1>Teste Local</h1>
 
 <div class="form-group">
-    @Html.Label("Cidade")
     <div class="col-md-10">
+        @Html.Label("Cidade")
         @Html.TextBox("PointA")
         @Html.ValidationMessageFor(model => model.Morada, "", new { @class = "text-danger" })
+        <button class="btn btn-default">Ir</button>
     </div>
 </div>
 
