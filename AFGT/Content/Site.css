@@ -22,6 +22,7 @@ select,
 textarea {
     max-width: 280px;
 }
-.p.hidden{
+
+table.hidden {
     display: none;
 }
