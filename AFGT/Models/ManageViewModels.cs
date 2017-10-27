@@ -14,7 +14,10 @@ namespace AFGT.Models
         public bool BrowserRemembered { get; set; }
         public string UserName { get; set; }     //Adicionei
          public string LinkFotoUser { get; set; }  //Adicionei
-         
+        public int Id { get; set; }  // Adicionei
+        public string Email { get; set; }
+        public string NameUser { get; set; }
+
     }
 
     public class ManageLoginsViewModel
