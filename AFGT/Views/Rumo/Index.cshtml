@@ -5,5 +5,18 @@
 
 <h2>Teste Rumo</h2>
 
+<div class="form-group">
+    <div class="col-md-10">
+        @Html.Label("Origem")
+        @Html.TextBox("PointA")
+        <button class="btn btn-default">Ir</button>
+    </div>
+</div>
+
 <iframe width="600" height="450" frameborder="0" style="border:0" src="@(ViewBag.Link)" allowfullscreen></iframe>
 
+<script>
+    $('button').click(function () {
+        var PointA = $.(something).val();
+    })
+</script>
