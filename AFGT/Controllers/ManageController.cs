@@ -108,9 +108,7 @@ namespace AFGT.Controllers
                         
                         var userId = User.Identity.GetUserId<int>();      /////   ID do User Logado
                         AspNetUser NetUser = db.AspNetUsers.Find(userId); /////    Procura o ID na tabela AspNetUsers 
-
-                        aspNetUser.LinkFotoUser = "/Images/" + _FileName;
-
+                       
                         
                         NetUser.LinkFotoUser = "/Images/" + _FileName;      //////    Adiciono o link a tabela AspNetUsers
                         NetUser.NameUser = aspNetUser.NameUser;               //        "        Nome

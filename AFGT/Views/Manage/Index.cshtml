@@ -73,14 +73,8 @@
             <dt>Password:</dt>
             <dd>
                 [
-                @if (Model.HasPassword)
-                {
                     @Html.ActionLink("Change your password", "ChangePassword")
-                }
-                else
-                {
-                    @Html.ActionLink("Create", "SetPassword")
-                }
+               
                 ]
             </dd>
            
