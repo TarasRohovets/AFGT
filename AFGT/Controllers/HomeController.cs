@@ -37,8 +37,8 @@ namespace AFGT.Controllers
         {
             List<Models.Evento> Evento = new List<Models.Evento>();
 
-            string TipoPesquisa = ""//HttpRequest.Form.Get("search");
-            string ConteudoPesquisa = ""///HttpRequest.Form.Get("search");
+            string TipoPesquisa = "";//HttpRequest.Form.Get("search");
+            string ConteudoPesquisa = "";///HttpRequest.Form.Get("search");
 
             if (TipoPesquisa == "Genero")
             {
