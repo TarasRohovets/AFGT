@@ -13,6 +13,12 @@ namespace AFGT.Controllers
 
         public ActionResult Index()
         {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem { Value = "1", Text = "Artista" });
+            list.Add(new SelectListItem { Value = "2", Text = "Estilo Musical" });
+
+            ViewBag.ListaPesquisa = list;
+
             return View();
         }
 
@@ -25,7 +31,7 @@ namespace AFGT.Controllers
 
             if (TipoPesquisa == "Genero")
             {
-                return View(db.Eventos.Where(model => model.Data == Dia || Dia == null).ToList().Where(model => model.Artistas.GeneroMusical.NomeEstilo.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
+                return View(db.Eventos.Where(model => model.Data == Dia || Dia == null).ToList());//.Where(model => model.Artistas.GeneroMusical.NomeEstilo.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
             }
             else
             {
@@ -35,14 +41,14 @@ namespace AFGT.Controllers
 
         public ActionResult Local(String PointA)
         {
-            List<Models.Evento> Evento = new List<Models.Evento>();
+            List<Evento> Evento = new List<Evento>();
 
-            string TipoPesquisa = ""//HttpRequest.Form.Get("search");
-            string ConteudoPesquisa = ""///HttpRequest.Form.Get("search");
+            string ConteudoPesquisa = "";
+            string TipoPesquisa = Request.Form["ListaPesquisa"].ToString();
 
-            if (TipoPesquisa == "Genero")
+            if (TipoPesquisa == "EstiloMusical")
             {
-                return View(db.Eventos.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).ToList().Where(model => model.Artistas.GeneroMusical.NomeEstilo.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
+                return View(db.Eventos.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).ToList());//.Where(model => model.Artistas.GeneroMusical.NomeEstilo.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
             }
             else
             {
