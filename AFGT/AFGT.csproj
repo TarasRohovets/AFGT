@@ -201,7 +201,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MoradasController.cs" />
+    <Compile Include="Controllers\OrganizadoresController.cs" />
     <Compile Include="Controllers\RumoController.cs" />
+    <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -334,8 +336,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Data.cshtml" />
-    <Content Include="Views\Home\Local.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -357,10 +359,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.2.1.min.map" />
-    <Content Include="Views\Home\Pesquisa.cshtml" />
-    <Content Include="Views\GeneroMusicals\Index.cshtml" />
     <Content Include="Views\Eventoes\Create.cshtml" />
     <Content Include="Views\Eventoes\Delete.cshtml" />
     <Content Include="Views\Eventoes\Details.cshtml" />
@@ -371,10 +369,23 @@
     <Content Include="Views\Moradas\Details.cshtml" />
     <Content Include="Views\Moradas\Edit.cshtml" />
     <Content Include="Views\Moradas\Index.cshtml" />
+    <Content Include="Views\Organizadores\Create.cshtml" />
+    <Content Include="Views\Organizadores\Delete.cshtml" />
+    <Content Include="Views\Organizadores\Details.cshtml" />
+    <Content Include="Views\Organizadores\Edit.cshtml" />
+    <Content Include="Views\Organizadores\Index.cshtml" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.2.1.min.map" />
+    <Content Include="Views\GeneroMusicals\Index.cshtml" />
+    <Content Include="Views\Home\Data.cshtml" />
+    <Content Include="Views\Home\Local.cshtml" />
+    <Content Include="Views\Home\Pesquisa.cshtml" />
     <Content Include="Views\Rumo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images1\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
