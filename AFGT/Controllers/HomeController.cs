@@ -36,19 +36,21 @@ namespace AFGT.Controllers
         {
             List<Evento> Evento = new List<Evento>();
 
-            while (ConteudoPesquisa == null)
+            if (ConteudoPesquisa == null)
             {
                 return View(db.Eventos.Where(model => model.Data == Dia || Dia == null).ToList());
             }
-
-            if (TipoPesquisa == "Estilo Musical")
-            {
-                return View(db.Eventos.Where(model => model.Data == Dia || Dia == null).ToList());//.Where(model => model.Artistas.GeneroMusical.NomeEstilo.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
-            }
             else
             {
-                return View(db.Eventos.Where(model => model.Data == Dia || Dia == null).ToList().Where(model => model.Artistas.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
-            }           
+                if (TipoPesquisa == "Estilo Musical")
+                {
+                    return View(db.Eventos.Where(model => model.Data == Dia || Dia == null).ToList());//.Where(model => model.Artistas.GeneroMusical.NomeEstilo.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
+                }
+                else
+                {
+                    return View(db.Eventos.Where(model => model.Data == Dia || Dia == null).ToList().Where(model => model.Artistas.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
+                }           
+            }
         }
 
         [HttpPost, ActionName("Index")]
@@ -56,18 +58,21 @@ namespace AFGT.Controllers
         {
             List<Evento> Evento = new List<Evento>();
 
-            while (ConteudoPesquisa == null)
+            if (ConteudoPesquisa == null)
             {
                 return View(db.Eventos.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).ToList());
             }
-
-            if (TipoPesquisa == "Estilo Musical")
-            {
-                return View(db.Eventos.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).ToList());//.Where(model => model.Artistas.GeneroMusical.NomeEstilo.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
-            }
             else
             {
-                return View(db.Eventos.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).ToList().Where(model => model.Artistas.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
+
+                if (TipoPesquisa == "Estilo Musical")
+                {
+                    return View(db.Eventos.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).ToList());//.Where(model => model.Artistas.GeneroMusical.NomeEstilo.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
+                }
+                else
+                {
+                    return View(db.Eventos.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).ToList().Where(model => model.Artistas.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
+                }
             }
         }
     }
