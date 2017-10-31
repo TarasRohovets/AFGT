@@ -11,15 +11,15 @@
                 <input type="text" class="form-control" placeholder="O que procuras?" />
             </div>
          </div>
-            <div class="col-md-10 hidden" id="Genero">
+         <div class="col-md-10 hidden" id="Genero">
                 @Html.Action("Index", "GeneroMusicals", new { id = ViewBag.GeneroMusicalID})
-            </div>             
-            <div class="col-md-10">
+         </div>             
+         <div class="col-md-10">
                 @Html.DropDownList("ListaPesquisa",  new SelectList(ViewBag.ListaPesquisa, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
                 <button class="btn btn-default">Ir</button>
-             </div>           
-        </div>
+         </div>           
     </div>
+</div>
 
 <div class="row">
     <p>Ordenar por:</p>
@@ -54,7 +54,7 @@
         })
 
         $("ListaPesquisa").change(function () {
-            var TipoSearch = $("TipoPesquisa").val();
+            var TipoSearch = $("ListaPesquisa").val();
             if (TipoSearch == "2") {
                 $('#Artista').removeClass('active').addClass('hidden');
                 $('#Genero').removeClass('hidden').addClass('active');
