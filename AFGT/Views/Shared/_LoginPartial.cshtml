@@ -7,10 +7,12 @@
         
     <div class="dropdown" style="float:right;">
         
-          <div class="color">@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</div>
+          <div class="dropbtn">@Html.ActionLink("HELLO " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</div>
         <div class="dropdown-content">
             
             @Html.ActionLink("Account Settings", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink("Your Events", "Index", "Eventoes")
+            @Html.ActionLink("Create New Event", "Create", "Eventoes")
 
 
             <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
