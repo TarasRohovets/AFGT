@@ -14,5 +14,15 @@ namespace AFGT.Extensions
             var claim = ((ClaimsIdentity)identity).FindFirst("NameUser");
             return (claim != null) ? claim.Value : string.Empty;
         }
+
+        public static string GetLinkFotoUser(this IIdentity identity)
+        {
+            var claim = ((ClaimsIdentity)identity).FindFirst("LinkFotoUser");
+            return (claim != null) ? claim.Value : string.Empty;
+        }
+
+
+
+
     }
 }
