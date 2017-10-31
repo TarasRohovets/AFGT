@@ -18,7 +18,7 @@ namespace AFGT.Controllers
             //Evento evento = db.Eventos.Find(id);
             string url1 = "https://www.google.com/maps/embed/v1/directions?key=";
             string key = WebConfigurationManager.AppSettings["GoogleMapsAPIKey"];
-            string PointA = Request.Form["GoogleMapsAPIKey"].ToString();
+            string PointA = Request.Form["PointA"].ToString();
             string PointB = "Lisboa";//evento.Morada.ToString();
 
             if (PointA != null)
