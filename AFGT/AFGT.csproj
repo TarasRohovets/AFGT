@@ -197,10 +197,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EventoesController.cs" />
+    <Compile Include="Controllers\GeneroMusicalsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MoradasController.cs" />
     <Compile Include="Controllers\OrganizadoresController.cs" />
+    <Compile Include="Controllers\RumoController.cs" />
     <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -374,6 +376,11 @@
     <Content Include="Views\Organizadores\Index.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
+    <Content Include="Views\GeneroMusicals\Index.cshtml" />
+    <Content Include="Views\Home\Data.cshtml" />
+    <Content Include="Views\Home\Local.cshtml" />
+    <Content Include="Views\Home\Pesquisa.cshtml" />
+    <Content Include="Views\Rumo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
