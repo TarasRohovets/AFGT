@@ -19,8 +19,8 @@ namespace AFGT.Controllers
 
             ViewBag.ListaPesquisa = list;
 
-            string ConteudoPesquisa = Request.Form["ConteudoPesquisa"].ToString();
-            string TipoPesquisa = Request.Form["ListaPesquisa"].ToString();
+            //string ConteudoPesquisa = Request.Form["ConteudoPesquisa"].ToString();
+            //string TipoPesquisa = Request.Form["ListaPesquisa"].ToString();
 
             return View();
         }
