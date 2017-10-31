@@ -35,12 +35,12 @@ namespace AFGT.Controllers
             return View();
         }
 
-       
+
         //[HttpGet]
         //public ActionResult Busca(string filtro, string inputDePesquisa)
         //{
 
-            
+
         //    switch (filtro)
         //    {
         //        case "Artist":
@@ -54,18 +54,19 @@ namespace AFGT.Controllers
         //                return ViewBag.Message ="TestandoaBuscadeEventos";
         //            }
 
-              
+
         //    }
-               
+
 
         //        return View(); //How many results are there in total? NOTE: item.Tracks = item.Artists = null
         //    }
 
         //public async Task<ActionResult> Busca()
         //{
-            
 
-        //    var output = await SpotifyWebAPI.Artist.GetArtist("Beatles");
+        //    var artSearch = await SpotifyWebAPI.Artist.Search();
+        //    var temp;
+        //    var output = await SpotifyWebAPI.Artist.GetArtist();
             
             
 
