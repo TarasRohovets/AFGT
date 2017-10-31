@@ -25,7 +25,8 @@ namespace AFGT.Controllers
             {
                 ViewBag.Link = url1 + key + "&origin=" + PointA + "&destination=" + PointB;
             }
-            else {
+            else
+            {
                 ViewBag.Link = "https://www.google.com/maps/embed/v1/place?key=" + key + " &q=" + PointB;
             }
 
