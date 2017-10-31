@@ -8,7 +8,7 @@
     <div class="row">
         <div class="form-group active" id="Artista">
             <div class="col-md-10">
-                <input type="text" class="form-control" placeholder="O que procuras?" />
+                <input name ="ConteudoPesquisa" type="text" class="form-control" placeholder="O que procuras?" />
             </div>
          </div>
          <div class="col-md-10 hidden" id="Genero">
@@ -41,10 +41,9 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-
         $('#option').change(function () {
             var TipoOpcao = $('#option').val();
-            if (TipoOpcao == "Local") {
+            if (TipoOpcao == 'Local') {
                 $('#Data').removeClass('active').addClass('hidden');
                 $('#Local').removeClass('hidden').addClass('active');
             } else {
@@ -54,8 +53,8 @@
         })
 
         $("ListaPesquisa").change(function () {
-            var TipoSearch = $("ListaPesquisa").val();
-            if (TipoSearch == "2") {
+            var TipoSearch = $('ListaPesquisa').val();
+            if (TipoSearch == '2') {
                 $('#Artista').removeClass('active').addClass('hidden');
                 $('#Genero').removeClass('hidden').addClass('active');
             } else {
