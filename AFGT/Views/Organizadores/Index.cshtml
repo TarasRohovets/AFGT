@@ -1,0 +1,64 @@
+﻿@model IEnumerable<AFGT.Models.Organizadore>
+
+@{
+    ViewBag.Title ="Personal Account"; <!--  Depois trocar para html.link...para ir buscar o nome do Organizador logado  -->
+}
+
+<h2> Organizadores</h2> <!-- Tambem Ligar o nome do aqui-->
+
+<!--   Este Create e o Register do Utilizdor. Vai para o Gustavo. -->
+ <p> 
+    @Html.ActionLink("Create New", "Create")
+</p>
+    
+<p>
+    @Html.ActionLink("Menu", "Menu")
+    </p>  
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeOrg)
+        </th>
+        <th>
+          
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nipc)
+        </th>
+        <th>
+           
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LinkFotoORG)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeOrg)
+        </td>
+        <td>
+          
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nipc)
+        </td>
+        <td>
+           
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LinkFotoORG)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OrgID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OrgID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OrgID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,82 @@
+﻿@model AFGT.Models.Organizadore
+
+@{
+    ViewBag.Title = @Html.DisplayFor(model => model.NomeOrg);
+}
+
+<h2>@Html.DisplayFor(model => model.NomeOrg)</h2>
+
+<h3><img src="@Model.LinkFotoORG" style="width:160px;height:160px; background: #FFFFFF;   
+    margin: auto; 
+    -moz-border-radius: 60px; 
+    border-radius: 100px; 
+    padding: 6px; 
+    box-shadow: 0px 0px 20px #888;" /></h3> <!--   Fiz aleraxoes aqui-->
+
+
+<h2>UploadFile</h2>
+@using (Html.BeginForm("Edit", "Organizadores", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        @Html.TextBox("file", "", new {type="file" }) <br />
+
+    </div>
+
+
+
+
+    
+
+
+        <!-- !!!!!!!!!A cena das FOTOS vai aparecer aqui, E preciso FORM Action? 
+        Html.LabelFor(m => m.LinkFotoORG)
+        <input type="file" name="LinkFotoORG" id="fileUpload" accept=".png, .jpg, .jpeg, .gif, .tif" />
+        <input type="submit" />   -->
+ 
+
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.OrgID)
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeOrg, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NomeOrg, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NomeOrg, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nipc, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nipc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nipc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

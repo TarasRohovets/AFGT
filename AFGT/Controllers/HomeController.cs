@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AFGT.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,7 +13,11 @@ namespace AFGT.Controllers
 {
     public class HomeController : Controller
     {
+
         
+
+        private afgtEntities db = new afgtEntities();
+
 
         public ActionResult Index()
         {
@@ -21,18 +26,39 @@ namespace AFGT.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Data(DateTime Dia)
         {
-            ViewBag.Message = "Your application description page.";
+            List<Models.Evento> Evento = new List<Models.Evento>();
 
-            return View();
+            string TipoPesquisa = ""; 
+            string ConteudoPesquisa = "";
+
+            if (TipoPesquisa == "Genero")
+            {
+                return View(db.Eventos.Where(model => model.Data == Dia || Dia == null).ToList().Where(model => model.Artistas.GeneroMusical.NomeEstilo.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
+            }
+            else
+            {
+                return View(db.Eventos.Where(model => model.Data == Dia || Dia == null).ToList().Where(model => model.Artistas.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
+            }
         }
 
-        public ActionResult Contact()
+        public ActionResult Local(String PointA)
         {
-            ViewBag.Message = "Your contact page.";
+            List<Models.Evento> Evento = new List<Models.Evento>();
 
-            return View();
+            string TipoPesquisa = "";//HttpRequest.Form.Get("search");
+            string ConteudoPesquisa = "";///HttpRequest.Form.Get("search");
+
+            if (TipoPesquisa == "Genero")
+            {
+                return View(db.Eventos.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).ToList().Where(model => model.Artistas.GeneroMusical.NomeEstilo.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
+            }
+            else
+            {
+                return View(db.Eventos.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).ToList().Where(model => model.Artistas.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
+            }
+
         }
 
 
