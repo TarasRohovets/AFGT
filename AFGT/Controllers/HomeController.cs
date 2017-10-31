@@ -36,11 +36,20 @@ namespace AFGT.Controllers
         }
 
 
-        //[HttpGet]
+
+
+
+
+
+
+
+
+
+        //TENTIVA DE METODOS PARA POR OS PEDIDOS AO API A FUNCIONAR
+
+
         //public ActionResult Busca(string filtro, string inputDePesquisa)
         //{
-
-
         //    switch (filtro)
         //    {
         //        case "Artist":
@@ -74,7 +83,7 @@ namespace AFGT.Controllers
 
         //}
 
-        //[HttpGet]
+        //
         //public ActionResult getArtist()
         //{
         //    string token = SpotifyWebAPI.Authentication.ClientId{ };

@@ -1,10 +1,11 @@
-﻿@model SpotifyWebAPI.Artist
+﻿@*@model SpotifyWebAPI.Artist*@
 @{
     ViewBag.Title = "Busca";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Busca</h2>
+<h1>go</h1>
+<ul id="results"></ul>
 
-
-@Model.Uri
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/testeAPI")
