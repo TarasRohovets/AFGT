@@ -25,6 +25,8 @@ namespace AFGT.Controllers
             return View(eventos.ToList());
         }
 
+       
+
         // GET: Eventoes/Details/5
         public ActionResult Details(int? id)
         {
@@ -54,26 +56,31 @@ namespace AFGT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "NomeEvento,Descricao,Data,Artistas,Link")] Evento evento, HttpPostedFileBase file, [Bind(Include = "Endereco,Cidade,CodPostal")] Morada morada)
         {
-            var path = "";
-            if (file != null)
+
+            try
             {
                 if (file.ContentLength > 0)
                 {
-                    //verifica se o ficheiro é imagem
-                    if(Path.GetExtension(file.FileName).ToLower()==".jpg" ||
-                        Path.GetExtension(file.FileName).ToLower() == ".png" ||
-                        Path.GetExtension(file.FileName).ToLower() == ".jpeg")
-                    {
-                        path = Path.Combine(Server.MapPath("~/Content/Images"), file.FileName);
-                        file.SaveAs(path);
-                        evento.Link = path;
-                    }
+                    string _FileName = Path.GetFileName(file.FileName);
+                    string _path = Path.Combine(Server.MapPath("~/Images/"), _FileName);
+                    file.SaveAs(_path);
+                    
+
+                    evento.Link = "/Images/" + _FileName;      //////    Adiciono o link a tabela AspNetUsers
+                    
+                    db.Entry(evento).State = EntityState.Modified;      /////     Faz Alteracoes na Base de Dados 
+                    db.SaveChanges();                                      /////     Grava as altereacoes 
+
                 }
-            } else
-            {
-                evento.Link = "~/Content/Images/default.jpg";
+                @ViewBag.Message = "Mission Succeded, Congtratulations!";
+                return View(evento); //////????? qual return eh aqui?
             }
-           
+            catch
+            {
+                @ViewBag.Message = "Abort!Emergency state!File not uploaded!";
+                return View(evento);////qual return 
+            }
+
             /*Verificar morada inserida*/
             var x = db.Moradas.FirstOrDefault(m => m.Endereco == morada.Endereco &&  m.CodPostal == morada.CodPostal && m.Cidade == morada.Cidade);
 
@@ -94,8 +101,9 @@ namespace AFGT.Controllers
             }
             /*Fim de verificaçao morada inserida*/
 
-            //evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());
-            evento.OrgID = 1;
+            evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());
+            //var userId = User.Identity.GetUserId<int>();
+            //evento.OrgID = 1;
                 db.Eventos.Add(evento);
                 db.SaveChanges();
                 return RedirectToAction("Index");
