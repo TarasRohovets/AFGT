@@ -25,7 +25,6 @@ namespace AFGT.Controllers
                 ViewBag.Link = url1 + key + "&origin=" + PointA + "&destination=" + PointB;
             }
             else {
-
                 ViewBag.Link = url1 + key + "&origin=" + "Coimbra" + "&destination=" + PointB;
             }
 
