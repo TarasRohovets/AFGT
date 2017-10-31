@@ -22,12 +22,12 @@ namespace AFGT.Controllers
             return View();
         }
 
-        public ActionResult Data(DateTime Dia)
+        public ActionResult Data(DateTime Dia, string TipoPesquisa, string ConteudoPesquisa)
         {
             List<Models.Evento> Evento = new List<Models.Evento>();
 
-            string TipoPesquisa = ""; 
-            string ConteudoPesquisa = "";
+            TipoPesquisa = ""; 
+            ConteudoPesquisa = "";
 
             if (TipoPesquisa == "Genero")
             {
@@ -39,12 +39,12 @@ namespace AFGT.Controllers
             }
         }
 
-        public ActionResult Local(String PointA)
+        public ActionResult Local(String PointA, string TipoPesquisa, string ConteudoPesquisa)
         {
             List<Evento> Evento = new List<Evento>();
 
-            string ConteudoPesquisa = "";
-            string TipoPesquisa = Request.Form["ListaPesquisa"].ToString();
+            ConteudoPesquisa = "";
+            TipoPesquisa = Request.Form["ListaPesquisa"].ToString();
 
             if (TipoPesquisa == "EstiloMusical")
             {
