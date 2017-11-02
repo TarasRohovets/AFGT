@@ -75,7 +75,6 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="LinkFotoUser" Type="nvarchar" MaxLength="250" />
-          <Property Name="NameUser" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Eventos">
           <Key>
@@ -513,7 +512,6 @@
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="LinkFotoUser" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="NameUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="afgtModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="afgtModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="Likes" Relationship="afgtModel.FK_Likes_AspNetUsers" FromRole="AspNetUser" ToRole="Like" />
@@ -717,7 +715,7 @@
           <End Type="afgtModel.Artista" Role="Artista" Multiplicity="*" />
           <End Type="afgtModel.Evento" Role="Evento" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -773,7 +771,6 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="afgtModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="NameUser" ColumnName="NameUser" />
                 <ScalarProperty Name="LinkFotoUser" ColumnName="LinkFotoUser" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
