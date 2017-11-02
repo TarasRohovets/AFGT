@@ -184,8 +184,6 @@ namespace AFGT.Controllers
         [AllowAnonymous]
         public ActionResult RegisterOrg()
         {
-            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
-                                            .ToList(), "Name", "Name");
             return View();
         }
 
