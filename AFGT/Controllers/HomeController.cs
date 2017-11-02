@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using SpotifyWebAPI.SpotifyModel;
+
 using System.Threading.Tasks;
 
 namespace AFGT.Controllers
