@@ -380,6 +380,8 @@
     <Content Include="Views\Home\Data.cshtml" />
     <Content Include="Views\Home\Local.cshtml" />
     <Content Include="Views\Rumo\Index.cshtml" />
+    <Content Include="Views\Home\ResultadosPesquisa.cshtml" />
+    <Content Include="Views\Rumo\TesteRumo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

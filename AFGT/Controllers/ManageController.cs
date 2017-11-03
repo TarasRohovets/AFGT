@@ -82,7 +82,7 @@ namespace AFGT.Controllers
                 UserName = aspNetUser.UserName,
                 LinkFotoUser = aspNetUser.LinkFotoUser,
                 Email = aspNetUser.Email,
-                NameUser = aspNetUser.NameUser
+               
             };
                //  LinkFotoUser = AspNetUser.LinkFotoUser; //LinkFoto nao ve noindexView
     
@@ -111,7 +111,7 @@ namespace AFGT.Controllers
                        
                         
                         NetUser.LinkFotoUser = "/Images/" + _FileName;      //////    Adiciono o link a tabela AspNetUsers
-                        NetUser.NameUser = aspNetUser.NameUser;               //        "        Nome
+                                   //        "        Nome
                         NetUser.Email = aspNetUser.Email;                      //        "       Email  
                         NetUser.PhoneNumber = aspNetUser.PhoneNumber;           //        "      Tlmv
 
