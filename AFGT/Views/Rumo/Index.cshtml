@@ -7,12 +7,11 @@
 
 @using (Ajax.BeginForm("Index", "Rumo", new AjaxOptions { UpdateTargetId = "mapa" }))
 {
-    <div class="form-group">
+ <div class="form-group">
     <div class="col-md-10">
         @Html.Label("Origem")
-        @Html.TextBox("PointA")
-        <button class="btn btn-default">Ir</button>
-    </div>
+        @Html.Action("Local","Home")
+     </div>
 </div>
 }
 
