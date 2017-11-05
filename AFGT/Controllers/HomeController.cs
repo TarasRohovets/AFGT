@@ -38,6 +38,8 @@ namespace AFGT.Controllers
 
             ViewBag.ListaPesquisa = list;
 
+            TempData["PointA"] = PointA;
+
             switch (TipoOpcao)
             {
                 case "Data":

@@ -11,7 +11,13 @@
     <div class="col-md-10">
         @Html.Label("Origem")
         @Html.Action("Local","Home")
-     </div>
+        @{
+            if (TempData["PointA"] != null)
+            {
+                var PointA = TempData["PointA"];
+            }
+        }
+    </div>
 </div>
 }
 
