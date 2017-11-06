@@ -26,3 +26,15 @@ textarea {
 table.hidden {
     display: none;
 }
+
+.thumbnail {
+    height: 650px;
+}
+.thumbnail img {
+    height: 250px;
+}
+
+#navbar{
+
+    color:burlywood;
+}
