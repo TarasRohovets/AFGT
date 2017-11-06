@@ -29,7 +29,7 @@ namespace AFGT.Controllers
 
            if (PointA != null)
            {
-                ViewBag.Link = url1 + key + "&origin=" + PointA + "&destination=" + PointB;//+ "&travelMode=" + "BICYCLING"
+                ViewBag.Link = url1 + key + "&origin=" + PointA + "&destination=" + PointB;
            }
             else
             {
@@ -38,50 +38,5 @@ namespace AFGT.Controllers
 
             return View();
         }
-
-        //public ActionResult TesteRumo()
-        //{
-        //    List<SelectListItem> list = new List<SelectListItem>
-        //    {
-        //        new SelectListItem { Value = "DRIVING", Text = "Carro" },
-        //        new SelectListItem { Value = "BICYCLING", Text = "Bicicleta" },
-        //        new SelectListItem { Value = "TRANSIT", Text = "Transporte Publico" },
-        //        new SelectListItem { Value = "WALKING", Text = "A pe" }
-        //    };
-
-        //    ViewBag.TravelMode = list;
-        //    ViewBag.Link = "https://www.google.com/maps/embed/v1/place?key=" + key + " &q=" + PointB;
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult TesteRumo(string PointA, string TravelMode)
-        //{
-        //    //Evento evento = db.Eventos.Find(id);
-
-        //    List<SelectListItem> list = new List<SelectListItem>
-        //    {
-        //        new SelectListItem { Value = "DRIVING", Text = "Carro" },
-        //        new SelectListItem { Value = "BICYCLING", Text = "Bicicleta" },
-        //        new SelectListItem { Value = "TRANSIT", Text = "Transporte Publico" },
-        //        new SelectListItem { Value = "WALKING", Text = "Caminhando" }
-        //    };
-
-        //    ViewBag.TravelMode = list;
-
-        //    string url1 = "http://maps.google.com/maps/api/js?key=";
-
-        //    if (PointA != null)
-        //    {
-        //        ViewBag.Link = url1 + key + "&origin=" + PointA + "&destination=" + PointB + "&travelMode=" + TravelMode;
-               
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Link = "https://www.google.com/maps/embed/v1/place?key=" + key + " &q=" + PointB;
-                
-        //    }
-        //    return View();
-        //}
     }
 }
