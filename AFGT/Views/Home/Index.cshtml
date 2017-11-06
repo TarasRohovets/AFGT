@@ -1,0 +1,90 @@
+﻿
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>AFGT</h1>
+    <p class="lead">AFGT guia-te pelo o que ouves! xD</p>
+    <div class="row">
+        <div class="form-group active" id="Artista">
+            <div class="col-md-10">
+                <input name ="ConteudoPesquisa" type="text" class="form-control" placeholder="O que procuras?" />
+            </div>
+         </div>
+         <div class="col-md-10 hidden" id="Genero">
+                @Html.Action("Index", "GeneroMusicals", new { id = ViewBag.GeneroMusicalID})
+         </div>             
+         <div class="col-md-10">
+                @Html.DropDownList("ListaPesquisa",  new SelectList(ViewBag.ListaPesquisa, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                <button class="btn btn-default">Ir</button>
+         </div>           
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-4">
+        <h2>Lixo</h2>
+        <p>
+            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+
+    <p>Ordenar por:</p>
+    <select id="option">
+        <option value="Data">Data</option>
+        <option value="Local">Cidade</option>
+    </select>
+    <br>
+    <br>
+    <div class="active" id="Data">
+        @Html.Partial("Data")
+
+    </div>
+    <div class="hidden" id="Local">
+        @Html.Partial("Local")
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $('#option').change(function () {
+            var TipoOpcao = $('#option').val();
+            if (TipoOpcao == 'Local') {
+                $('#Data').removeClass('active').addClass('hidden');
+                $('#Local').removeClass('hidden').addClass('active');
+            } else {
+                $('#Local').removeClass('active').addClass('hidden');
+                $('#Data').removeClass('hidden').addClass('active');
+            }
+        })
+
+        $("ListaPesquisa").change(function () {
+            var TipoSearch = $('ListaPesquisa').val();
+            if (TipoSearch == '2') {
+                $('#Artista').removeClass('active').addClass('hidden');
+                $('#Genero').removeClass('hidden').addClass('active');
+            } else {
+                $('#Genero').removeClass('active').addClass('hidden');
+                $('#Artista').removeClass('hidden').addClass('active');
+            }
+        })
+
+        $('button').click(function () {
+            //action do controlador 
+        })
+    </script>
+
+}
