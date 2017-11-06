@@ -54,7 +54,7 @@ namespace AFGT.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NomeEvento,Descricao,Data,Link")] Evento evento, HttpPostedFileBase file, [Bind(Include = "Endereco,Cidade,CodPostal")] Morada morada)
+        public ActionResult Create([Bind(Include = "NomeEvento,Descricao,Data,Artistas,Link")] Evento evento, HttpPostedFileBase file, [Bind(Include = "Endereco,Cidade,CodPostal")] Morada morada)
         {
 
             try
@@ -134,7 +134,6 @@ namespace AFGT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "EventosID,OrgID,NomeEvento,Morada,Descricao,Data,Artistas,Link")] Evento evento)
-        public ActionResult Edit([Bind(Include = "EventosID,NomeEvento,Descricao,Data,Link")] Evento evento, HttpPostedFileBase file, [Bind(Include = "Endereco,Cidade,CodPostal")] Morada morada)
         {
             if (ModelState.IsValid)
             {

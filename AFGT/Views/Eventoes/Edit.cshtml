@@ -87,48 +87,4 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script>
-    $("a.tooltipLink").tooltip();
-
-
-    $('.datetimepicker').datetimepicker({
-        
-        format: 'DD-MM-YYYY HH:mm',
-        
-        sideBySide: true,
-        showClose: true,
-        showClear: true,
-        toolbarPlacement: 'top',
-        stepping: 15,
-
-        tooltips: {
-            clear: 'Clear selection',
-            close: 'Close the picker',
-            selectMonth: 'Select Month',
-            prevMonth: 'Previous Month',
-            nextMonth: 'Next Month',
-            selectYear: 'Select Year',
-            prevYear: 'Previous Year',
-            nextYear: 'Next Year',
-            incrementHour: 'Increment Hour',
-            pickHour: 'Pick Hour',
-            decrementHour: 'Decrement Hour',
-            incrementMinute: 'Increment Minute',
-            pickMinute: 'Pick Minute',
-            decrementMinute: 'Decrement Minute',
-        }
-    });
-
-
-    $('.datetimepicker').focusout(function () {
-
-        var input = $('.datetimepicker').val();
-        console.log(input);
-        var output = input.substr(0, 10).split('-').reverse().join('-') + " " + input.substr(11, 5);
-        console.log(output);
-        $('.datatimepicker').val(ouput);
-        console.log($('.datatimepicker').val());
-    });
-
-</script>
 }
