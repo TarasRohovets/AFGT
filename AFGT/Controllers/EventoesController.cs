@@ -25,6 +25,8 @@ namespace AFGT.Controllers
             return View(eventos.ToList());
         }
 
+       
+
         // GET: Eventoes/Details/5
         public ActionResult Details(int? id)
         {
@@ -54,7 +56,25 @@ namespace AFGT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "NomeEvento,Descricao,Data,Artistas,Link")] Evento evento, HttpPostedFileBase file, [Bind(Include = "Endereco,Cidade,CodPostal")] Morada morada)
         {
-            var path = "";
+<<<<<<< HEAD
+
+            try
+            {
+                if (file.ContentLength > 0)
+                {
+                    string _FileName = Path.GetFileName(file.FileName);
+                    string _path = Path.Combine(Server.MapPath("~/Images/"), _FileName);
+                    file.SaveAs(_path);
+                    
+
+                    evento.Link = "/Images/" + _FileName;      //////    Adiciono o link a tabela AspNetUsers
+                    
+                    db.Entry(evento).State = EntityState.Modified;      /////     Faz Alteracoes na Base de Dados 
+                    db.SaveChanges();                                      /////     Grava as altereacoes 
+
+=======
+            var _path = "";
+            var _FileName = "";
             if (file != null)
             {
                 if (file.ContentLength > 0)
@@ -64,16 +84,27 @@ namespace AFGT.Controllers
                         Path.GetExtension(file.FileName).ToLower() == ".png" ||
                         Path.GetExtension(file.FileName).ToLower() == ".jpeg")
                     {
-                        path = Path.Combine(Server.MapPath("~/Content/Images"), file.FileName);
-                        file.SaveAs(path);
-                        evento.Link = path;
+
+                        _FileName = Path.GetFileName(file.FileName);
+                        _path = Path.Combine(Server.MapPath("~/Content/Images/"), _FileName);
+                        file.SaveAs(_path);
+                        evento.Link = "/Content/Images/" + _FileName;
                     }
+>>>>>>> BranchF
                 }
-            } else
-            {
-                evento.Link = "~/Content/Images/default.jpg";
+                @ViewBag.Message = "Mission Succeded, Congtratulations!";
+                return View(evento); //////????? qual return eh aqui?
             }
-           
+            catch
+            {
+<<<<<<< HEAD
+                @ViewBag.Message = "Abort!Emergency state!File not uploaded!";
+                return View(evento);////qual return 
+=======
+                evento.Link = "/Content/Images/default.jpg";
+>>>>>>> BranchF
+            }
+
             /*Verificar morada inserida*/
             var x = db.Moradas.FirstOrDefault(m => m.Endereco == morada.Endereco &&  m.CodPostal == morada.CodPostal && m.Cidade == morada.Cidade);
 
@@ -93,14 +124,25 @@ namespace AFGT.Controllers
             }
             /*Fim de verificaçao morada inserida*/
 
+<<<<<<< HEAD
+            evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());
+            //var userId = User.Identity.GetUserId<int>();
+            //evento.OrgID = 1;
+=======
+
+           
+
+
+
             //evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());
             evento.OrgID = 1;
+>>>>>>> BranchF
                 db.Eventos.Add(evento);
                 db.SaveChanges();
                 return RedirectToAction("Index");
           
            
-            ViewBag.OrgID = new SelectList(db.Organizadores, "OrgID", "NomeOrg", evento.OrgID);
+            //ViewBag.OrgID = new SelectList(db.Organizadores, "OrgID", "NomeOrg", evento.OrgID);
             //return View(evento);
         }
         
@@ -116,6 +158,10 @@ namespace AFGT.Controllers
             {
                 return HttpNotFound();
             }
+
+           
+
+
             ViewBag.OrgID = new SelectList(db.Organizadores, "OrgID", "NomeOrg", evento.OrgID);
             return View(evento);
         }
@@ -129,9 +175,44 @@ namespace AFGT.Controllers
         {
             if (ModelState.IsValid)
             {
+                            _path = Path.Combine(Server.MapPath("~/Content/Images/"), _FileName);
+                            file.SaveAs(_path);
+                            evento.Link = "/Content/Images/" + _FileName;
+                        }
+                    }
+                }
+                else
+                {
+                    evento.Link = "/Content/Images/default.jpg";
+                }
+
+                /*Verificar morada inserida*/
+                var x = db.Moradas.FirstOrDefault(m => m.Endereco == morada.Endereco && m.CodPostal == morada.CodPostal && m.Cidade == morada.Cidade);
+
+                //x == null// não existe na base de dados
+
+                if (x != null)
+                {
+                    evento.MoradaID = x.MoradaID;
+
+
+                }
+                else
+                {
+
+                    db.Moradas.Add(morada);
+                    db.SaveChanges();
+                    evento.MoradaID = morada.MoradaID;
+                }
+                /*Fim de verificaçao morada inserida*/
+
+                /*organizadores*/
+                //evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());
+                evento.OrgID = 1;
+                /*oraganizadores*/
+
                 db.Entry(evento).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
             ViewBag.OrgID = new SelectList(db.Organizadores, "OrgID", "NomeOrg", evento.OrgID);
             return View(evento);
