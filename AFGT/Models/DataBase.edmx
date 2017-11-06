@@ -63,6 +63,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LinkFotoUser" Type="nvarchar(max)" />
           <Property Name="Email" Type="nvarchar" MaxLength="256" />
           <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
           <Property Name="PasswordHash" Type="nvarchar(max)" />
@@ -276,6 +277,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Organizadores_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Organizadores" Type="Self.Organizadores" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organizadores">
+              <PropertyRef Name="OrgID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="afgtModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Artistas" EntityType="Self.Artistas" Schema="dbo" store:Type="Tables" />
@@ -332,6 +345,10 @@
             <End Role="Eventos" EntitySet="Eventos" />
             <End Role="Likes" EntitySet="Likes" />
           </AssociationSet>
+          <AssociationSet Name="FK_Organizadores_AspNetUsers" Association="Self.FK_Organizadores_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Organizadores" EntitySet="Organizadores" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -339,7 +356,6 @@
       <Schema Namespace="afgtModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="afgtEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="afgtModel.C__MigrationHistory" />
-          <EntitySet Name="Artistas" EntityType="afgtModel.Artista" />
           <EntitySet Name="AspNetRoles" EntityType="afgtModel.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="afgtModel.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="afgtModel.AspNetUserLogin" />
@@ -351,10 +367,6 @@
           <EntitySet Name="Organizadores" EntityType="afgtModel.Organizadore" />
           <EntitySet Name="SearchHistories" EntityType="afgtModel.SearchHistory" />
           <EntitySet Name="sysdiagrams" EntityType="afgtModel.sysdiagram" />
-          <AssociationSet Name="FK_Artistas_GeneroMusical" Association="afgtModel.FK_Artistas_GeneroMusical">
-            <End Role="GeneroMusical" EntitySet="GeneroMusicals" />
-            <End Role="Artista" EntitySet="Artistas" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="afgtModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
@@ -362,6 +374,10 @@
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="afgtModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organizadores_AspNetUsers" Association="afgtModel.FK_Organizadores_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Organizadore" EntitySet="Organizadores" />
           </AssociationSet>
           <AssociationSet Name="FK_Eventos_Morada" Association="afgtModel.FK_Eventos_Morada">
             <End Role="Morada" EntitySet="Moradas" />
@@ -379,6 +395,11 @@
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Artistas" EntityType="afgtModel.Artista" />
+          <AssociationSet Name="FK_Artistas_GeneroMusical" Association="afgtModel.FK_Artistas_GeneroMusical">
+            <End Role="GeneroMusical" EntitySet="GeneroMusicals" />
+            <End Role="Artista" EntitySet="Artistas" />
+          </AssociationSet>
           <AssociationSet Name="EventosArtistas" Association="afgtModel.EventosArtistas">
             <End Role="Artista" EntitySet="Artistas" />
             <End Role="Evento" EntitySet="Eventos" />
@@ -393,17 +414,6 @@
           <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Artista">
-          <Key>
-            <PropertyRef Name="ArtistasID" />
-          </Key>
-          <Property Name="ArtistasID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LinkFoto" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="GeneroMusicalID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="GeneroMusical" Relationship="afgtModel.FK_Artistas_GeneroMusical" FromRole="Artista" ToRole="GeneroMusical" />
-          <NavigationProperty Name="Eventos" Relationship="afgtModel.EventosArtistas" FromRole="Artista" ToRole="Evento" />
         </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
@@ -439,6 +449,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LinkFotoUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
           <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -452,6 +463,7 @@
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="afgtModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="afgtModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="Organizadore" Relationship="afgtModel.FK_Organizadores_AspNetUsers" FromRole="AspNetUser" ToRole="Organizadore" />
           <NavigationProperty Name="AspNetRoles" Relationship="afgtModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
         <EntityType Name="Evento">
@@ -507,6 +519,7 @@
           <Property Name="NomeOrg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Nipc" Type="Int32" Nullable="false" />
           <Property Name="LinkFotoORG" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="afgtModel.FK_Organizadores_AspNetUsers" FromRole="Organizadore" ToRole="AspNetUser" />
           <NavigationProperty Name="Eventos" Relationship="afgtModel.FK_Eventos_Organizadores" FromRole="Organizadore" ToRole="Evento" />
         </EntityType>
         <EntityType Name="SearchHistory">
@@ -527,18 +540,6 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_Artistas_GeneroMusical">
-          <End Type="afgtModel.GeneroMusical" Role="GeneroMusical" Multiplicity="1" />
-          <End Type="afgtModel.Artista" Role="Artista" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GeneroMusical">
-              <PropertyRef Name="GeneroMusicalID" />
-            </Principal>
-            <Dependent Role="Artista">
-              <PropertyRef Name="GeneroMusicalID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="afgtModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -564,6 +565,18 @@
             </Principal>
             <Dependent Role="AspNetUserLogin">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organizadores_AspNetUsers">
+          <End Type="afgtModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="afgtModel.Organizadore" Role="Organizadore" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organizadore">
+              <PropertyRef Name="OrgID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -607,11 +620,34 @@
           <End Type="afgtModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="afgtModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
+        <EntityType Name="Artista">
+          <Key>
+            <PropertyRef Name="ArtistasID" />
+          </Key>
+          <Property Name="ArtistasID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LinkFoto" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="GeneroMusicalID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GeneroMusical" Relationship="afgtModel.FK_Artistas_GeneroMusical" FromRole="Artista" ToRole="GeneroMusical" />
+          <NavigationProperty Name="Eventos" Relationship="afgtModel.EventosArtistas" FromRole="Artista" ToRole="Evento" />
+        </EntityType>
+        <Association Name="FK_Artistas_GeneroMusical">
+          <End Type="afgtModel.GeneroMusical" Role="GeneroMusical" Multiplicity="1" />
+          <End Type="afgtModel.Artista" Role="Artista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GeneroMusical">
+              <PropertyRef Name="GeneroMusicalID" />
+            </Principal>
+            <Dependent Role="Artista">
+              <PropertyRef Name="GeneroMusicalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="EventosArtistas">
           <End Type="afgtModel.Artista" Role="Artista" Multiplicity="*" />
           <End Type="afgtModel.Evento" Role="Evento" Multiplicity="*" />
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -624,16 +660,6 @@
                 <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Artistas">
-            <EntityTypeMapping TypeName="afgtModel.Artista">
-              <MappingFragment StoreEntitySet="Artistas">
-                <ScalarProperty Name="GeneroMusicalID" ColumnName="GeneroMusicalID" />
-                <ScalarProperty Name="LinkFoto" ColumnName="LinkFoto" />
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="ArtistasID" ColumnName="ArtistasID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -678,6 +704,7 @@
                 <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LinkFotoUser" ColumnName="LinkFotoUser" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -762,6 +789,16 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Artistas">
+            <EntityTypeMapping TypeName="afgtModel.Artista">
+              <MappingFragment StoreEntitySet="Artistas">
+                <ScalarProperty Name="GeneroMusicalID" ColumnName="GeneroMusicalID" />
+                <ScalarProperty Name="LinkFoto" ColumnName="LinkFoto" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="ArtistasID" ColumnName="ArtistasID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="EventosArtistas" TypeName="afgtModel.EventosArtistas" StoreEntitySet="EventosArtistas">
             <EndProperty Name="Evento">
               <ScalarProperty Name="EventosID" ColumnName="EventosID" />
