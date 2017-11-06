@@ -21,6 +21,13 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         
+        <div class="form-group">
+            @Html.LabelFor(model => model.Link, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="file" value="Browse" class="btn btn-default" />
+                <!--falta aqui coisa-->
+            </div>
+            </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.NomeEvento, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
