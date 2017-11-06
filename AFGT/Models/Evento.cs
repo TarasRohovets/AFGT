@@ -26,7 +26,7 @@ namespace AFGT.Models
         public int MoradaID { get; set; }
         public string NomeEvento { get; set; }
         public string Descricao { get; set; }
-        public Nullable<System.DateTime> Data { get; set; }
+        public System.DateTime Data { get; set; }
         public string Artistas { get; set; }
         public string Link { get; set; }
     

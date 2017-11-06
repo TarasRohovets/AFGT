@@ -17,5 +17,7 @@ namespace AFGT.Models
         public int SearchHistoryID { get; set; }
         public int Id { get; set; }
         public string Conteudo { get; set; }
+    
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }
