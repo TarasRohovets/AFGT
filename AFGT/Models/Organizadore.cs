@@ -25,7 +25,6 @@ namespace AFGT.Models
         public int Nipc { get; set; }
         public string LinkFotoORG { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Evento> Eventos { get; set; }
     }

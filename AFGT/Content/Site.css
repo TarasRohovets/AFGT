@@ -79,3 +79,15 @@ a {
 .dropdown:hover .dropbtn {
     background-color: #f9f9f9;
 } 
+
+.thumbnail {
+    height: 650px;
+}
+.thumbnail img {
+    height: 250px;
+}
+
+#navbar{
+
+    color:burlywood;
+}
