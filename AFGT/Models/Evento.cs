@@ -19,6 +19,7 @@ namespace AFGT.Models
         {
             this.Likes = new HashSet<Like>();
             this.Artistas1 = new HashSet<Artista>();
+            this.Artistas = new HashSet<Artista>();
         }
     
         public int EventosID { get; set; }
@@ -36,5 +37,6 @@ namespace AFGT.Models
         public virtual ICollection<Like> Likes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Artista> Artistas1 { get; set; }
+        public virtual ICollection<Artista> Artistas { get; set; }
     }
 }
