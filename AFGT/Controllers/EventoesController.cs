@@ -71,20 +71,6 @@ namespace AFGT.Controllers
                     db.Entry(evento).State = EntityState.Modified;      /////     Faz Alteracoes na Base de Dados 
                     db.SaveChanges();                                      /////     Grava as altereacoes 
 
-            var path = "";
-            if (file != null)
-            {
-                if (file.ContentLength > 0)
-                {
-                    //verifica se o ficheiro é imagem
-                    if(Path.GetExtension(file.FileName).ToLower()==".jpg" ||
-                        Path.GetExtension(file.FileName).ToLower() == ".png" ||
-                        Path.GetExtension(file.FileName).ToLower() == ".jpeg")
-                    {
-                        path = Path.Combine(Server.MapPath("~/Content/Images"), file.FileName);
-                        file.SaveAs(path);
-                        evento.Link = path;
-                    }
                 }
                 @ViewBag.Message = "Mission Succeded, Congtratulations!";
                 return View(evento); //////????? qual return eh aqui?
@@ -93,7 +79,6 @@ namespace AFGT.Controllers
             {
                 @ViewBag.Message = "Abort!Emergency state!File not uploaded!";
                 return View(evento);////qual return 
-                evento.Link = "~/Content/Images/default.jpg";
             }
 
             /*Verificar morada inserida*/
@@ -118,8 +103,6 @@ namespace AFGT.Controllers
             evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());
             //var userId = User.Identity.GetUserId<int>();
             //evento.OrgID = 1;
-            //evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());
-            evento.OrgID = 1;
                 db.Eventos.Add(evento);
                 db.SaveChanges();
                 return RedirectToAction("Index");
