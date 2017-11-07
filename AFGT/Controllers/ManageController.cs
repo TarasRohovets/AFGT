@@ -18,7 +18,7 @@ namespace AFGT.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private afgtEntities db = new afgtEntities();
-        
+
         // AspNetUser AspNetUser = new AspNetUser(); //
 
         public ManageController()
@@ -37,9 +37,9 @@ namespace AFGT.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -82,18 +82,18 @@ namespace AFGT.Controllers
                 UserName = aspNetUser.UserName,
                 LinkFotoUser = aspNetUser.LinkFotoUser,
                 Email = aspNetUser.Email,
-                NameUser = aspNetUser.NameUser
+
             };
-               //  LinkFotoUser = AspNetUser.LinkFotoUser; //LinkFoto nao ve noindexView
-    
-             
+            //  LinkFotoUser = AspNetUser.LinkFotoUser; //LinkFoto nao ve noindexView
+
+
             return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index([Bind(Include = "OrgID,NameUser,Email,PhoneNumber")] IndexViewModel aspNetUser, HttpPostedFileBase file)
         {
-            
+
             if (ModelState.IsValid)
             {
                 //
@@ -105,13 +105,13 @@ namespace AFGT.Controllers
                         string _path = Path.Combine(Server.MapPath("~/Images/"), _FileName);
                         file.SaveAs(_path);
 
-                        
+
                         var userId = User.Identity.GetUserId<int>();      /////   ID do User Logado
                         AspNetUser NetUser = db.AspNetUsers.Find(userId); /////    Procura o ID na tabela AspNetUsers 
-                       
-                        
+
+
                         NetUser.LinkFotoUser = "/Images/" + _FileName;      //////    Adiciono o link a tabela AspNetUsers
-                        NetUser.NameUser = aspNetUser.NameUser;               //        "        Nome
+                                                                            //        "        Nome
                         NetUser.Email = aspNetUser.Email;                      //        "       Email  
                         NetUser.PhoneNumber = aspNetUser.PhoneNumber;           //        "      Tlmv
 
@@ -394,7 +394,7 @@ namespace AFGT.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -445,6 +445,6 @@ namespace AFGT.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

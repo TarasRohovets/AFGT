@@ -1,0 +1,15 @@
+﻿<p>Ordenar por:</p>
+<select id="option" name="TipoOpcao">
+    <option value="Data">Data</option>
+    <option value="Local">Cidade</option>
+</select>
+<br>
+<br>
+
+<div class="active" id="Data">
+    @Html.Partial("Data")
+</div>
+
+<div class="hidden" id="Local">
+    @Html.Partial("Local")
+</div>
