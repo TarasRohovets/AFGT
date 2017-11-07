@@ -1,4 +1,6 @@
-﻿<p>Ordenar por:</p>
+﻿@model IEnumerable<AFGT.Models.Evento>
+
+<p>Ordenar por:</p>
 <select id="option" name="TipoOpcao">
     <option value="Data">Data</option>
     <option value="Local">Cidade</option>
@@ -13,3 +15,26 @@
 <div class="hidden" id="Local">
     @Html.Partial("Local")
 </div>
+
+@foreach (var item in Model)
+            {
+                if (item.Data > System.DateTime.Now)
+                {
+        <div class="col-sm-4">
+            <div class="thumbnail">
+                <img alt="..." src="~/Content/Images/default.jpg"> <!--falta fazer upload-->
+                <div class="caption">
+                    <h2>@Html.DisplayFor(modelItem => item.NomeEvento)</h2>
+                    <h3>@Html.DisplayFor(modelItem => item.Data)</h3>
+                    <br />
+                    <strong>@Html.LabelFor(modelItem => item.Descricao)</strong>
+                    <p>@Html.DisplayFor(modelItem => item.Descricao)</p>
+                    <strong>@Html.LabelFor(modelItem => item.Artistas)</strong>
+                    <p>@Html.DisplayFor(modelItem => item.Artistas)</p>
+                    <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) </p>
+                    <p>@Html.ActionLink("Ver percurso", "Index", "Rumo")</p>
+                </div>
+            </div>
+        </div>
+    }
+}

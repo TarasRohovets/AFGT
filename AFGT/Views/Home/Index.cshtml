@@ -7,31 +7,7 @@
 @using (Ajax.BeginForm("Index", "Home", new AjaxOptions { UpdateTargetId = "MotorBusca" }))
 {
     <div class="form-group">
-        <div class="jumbotron">
-            <h1>AFGT</h1>
-            <p class="lead">AFGT guia-te pelo o que ouves! xD</p>
-            <div class="row">
-
-                <div class="active" id="Artista">
-                    <div class="col-md-10">
-                        <input name="ConteudoPesquisa" type="text" class="form-control" placeholder="O que procuras?" />
-                    </div>
-                </div>
-
-                <div class="hidden" id="Genero">
-                    <div class="col-md-10">
-                        @Html.Action("Index", "GeneroMusicals", new { id = ViewBag.GeneroMusicalID })
-                    </div>
-                </div>
-
-                <div class="col-md-10">
-                    @Html.DropDownList("ListaPesquisa", new SelectList(ViewBag.ListaPesquisa, "Value", "Text"), new { onchange = @"TipoPesquisa(this.value);" })
-                    <button class="btn btn-default">Ir</button>
-                </div>
-
-            </div>
-        </div>
-
+        @Html.Partial("Banner")
         <div class="row" id="MotorBusca">
             @Html.Partial("ResultadosPesquisa")
         </div>

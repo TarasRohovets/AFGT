@@ -79,7 +79,7 @@ namespace AFGT.Controllers
                 //BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId()),
                 Id = aspNetUser.Id,
                 PhoneNumber = aspNetUser.PhoneNumber,
-                UserName = aspNetUser.UserName,
+                //UserName = aspNetUser.UserName,
                 LinkFotoUser = aspNetUser.LinkFotoUser,
                 Email = aspNetUser.Email,
 

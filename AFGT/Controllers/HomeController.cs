@@ -21,14 +21,18 @@ namespace AFGT.Controllers
 
         public ActionResult Index()
         {
+            var result = db.Eventos.OrderBy(evento => evento.Data).ToList();
             ViewBag.ListaPesquisa = list;
-            return View();
+            return View(result);
         }
 
         [HttpPost]
         public ActionResult Index(string ConteudoPesquisa, string GeneroMusicalID, string ListaPesquisa, string Data, string PointA, string TipoOpcao)
         {
             List<Evento> Evento = new List<Evento>();
+
+            var evento = db.Eventos.OrderBy(e => e.Data);
+            var result = evento.ToList();
 
             ViewBag.ListaPesquisa = list;
 
@@ -39,40 +43,43 @@ namespace AFGT.Controllers
                 case "Data":
                     while (Data == null)
                     {
-                        return View(db.Eventos.ToList());
+                        result = evento.ToList();
                     }
-                    if (ConteudoPesquisa == null)
+                    if (GeneroMusicalID == null && ConteudoPesquisa == null)
                     {
-                        return View(db.Eventos.Where(model => model.Data.ToString() == Data || Data == null).ToList());
+                        result = evento.Where(model => model.Data.ToString() == Data || Data == null).ToList();
                     }
                     else if (ListaPesquisa == "2")
                     {
-                        return View(db.Eventos.Where(model => model.Data.ToString() == Data || Data == null).Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList());
+                        result = evento.Where(model => model.Data.ToString() == Data || Data == null).Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList();
                     }
                     else
                     {
-                        return View(db.Eventos.Where(model => model.Data.ToString() == Data || Data == null).Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null).ToList()));
+                        result = evento.Where(model => model.Data.ToString() == Data || Data == null).Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null)).ToList();
                     }
+                break;
 
                 case "Local":
                     while (PointA == null)
                     {
-                        return View(db.Eventos.ToList());
+                        result = evento.OrderBy(e => e.Data).ToList();
                     }
-                    if (GeneroMusicalID == null)
+                    if (GeneroMusicalID == null && ConteudoPesquisa == null)
                     {
-                        return View(db.Eventos.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).ToList());
+                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).ToList();
                     }
                     else if (ListaPesquisa == "2")
                     {
-                        return View(db.Eventos.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList());
+                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList();
                     }
                     else
                     {
-                        return View(db.Eventos.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == GeneroMusicalID.ToLower() || GeneroMusicalID == null).ToList()));
+                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null)).ToList();
                     }
+                break;
             }
-            return PartialView("ResultadosPesquisa");
+
+            return PartialView("ResultadosPesquisa", result);
         }
 
         public ActionResult Local()
