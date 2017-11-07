@@ -11,8 +11,11 @@
         <div class="dropdown-content">
             
             @Html.ActionLink("Account Settings", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+
+            @if (ViewContext.HttpContext.User.IsInRole("Manager")) { 
             @Html.ActionLink("Your Events", "Index", "Eventoes")
             @Html.ActionLink("Create New Event", "Create", "Eventoes")
+            }
 
 
             <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
