@@ -7,7 +7,7 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Eventoes", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -18,23 +18,16 @@
         @Html.HiddenFor(model => model.EventosID)
 
         <div class="form-group"><!--Falta o upload da imagem-->
-            @Html.LabelFor(model => model.Link, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
-            </div>
+            <label class="control-label col-md-2">Imagem do Evento</label>         
+            <div class="col-md-10">             
+                <h3><img src=@Html.DisplayFor(model => model.Link) style=" width:280px; height:160px; background: #ffffff; margin: auto; -moz-border-radius: 0px; border-radius: 0px; padding: 6px; box-shadow: 0px 0px 20px #888;" /></h3>
+                <input type="file" name="file" value="Browse" class="btn btn-default" />
+                </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.OrgID, "OrgID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("OrgID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.OrgID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.NomeEvento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Nome do Evento</label>   
+            @*@Html.LabelFor(model => model.NomeEvento, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.NomeEvento, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.NomeEvento, "", new { @class = "text-danger" })
@@ -42,26 +35,59 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Morada, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Endereço</label>   
+            @*@Html.LabelFor(model => model.Morada.Endereco, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Morada, new { htmlAttributes = new { @class = "form-control" } })
+
+                @Html.EditorFor(model => model.Morada.Endereco, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Morada, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Morada.Cidade, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.Morada.Cidade, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Morada, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group" id="helpme">
+            <label class="control-label col-md-2">Código Postal</label>
+            @*@Html.LabelFor(model => model.Morada.CodPostal, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <a data-toggle="tooltip" class="tooltipLink" data-original-title="Contem 8 caracteres: 0000-000">
+                <span class="glyphicon glyphicon-info-sign"></span>
+            </a>
+            <div class="col-md-10">
+                   
+                @Html.EditorFor(model => model.Morada.CodPostal, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Morada, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Descrição</label>
+            @*@Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="helpme">
+
             @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
+            <a data-toggle="tooltip" class="tooltipLink" data-original-title="Date: YYYY-MM-DD HH:MM">
+                <span class="glyphicon glyphicon-info-sign"></span>
+            </a>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+                <!--  Html.EditorFor(model => model.Data, new { htmlAttributes = new { class = "form-control" } })-->
+                <!--Html.ValidationMessageFor(model => model.Data, "", new { class = "text-danger" })-->
+                <div class='input-group date'>
+                    @{ Html.EnableClientValidation(false); }
+                    @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(model => model.Data, new { @class = "form-control datetimepicker" })
+                    @{ Html.EnableClientValidation(true); }
+                </div>
             </div>
         </div>
 
@@ -87,4 +113,48 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script>
+    $("a.tooltipLink").tooltip();
+
+
+    $('.datetimepicker').datetimepicker({
+        
+        format: 'DD-MM-YYYY HH:mm',
+        
+        sideBySide: true,
+        showClose: true,
+        showClear: true,
+        toolbarPlacement: 'top',
+        stepping: 15,
+
+        tooltips: {
+            clear: 'Clear selection',
+            close: 'Close the picker',
+            selectMonth: 'Select Month',
+            prevMonth: 'Previous Month',
+            nextMonth: 'Next Month',
+            selectYear: 'Select Year',
+            prevYear: 'Previous Year',
+            nextYear: 'Next Year',
+            incrementHour: 'Increment Hour',
+            pickHour: 'Pick Hour',
+            decrementHour: 'Decrement Hour',
+            incrementMinute: 'Increment Minute',
+            pickMinute: 'Pick Minute',
+            decrementMinute: 'Decrement Minute',
+        }
+    });
+
+
+    $('.datetimepicker').focusout(function () {
+
+        var input = $('.datetimepicker').val();
+        console.log(input);
+        var output = input.substr(0, 10).split('-').reverse().join('-') + " " + input.substr(11, 5);
+        console.log(output);
+        $('.datatimepicker').val(ouput);
+        console.log($('.datatimepicker').val());
+    });
+
+</script>
 }

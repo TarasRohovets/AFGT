@@ -25,8 +25,6 @@ namespace AFGT.Controllers
             return View(eventos.ToList());
         }
 
-       
-
         // GET: Eventoes/Details/5
         public ActionResult Details(int? id)
         {
@@ -54,33 +52,31 @@ namespace AFGT.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NomeEvento,Descricao,Data,Artistas,Link")] Evento evento, HttpPostedFileBase file, [Bind(Include = "Endereco,Cidade,CodPostal")] Morada morada)
+        public ActionResult Create([Bind(Include = "NomeEvento,Descricao,Data,Link")] Evento evento, HttpPostedFileBase file, [Bind(Include = "Endereco,Cidade,CodPostal")] Morada morada)
         {
-
-            try
+            var _path = "";
+            var _FileName = "";
+            if (file != null)
             {
                 if (file.ContentLength > 0)
                 {
-                    string _FileName = Path.GetFileName(file.FileName);
-                    string _path = Path.Combine(Server.MapPath("~/Images/"), _FileName);
-                    file.SaveAs(_path);
-                    
+                    //verifica se o ficheiro é imagem
+                    if(Path.GetExtension(file.FileName).ToLower()==".jpg" ||
+                        Path.GetExtension(file.FileName).ToLower() == ".png" ||
+                        Path.GetExtension(file.FileName).ToLower() == ".jpeg")
+                    {
 
-                    evento.Link = "/Images/" + _FileName;      //////    Adiciono o link a tabela AspNetUsers
-                    
-                    db.Entry(evento).State = EntityState.Modified;      /////     Faz Alteracoes na Base de Dados 
-                    db.SaveChanges();                                      /////     Grava as altereacoes 
-
+                        _FileName = Path.GetFileName(file.FileName);
+                        _path = Path.Combine(Server.MapPath("~/Content/Images/"), _FileName);
+                        file.SaveAs(_path);
+                        evento.Link = "/Content/Images/" + _FileName;
+                    }
                 }
-                @ViewBag.Message = "Mission Succeded, Congtratulations!";
-                return View(evento); //////????? qual return eh aqui?
-            }
-            catch
+            } else
             {
-                @ViewBag.Message = "Abort!Emergency state!File not uploaded!";
-                return View(evento);////qual return 
+                evento.Link = "/Content/Images/default.jpg";
             }
-
+           
             /*Verificar morada inserida*/
             var x = db.Moradas.FirstOrDefault(m => m.Endereco == morada.Endereco &&  m.CodPostal == morada.CodPostal && m.Cidade == morada.Cidade);
 
@@ -93,22 +89,27 @@ namespace AFGT.Controllers
 
             }
             else
-            {                
+            {
+                
                 db.Moradas.Add(morada);
                 db.SaveChanges();
                 evento.MoradaID = morada.MoradaID;
             }
             /*Fim de verificaçao morada inserida*/
 
-            evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());
-            //var userId = User.Identity.GetUserId<int>();
-            //evento.OrgID = 1;
+
+           
+
+
+
+            //evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());
+            evento.OrgID = 1;
                 db.Eventos.Add(evento);
                 db.SaveChanges();
                 return RedirectToAction("Index");
           
            
-            ViewBag.OrgID = new SelectList(db.Organizadores, "OrgID", "NomeOrg", evento.OrgID);
+            //ViewBag.OrgID = new SelectList(db.Organizadores, "OrgID", "NomeOrg", evento.OrgID);
             //return View(evento);
         }
         
@@ -124,6 +125,10 @@ namespace AFGT.Controllers
             {
                 return HttpNotFound();
             }
+
+           
+
+
             ViewBag.OrgID = new SelectList(db.Organizadores, "OrgID", "NomeOrg", evento.OrgID);
             return View(evento);
         }
@@ -133,13 +138,62 @@ namespace AFGT.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EventosID,OrgID,NomeEvento,Morada,Descricao,Data,Artistas,Link")] Evento evento)
+        public ActionResult Edit([Bind(Include = "EventosID,NomeEvento,Descricao,Data,Link")] Evento evento, HttpPostedFileBase file, [Bind(Include = "Endereco,Cidade,CodPostal")] Morada morada)
         {
             if (ModelState.IsValid)
             {
+
+                var _path = "";
+                var _FileName = "";
+                if (file != null)
+                {
+                    if (file.ContentLength > 0)
+                    {
+                        //verifica se o ficheiro é imagem
+                        if (Path.GetExtension(file.FileName).ToLower() == ".jpg" ||
+                            Path.GetExtension(file.FileName).ToLower() == ".png" ||
+                            Path.GetExtension(file.FileName).ToLower() == ".jpeg")
+                        {
+
+                            _FileName = Path.GetFileName(file.FileName);
+                            _path = Path.Combine(Server.MapPath("~/Content/Images/"), _FileName);
+                            file.SaveAs(_path);
+                            evento.Link = "/Content/Images/" + _FileName;
+                        }
+                    }
+                }
+                else
+                {
+                    evento.Link = "/Content/Images/default.jpg";
+                }
+
+                /*Verificar morada inserida*/
+                var x = db.Moradas.FirstOrDefault(m => m.Endereco == morada.Endereco && m.CodPostal == morada.CodPostal && m.Cidade == morada.Cidade);
+
+                //x == null// não existe na base de dados
+
+                if (x != null)
+                {
+                    evento.MoradaID = x.MoradaID;
+
+
+                }
+                else
+                {
+
+                    db.Moradas.Add(morada);
+                    db.SaveChanges();
+                    evento.MoradaID = morada.MoradaID;
+                }
+                /*Fim de verificaçao morada inserida*/
+
+                /*organizadores*/
+                //evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());
+                evento.OrgID = 1;
+                /*oraganizadores*/
+
                 db.Entry(evento).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
             ViewBag.OrgID = new SelectList(db.Organizadores, "OrgID", "NomeOrg", evento.OrgID);
             return View(evento);
