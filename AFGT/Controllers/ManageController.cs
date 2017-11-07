@@ -82,7 +82,7 @@ namespace AFGT.Controllers
                 UserName = aspNetUser.UserName,
                 LinkFotoUser = aspNetUser.LinkFotoUser,
                 Email = aspNetUser.Email,
-                NameUser = aspNetUser.UserName
+                
             };
                //  LinkFotoUser = AspNetUser.LinkFotoUser; //LinkFoto nao ve noindexView
     
@@ -97,40 +97,26 @@ namespace AFGT.Controllers
             if (ModelState.IsValid)
             {
                 //
-                try
-                {
-                    if (file.ContentLength > 0)
+                var userId = User.Identity.GetUserId<int>();      /////   ID do User Logado
+                AspNetUser NetUser = db.AspNetUsers.Find(userId); /////    Procura o ID na tabela AspNetUsers 
+
+                if (file.ContentLength > 0)
                     {
                         string _FileName = Path.GetFileName(file.FileName);
                         string _path = Path.Combine(Server.MapPath("~/Images/"), _FileName);
-                        file.SaveAs(_path);
-
-                        
-                        var userId = User.Identity.GetUserId<int>();      /////   ID do User Logado
-                        AspNetUser NetUser = db.AspNetUsers.Find(userId); /////    Procura o ID na tabela AspNetUsers 
-                       
-                        
+                        file.SaveAs(_path);            
                         NetUser.LinkFotoUser = "/Images/" + _FileName;      //////    Adiciono o link a tabela AspNetUsers
-                        NetUser.UserName = aspNetUser.NameUser;               //        "        Nome
-                        NetUser.Email = aspNetUser.Email;                      //        "       Email  
-                        NetUser.PhoneNumber = aspNetUser.PhoneNumber;           //        "      Tlmv
-
-                        db.Entry(NetUser).State = EntityState.Modified;      /////     Faz Alteracoes na Base de Dados 
-                        db.SaveChanges();                                      /////     Grava as altereacoes 
-
+ 
                     }
-                    @ViewBag.Message = "Mission Succeded, Congtratulations!";
-                    return View(aspNetUser); //////????? qual return eh aqui?
-                }
-                catch
-                {
-                    @ViewBag.Message = "Abort!Emergency state!File not uploaded!";
-                    return View(aspNetUser);////qual return 
-                }
+                NetUser.UserName = aspNetUser.UserName;               //        "        Nome
+                NetUser.Email = aspNetUser.Email;                      //        "       Email  
+                NetUser.PhoneNumber = aspNetUser.PhoneNumber;           //        "      Tlmv
 
+                db.Entry(NetUser).State = EntityState.Modified;      /////     Faz Alteracoes na Base de Dados 
+                db.SaveChanges();                                      /////     Grava as altereacoes 
 
-
-                return RedirectToAction("Index");
+                return View(aspNetUser); //////????? qual return eh aqui?
+                
             }
             return View(aspNetUser);
         }

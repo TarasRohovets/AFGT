@@ -3,7 +3,16 @@
 @{
     ViewBag.Title = "Home Page";
 }
-
+ <!-- BANNER -->
+<header class="banner">
+    <div class="container text-center" ">
+        <div class="row">
+            <h1>AFGT Project</h1>
+            <p>AFGT guia-te pelo o que ouves! xD</p>
+        </div>
+    </div>
+</header>
+<br><br>
 <div class="jumbotron">
     <h1>AFGT</h1>
     <p class="lead">AFGT guia-te pelo o que ouves! xD</p>
@@ -26,20 +35,6 @@
 
 <div class="row">
 
-    <div class="col-md-4">
-        <h2>Lixo</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-
     <p>Ordenar por:</p>
     <select id="option">
         <option value="Data">Data</option>
@@ -55,6 +50,7 @@
         @Html.Partial("Local")
     </div>
 </div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -85,6 +81,15 @@
         $('button').click(function () {
             //action do controlador 
         })
+    </script>
+    <script>
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50)  /*height in pixels when the navbar becomes non opaque*/ {
+                $('.custom-navbar').addClass('opaque');
+            } else {
+                $('.custom-navbar').removeClass('opaque');
+            }
+        });
     </script>
 
 }

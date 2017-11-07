@@ -16,7 +16,7 @@ namespace AFGT.Models
          public string LinkFotoUser { get; set; }  //Adicionei
         public int Id { get; set; }  // Adicionei
         public string Email { get; set; }
-        public string NameUser { get; set; }
+        //public string NameUser { get; set; }
 
     }
 

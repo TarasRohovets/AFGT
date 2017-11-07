@@ -1,10 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-
-    
-
-        
+  
     <div class="dropdown" style="float:right;">
         
           <div class="dropbtn">@Html.ActionLink("HELLO " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</div>
@@ -30,9 +27,10 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register User", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Register Organizer", "RegisterOrg", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
-}
+            <div class="nav navbar-nav pull-right">
+               <li>@Html.ActionLink("Register User", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                <li>@Html.ActionLink("Register Organizer", "RegisterOrg", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+               <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            </div>
+
+        }
