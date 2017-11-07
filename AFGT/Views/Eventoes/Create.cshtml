@@ -85,7 +85,7 @@
                   <!--Html.ValidationMessageFor(model => model.Data, "", new { class = "text-danger" })-->
                     <div class='input-group date'>
                         @{ Html.EnableClientValidation(false); }
-                        @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger", id="checkdate" })
                         @Html.TextBoxFor(model => model.Data, new { @class = "form-control datetimepicker" })
                         @{ Html.EnableClientValidation(true); }
                     </div>
@@ -159,12 +159,21 @@
 
         $('.datetimepicker').focusout(function () {
 
-        var input = $('.datetimepicker').val();
-        console.log(input);
-        var output = input.substr(0, 10).split('-').reverse().join('-') + " " + input.substr(11, 5);
-        console.log(output);
-        $('.datatimepicker').val(ouput);
-        console.log($('.datatimepicker').val());
+            var input = $('.datetimepicker').val();
+            console.log(input);
+
+            if ($('.datetimepicker').valid()) {
+                var output = input.substr(0, 10).split('-').reverse().join('-') + " " + input.substr(11, 5);
+                console.log(output);
+                $('.datatimepicker').val(output);
+                console.log($('.datatimepicker').val());
+            } else {
+      
+            }
+
+        
+        
+        
         });
 
     </script>
