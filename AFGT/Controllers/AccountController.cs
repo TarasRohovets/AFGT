@@ -71,14 +71,32 @@ namespace AFGT.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
+                
                 return View(model);
             }
 
+            //var userN = model.UserName;
+            //using(var context = new ApplicationDbContext())
+            // {
+            //     var user = context.Users.FirstOrDefault(p => p.Email == model.UserName);
+            //    if(user != null)
+            //    {
+            //       Goku = user.UserName;
+            //   }
+            // }
+
+            var user = UserManager.FindByEmail(model.Email);
+
+            if(user == null)
+            {
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View(model);
+            }
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
+            var result = await SignInManager.PasswordSignInAsync( user.UserName, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -156,7 +174,7 @@ namespace AFGT.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

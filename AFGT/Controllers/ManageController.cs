@@ -91,7 +91,7 @@ namespace AFGT.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "OrgID,NameUser,Email,PhoneNumber")] IndexViewModel aspNetUser, HttpPostedFileBase file)
+        public ActionResult Index([Bind(Include = "OrgID,UserName,Email,PhoneNumber")] IndexViewModel aspNetUser, HttpPostedFileBase file)
         {
             
             if (ModelState.IsValid)
