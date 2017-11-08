@@ -645,7 +645,7 @@
           <End Type="afgtModel.Artista" Role="Artista" Multiplicity="*" />
           <End Type="afgtModel.Evento" Role="Evento" Multiplicity="*" />
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

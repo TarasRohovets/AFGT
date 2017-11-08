@@ -56,15 +56,15 @@ namespace AFGT
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            app.UseFacebookAuthentication(
-               appId: "127323857985489",
-               appSecret: "70e2162ad0a20f6e68c273da0c9c9cd2");
+            //app.UseFacebookAuthentication(
+            //   appId: "",
+            //   appSecret: "");
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            {
-                ClientId = "480235220097-ebvq8209eh5dm65die9hfbi229485bmp.apps.googleusercontent.com",
-                ClientSecret = "oWXIBqKaW_oW0khUcSCreyRK"
-            });
+            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            //{
+            //    ClientId = "",
+            //    ClientSecret = ""
+            //});
         }
     }
 }
