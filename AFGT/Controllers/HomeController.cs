@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Globalization;
 
 namespace AFGT.Controllers
 {
@@ -42,25 +43,22 @@ namespace AFGT.Controllers
             switch (TipoOpcao)
             {
                 case "Data":
-                    string DiaDia = Dia.Substring(8, 2);
-                    string MesDia = Dia.Substring(5, 2);
-                    string AnoDia = Dia.Substring(0, 4);
-
+   
                     while (Dia == null)
                     {
                         result = evento.ToList();
                     }
                     if (GeneroMusicalID == "" && ConteudoPesquisa == "")
                     {
-                        result = evento.Where(model => model.Data.ToString().Substring(0, 10) == DiaDia +"/"+MesDia+"/"+AnoDia || Dia == null).ToList();
+                        result = evento.ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
                     }
                     else if (!(GeneroMusicalID == "" && ConteudoPesquisa == "") && ListaPesquisa == "2")
                     {
-                        result = evento.Where(model => model.Data.ToString().Substring(0, 10) == Dia || Dia == null).Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList();
+                        result = evento.Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
                     }
                     else
                     {
-                        result = evento.Where(model => model.Data.ToString().Substring(0, 10) == Dia || Dia == null).Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == "")).ToList();
+                        result = evento.Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == "")).ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
                     }
                 break;
 

@@ -10,15 +10,9 @@
     <div class="form-group">
         <div class="col-md-10">
             @Html.Label("Origem")
-            @Html.Action("Local", "Home")
-            @{
-                if (TempData["PointA"] != null)
-                {
-                    var PointA = TempData["PointA"];
-                }
-            }
+            @Html.TextBox("PointA")
         </div>
     </div>
-                }
+}
 
 <iframe id="mapa" width="600" height="450" frameborder="0" style="border:0" src="@(ViewBag.Link)" allowfullscreen></iframe>

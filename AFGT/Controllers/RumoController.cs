@@ -12,7 +12,7 @@ namespace AFGT.Controllers
     {
         // GET: Rumo
         private afgtEntities db = new afgtEntities();
-        string key = WebConfigurationManager.AppSettings["GoogleMapsAPIKey"];
+        string key = "AIzaSyDBY66jDfPCD2B_rIRaQnIJW_x2xC - i7Xc";//WebConfigurationManager.AppSettings["GoogleMapsAPIKey"];
         string PointB = "Lisboa";//evento.Morada.ToString()+","+evento.Morada.Cidade+","+evento.Morada.CodPostal;
 
         public ActionResult Index()
