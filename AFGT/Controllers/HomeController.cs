@@ -52,7 +52,7 @@ namespace AFGT.Controllers
                     }
                     if (GeneroMusicalID == "" && ConteudoPesquisa == "")
                     {
-                        result = evento.Where(model => Convert.ToString(model.Data).Substring(0, 10) == DiaDia +"/"+MesDia+"/"+AnoDia || Dia == null).ToList();
+                        result = evento.Where(model => model.Data.ToString().Substring(0, 10) == DiaDia +"/"+MesDia+"/"+AnoDia || Dia == null).ToList();
                     }
                     else if (!(GeneroMusicalID == "" && ConteudoPesquisa == "") && ListaPesquisa == "2")
                     {
