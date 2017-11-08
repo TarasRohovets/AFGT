@@ -12,6 +12,16 @@
 .banner {
     background: url("../../Images/Background.jpg") no-repeat;
     /*background-attachment: fixed;*/
+    
+}
+    .banner .row {
+        margin-top: 200px;
+    }
+
+body {
+    background: url("../../Images/Background.jpg") no-repeat;
+    padding-top: 50px;
+    padding-bottom: 20px;
     min-height: 600px;
     position: relative;
     overflow: hidden;
@@ -24,16 +34,6 @@
     -moz-background-size: cover !important;
     -o-background-size: cover !important;
     background-size: cover !important;
-}
-    .banner .row {
-        margin-top: 200px;
-    }
-
-body {
-    background: url("../../Images/Background.jpg") no-repeat;
-    padding-top: 50px;
-    padding-bottom: 20px;
-   
 }
 
 /* Set padding to keep content from hitting the edges */

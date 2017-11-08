@@ -460,6 +460,8 @@
     <Content Include="Views\Artistas\Edit.cshtml" />
     <Content Include="Views\Artistas\Index.cshtml" />
     <Content Include="Views\Date.cshtml" />
+    <Content Include="Views\Home\Pesquisa.cshtml" />
+    <Content Include="Views\Home\Local.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
