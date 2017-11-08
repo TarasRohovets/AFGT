@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top custom-navbar">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -29,9 +29,19 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
+        
+                <a class="navbar-brand">@Html.ActionLink("AFGT Project", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</a>            
+                
             </div>
+            <div class="nav navbar-nav pull-right">
+                <a class="navbar-brand">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</a>
+                <a class="navbar-brand">@Html.Partial("_LoginPartial")</a>
+            </div>
+           
         </div>
     </div>
+   
+
     <div class="container body-content">
         @RenderBody()
         <hr />

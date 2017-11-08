@@ -49,8 +49,9 @@ namespace AFGT.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "UserName/Email")]
         [EmailAddress]
+        public string UserName { get; set; }
         public string Email { get; set; }
 
         [Required]
