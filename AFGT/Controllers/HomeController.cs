@@ -27,12 +27,13 @@ namespace AFGT.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string ConteudoPesquisa, string GeneroMusicalID, string ListaPesquisa, string Data, string PointA, string TipoOpcao)
+        public ActionResult Index(string ConteudoPesquisa, string GeneroMusicalID, string ListaPesquisa, string Dia, string PointA, string TipoOpcao)
         {
             List<Evento> Evento = new List<Evento>();
 
             var evento = db.Eventos.OrderBy(e => e.Data);
             var result = evento.ToList();
+
 
             ViewBag.ListaPesquisa = list;
 
@@ -41,21 +42,25 @@ namespace AFGT.Controllers
             switch (TipoOpcao)
             {
                 case "Data":
-                    while (Data == null)
+                    string DiaDia = Dia.Substring(8, 2);
+                    string MesDia = Dia.Substring(5, 2);
+                    string AnoDia = Dia.Substring(0, 4);
+
+                    while (Dia == null)
                     {
                         result = evento.ToList();
                     }
                     if (GeneroMusicalID == "" && ConteudoPesquisa == "")
                     {
-                        result = evento.Where(model => model.Data.ToString() == Data || Data == null).ToList();
+                        result = evento.Where(model => Convert.ToString(model.Data).Substring(0, 10) == DiaDia +"/"+MesDia+"/"+AnoDia || Dia == null).ToList();
                     }
                     else if (!(GeneroMusicalID == "" && ConteudoPesquisa == "") && ListaPesquisa == "2")
                     {
-                        result = evento.Where(model => model.Data.ToString() == Data || Data == null).Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList();
+                        result = evento.Where(model => model.Data.ToString().Substring(0, 10) == Dia || Dia == null).Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList();
                     }
                     else
                     {
-                        result = evento.Where(model => model.Data.ToString() == Data || Data == null).Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == "")).ToList();
+                        result = evento.Where(model => model.Data.ToString().Substring(0, 10) == Dia || Dia == null).Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == "")).ToList();
                     }
                 break;
 
