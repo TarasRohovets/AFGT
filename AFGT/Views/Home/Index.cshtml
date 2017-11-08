@@ -3,20 +3,28 @@
 @{
     ViewBag.Title = "Home Page";
 }
-
-@using (Ajax.BeginForm("Index", "Home", new AjaxOptions { UpdateTargetId = "MotorBusca" }))
-{
-    <div class="form-group">
-        @Html.Partial("Banner")
-        <div class="row" id="MotorBusca">
-            @Html.Partial("ResultadosPesquisa")
+<div>
+    @using (Ajax.BeginForm("Index", new AjaxOptions { UpdateTargetId = "resultadosPesquisa" }))
+    {
+        <div class="form-group">
+            @Html.Partial("_Banner")
+            <div class="row">
+                <p>Ordenar por:</p>
+                <select id="option" name="TipoOpcao">
+                    <option value="Data">Data</option>
+                    <option value="Local">Cidade</option>
+                </select>
+                <br>
+                <br>
+                @Html.Partial("_ResultadosPesquisa", Model)
+            </div>
         </div>
-    </div>
-}
+    }
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script>
         $('#option').change(function () {
             var TipoOpcao = $('#option').val();

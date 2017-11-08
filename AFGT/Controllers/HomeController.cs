@@ -45,41 +45,41 @@ namespace AFGT.Controllers
                     {
                         result = evento.ToList();
                     }
-                    if (GeneroMusicalID == null && ConteudoPesquisa == null)
+                    if (GeneroMusicalID == "" && ConteudoPesquisa == "")
                     {
                         result = evento.Where(model => model.Data.ToString() == Data || Data == null).ToList();
                     }
-                    else if (ListaPesquisa == "2")
+                    else if (!(GeneroMusicalID == "" && ConteudoPesquisa == "") && ListaPesquisa == "2")
                     {
                         result = evento.Where(model => model.Data.ToString() == Data || Data == null).Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList();
                     }
                     else
                     {
-                        result = evento.Where(model => model.Data.ToString() == Data || Data == null).Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null)).ToList();
+                        result = evento.Where(model => model.Data.ToString() == Data || Data == null).Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == "")).ToList();
                     }
                 break;
 
                 case "Local":
-                    while (PointA == null)
+                    while (PointA == "")
                     {
-                        result = evento.OrderBy(e => e.Data).ToList();
+                        result = evento.OrderBy(e => e.Morada.Cidade).ToList();
                     }
-                    if (GeneroMusicalID == null && ConteudoPesquisa == null)
+                    if (GeneroMusicalID == "" && ConteudoPesquisa == "")
                     {
-                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).ToList();
+                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == "").ToList();
                     }
-                    else if (ListaPesquisa == "2")
+                    else if (!(GeneroMusicalID == "" && ConteudoPesquisa == "") && ListaPesquisa == "2")
                     {
-                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList();
+                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == "").Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList();
                     }
-                    else
+                    else 
                     {
-                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null)).ToList();
+                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == "").Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == "")).ToList();
                     }
                 break;
             }
 
-            return PartialView("ResultadosPesquisa", result);
+            return PartialView("_ResultadosPesquisa", result);
         }
 
         public ActionResult Local()
