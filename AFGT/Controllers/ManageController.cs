@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AFGT.Models;
+using System.IO;
+using System.Data.Entity;
 
 namespace AFGT.Controllers
 {
@@ -15,6 +17,7 @@ namespace AFGT.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private afgtEntities db = new afgtEntities();
 
         public ManageController()
         {
@@ -64,13 +67,11 @@ namespace AFGT.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId<int>();
+            AspNetUser aspNetUser = db.AspNetUsers.Find(userId);
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId())
+                
                 //PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 //TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 //Logins = await UserManager.GetLoginsAsync(userId),
