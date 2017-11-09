@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Home Page";
 }
+<<<<<<< HEAD
 <div>
     @using (Ajax.BeginForm("Index", new AjaxOptions { UpdateTargetId = "resultadosPesquisa" }))
     {
@@ -17,6 +18,25 @@
                 <br>
                 <br>
                 @Html.Partial("_ResultadosPesquisa", Model)
+=======
+ <!-- BANNER
+<header class="banner">
+    <div class="container text-center" ">
+        <div class="row">
+            <h1>AFGT Project</h1>
+            <p>AFGT guia-te pelo o que ouves! xD</p>
+        </div>
+    </div>
+</header> -->
+<br><br>
+<div class="jumbotron">
+    <h1>AFGT</h1>
+    <p class="lead">AFGT guia-te pelo o que ouves! xD</p>
+    <div class="row">
+        <div class="form-group active" id="Artista">
+            <div class="col-md-10">
+                <input name ="ConteudoPesquisa" type="text" class="form-control" placeholder="O que procuras?" />
+>>>>>>> BranchTaras
             </div>
         </div>
     }
