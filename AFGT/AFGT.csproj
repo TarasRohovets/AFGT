@@ -618,6 +618,7 @@
     <Content Include="Views\Home\_Local.cshtml" />
     <Content Include="Views\Home\_Data.cshtml" />
     <Content Include="Views\Home\_Banner.cshtml" />
+    <Content Include="Views\Account\SignIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
