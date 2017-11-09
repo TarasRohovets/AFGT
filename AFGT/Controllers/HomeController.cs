@@ -85,7 +85,7 @@ namespace AFGT.Controllers
             return PartialView("_ResultadosPesquisa", result);
         }
 
-        public ActionResult Local()
+        public ActionResult _Local()
         {
             return View();
         }
