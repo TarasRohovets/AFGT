@@ -7,7 +7,7 @@
 <h2>Lista Eventos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Novo Evento", "Create")
 </p>
 <table class="table">
 
@@ -32,9 +32,9 @@
                         <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) @Html.DisplayFor(modelItem => item.Morada.CodPostal)</p>
                        
                         <p>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.EventosID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.EventosID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.EventosID })
+                            @Html.ActionLink("Editar", "Edit", new { id = item.EventosID }) |
+                            @Html.ActionLink("Detalhes", "Details", new { id = item.EventosID }) |
+                            @Html.ActionLink("Apagar", "Delete", new { id = item.EventosID })
                         </p>
                     </div>
                 </div>
