@@ -232,7 +232,10 @@ namespace AFGT.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
+        public ActionResult SignIn()
+        {
+            return RedirectToAction("Login");
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
