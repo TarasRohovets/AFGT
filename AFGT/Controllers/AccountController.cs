@@ -234,7 +234,10 @@ namespace AFGT.Controllers
             return View(model);
         }
 
-
+        public ActionResult SignIn()
+        {
+            return View();
+        }
 
 
         //
