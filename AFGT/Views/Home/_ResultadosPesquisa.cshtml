@@ -32,7 +32,7 @@
                         <strong>@Html.LabelFor(modelItem => item.Artistas)</strong>
                         <p>@Html.DisplayFor(modelItem => item.Artistas)</p>
                         <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) </p>
-                        <p>@Html.ActionLink("Ver percurso","Index","Rumo")</p>
+                        <p>@Html.ActionLink("Ver percurso","Index","Rumo", new { id = item.EventosID }, new { @class = "active" } )</p>
                     </div>
                 </div>
             </div>

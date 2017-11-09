@@ -28,17 +28,14 @@ namespace AFGT.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string ConteudoPesquisa, string GeneroMusicalID, string ListaPesquisa, string Dia, string PointA, string TipoOpcao)
+        public ActionResult Index(string ConteudoPesquisa, int? GeneroMusicalID, string ListaPesquisa, string Dia, string PointA, string TipoOpcao)
         {
             List<Evento> Evento = new List<Evento>();
 
             var evento = db.Eventos.OrderBy(e => e.Data);
             var result = evento.ToList();
 
-
             ViewBag.ListaPesquisa = list;
-
-            TempData["PointA"] = PointA;
 
             switch (TipoOpcao)
             {
@@ -48,17 +45,17 @@ namespace AFGT.Controllers
                     {
                         result = evento.ToList();
                     }
-                    if (GeneroMusicalID == "" && ConteudoPesquisa == "")
+                    if (GeneroMusicalID == null && ConteudoPesquisa == "")
                     {
                         result = evento.ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
                     }
-                    else if (!(GeneroMusicalID == "" && ConteudoPesquisa == "") && ListaPesquisa == "2")
+                    else if (!(GeneroMusicalID == null && ConteudoPesquisa == "") && ListaPesquisa == "2")
                     {
-                        result = evento.Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
+                        result = evento.Include(c => c.Artistas.Select(a => a.GeneroMusicalID == GeneroMusicalID)).ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
                     }
                     else
                     {
-                        result = evento.Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == "")).ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
+                        result = evento.Include(c => c.Artistas.Select(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower())).ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
                     }
                 break;
 
@@ -67,17 +64,17 @@ namespace AFGT.Controllers
                     {
                         result = evento.OrderBy(e => e.Morada.Cidade).ToList();
                     }
-                    if (GeneroMusicalID == "" && ConteudoPesquisa == "")
+                    if (GeneroMusicalID == null && ConteudoPesquisa == "")
                     {
                         result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == "").ToList();
                     }
-                    else if (!(GeneroMusicalID == "" && ConteudoPesquisa == "") && ListaPesquisa == "2")
+                    else if (!(GeneroMusicalID == null && ConteudoPesquisa == "") && ListaPesquisa == "2")
                     {
-                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == "").Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList();
+                        result = evento.Include(c => c.Artistas.Select(a => a.GeneroMusicalID == GeneroMusicalID)).ToList().Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower()).ToList();
                     }
                     else 
                     {
-                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == "").Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == "")).ToList();
+                        result = evento.Include(c => c.Artistas.Select(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower())).ToList().Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower()).ToList();
                     }
                 break;
             }
