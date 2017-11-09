@@ -2,17 +2,10 @@
 
 <div id="resultadosPesquisa">
 
-    <div class="active" id="Data">
-        @Html.Partial("_Data")
-    </div>
-
-    <div class="hidden" id="Local">
-        @Html.Partial("_Local")
-    </div>
     <br>
     @if (Model.Count() == 0)
     {
-        <strong> Upss!!!!  Não foram encontrados eventos para esta pesquisa! Tenta outra vez! </strong>
+        <strong> Upss!!!!  Não foram encontrados eventos para esta pesquisa! @Html.ActionLink("Tenta outra vez!", "Index", "Home") </strong>
     }
 
     @foreach (var item in Model)
@@ -32,7 +25,7 @@
                         <strong>@Html.LabelFor(modelItem => item.Artistas)</strong>
                         <p>@Html.DisplayFor(modelItem => item.Artistas)</p>
                         <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) </p>
-                        <p>@Html.ActionLink("Ver percurso","Index","Rumo")</p>
+                        <p>@Html.ActionLink("Ver percurso","Index","Rumo", new { id = item.EventosID }, new { @class = "active" } )</p>
                     </div>
                 </div>
             </div>

@@ -41,9 +41,15 @@ namespace AFGT.Controllers
 
             switch (ListaPesquisa)
             {
+<<<<<<< HEAD
+                case "Data":
+
+                    while (Dia == null)
+=======
                 case "1":
 
                     if (ConteudoPesquisa == "")
+>>>>>>> BranchAline
                     {
                         result = evento.ToList();
                     }
