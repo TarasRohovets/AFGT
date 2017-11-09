@@ -22,7 +22,8 @@ namespace AFGT.Controllers
         public ActionResult Index()
         {
             var eventos = db.Eventos.Include(e => e.Organizadore);
-            return View(eventos.ToList());
+            var usid = Convert.ToInt32(User.Identity.GetUserId());
+            return View(eventos.Where(ev => ev.OrgID == usid).ToList());
         }
 
         // GET: Eventoes/Details/5
@@ -102,8 +103,8 @@ namespace AFGT.Controllers
 
 
 
-            //evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());
-            evento.OrgID = 1;
+            evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());
+            //evento.OrgID = 1;
                 db.Eventos.Add(evento);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -188,8 +189,8 @@ namespace AFGT.Controllers
                 /*Fim de verificaçao morada inserida*/
 
                 /*organizadores*/
-                //evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());
-                evento.OrgID = 1;
+                evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());
+                //evento.OrgID = 1;
                 /*oraganizadores*/
 
                 db.Entry(evento).State = EntityState.Modified;

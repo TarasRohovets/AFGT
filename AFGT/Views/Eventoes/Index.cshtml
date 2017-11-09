@@ -10,12 +10,13 @@
     @Html.ActionLink("Novo Evento", "Create")
 </p>
 <table class="table">
-
+    
        <!--falta ciclo para o organizador-->
-    @foreach (var item in Model) 
+    @foreach (var item in Model)
     {
-        if(item.Data > System.DateTime.Now) { 
-         
+
+            if (item.Data > System.DateTime.Now) {
+                
             <div class="col-sm-4">
                 <div class="thumbnail">
                     <img alt="..." src=@Html.DisplayFor(modelItem => item.Link)> <!--falta fazer upload-->
@@ -39,7 +40,7 @@
                     </div>
                 </div>
             </div>
-        }
+            }
     }
 
 
