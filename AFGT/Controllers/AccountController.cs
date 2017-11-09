@@ -236,7 +236,8 @@ namespace AFGT.Controllers
 
         public ActionResult SignIn()
         {
-            return View();
+            return RedirectToAction("Login");
+
         }
 
 
