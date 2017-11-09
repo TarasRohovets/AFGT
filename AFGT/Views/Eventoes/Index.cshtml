@@ -7,15 +7,16 @@
 <h2>Lista Eventos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Novo Evento", "Create")
 </p>
 <table class="table">
-
+    
        <!--falta ciclo para o organizador-->
-    @foreach (var item in Model) 
+    @foreach (var item in Model)
     {
-        if(item.Data > System.DateTime.Now) { 
-         
+
+            if (item.Data > System.DateTime.Now) {
+                
             <div class="col-sm-4">
                 <div class="thumbnail">
                     <img alt="..." src=@Html.DisplayFor(modelItem => item.Link)> <!--falta fazer upload-->
@@ -32,14 +33,14 @@
                         <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) @Html.DisplayFor(modelItem => item.Morada.CodPostal)</p>
                        
                         <p>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.EventosID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.EventosID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.EventosID })
+                            @Html.ActionLink("Editar", "Edit", new { id = item.EventosID }) |
+                            @Html.ActionLink("Detalhes", "Details", new { id = item.EventosID }) |
+                            @Html.ActionLink("Apagar", "Delete", new { id = item.EventosID })
                         </p>
                     </div>
                 </div>
             </div>
-        }
+            }
     }
 
 
