@@ -402,6 +402,11 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Images\afgticon.png" />
+    <Content Include="Content\Images\default.jpg" />
+    <Content Include="Content\Images\enventsdefault.jpg" />
+    <Content Include="Content\Images\testeupload.jpg" />
+    <Content Include="Content\Images\índice.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -540,6 +545,8 @@
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -554,6 +561,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\testeAPI.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -614,14 +622,13 @@
     <Content Include="Views\Organizadores\Edit.cshtml" />
     <Content Include="Views\Organizadores\Index.cshtml" />
     <Content Include="Views\Rumo\Index.cshtml" />
-
     <Content Include="Views\Home\_ResultadosPesquisa.cshtml" />
     <Content Include="Views\Home\_Local.cshtml" />
     <Content Include="Views\Home\_Data.cshtml" />
     <Content Include="Views\Home\_Banner.cshtml" />
-
     <Content Include="Views\Account\SignIn.cshtml" />
-
+    <Content Include="Views\Account\RegisterOrg.cshtml" />
+    <Content Include="Views\Account\AuthResponse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

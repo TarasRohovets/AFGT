@@ -232,13 +232,7 @@ namespace AFGT.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-<<<<<<< HEAD
-        public ActionResult SignIn()
-        {
-            return RedirectToAction("Login");
-        }
-=======
-
+    
         public ActionResult SignIn()
         {
             return RedirectToAction("Login");
@@ -246,7 +240,6 @@ namespace AFGT.Controllers
         }
 
 
->>>>>>> BranchTaras
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
