@@ -87,8 +87,9 @@ table.hidden {
 .thumbnail {
     height: 650px;
 }
-.thumbnail img {
-    height: 250px;
+    .thumbnail img {
+        height: 250px;
+    }
 a {
     color: dimgrey;
 }
