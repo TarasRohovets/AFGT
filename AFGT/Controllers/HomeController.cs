@@ -17,7 +17,9 @@ namespace AFGT.Controllers
         List<SelectListItem> list = new List<SelectListItem>
             {
                 new SelectListItem { Value = "1", Text = "Artista" },
-                new SelectListItem { Value = "2", Text = "Estilo Musical" }
+                new SelectListItem { Value = "2", Text = "Estilo Musical" },
+                new SelectListItem { Value = "3", Text = "Data" },
+                new SelectListItem { Value = "4", Text = "Cidade" }
             };
 
         public ActionResult Index()
@@ -37,46 +39,66 @@ namespace AFGT.Controllers
 
             ViewBag.ListaPesquisa = list;
 
-            switch (TipoOpcao)
+            switch (ListaPesquisa)
             {
-                case "Data":
-   
-                    while (Dia == null)
+                case "1":
+
+                    if (ConteudoPesquisa == "")
                     {
                         result = evento.ToList();
                     }
-                    if (GeneroMusicalID == null && ConteudoPesquisa == "")
+                    if (TipoOpcao == "Local")
                     {
-                        result = evento.ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
-                    }
-                    else if (!(GeneroMusicalID == null && ConteudoPesquisa == "") && ListaPesquisa == "2")
-                    {
-                        result = evento.Include(c => c.Artistas.Select(a => a.GeneroMusicalID == GeneroMusicalID)).ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
+                        evento = db.Eventos.OrderBy(e => e.Morada.Cidade);
+                        result = evento.Include(e => e.Artistas).Where(e => e.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower())).ToList();
                     }
                     else
                     {
-                        result = evento.Include(c => c.Artistas.Select(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower())).ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
+                        result = evento.Include(e => e.Artistas).Where(e => e.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower())).ToList();
                     }
-                break;
 
-                case "Local":
-                    while (PointA == "")
+                    break;
+
+                case "2":
+
+                    if (GeneroMusicalID == null)
                     {
-                        result = evento.OrderBy(e => e.Morada.Cidade).ToList();
+                        result = evento.ToList();
                     }
-                    if (GeneroMusicalID == null && ConteudoPesquisa == "")
+                    if (TipoOpcao == "Local")
                     {
-                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == "").ToList();
+                        evento = db.Eventos.OrderBy(e => e.Morada.Cidade);
+                        result = evento.Include(e => e.Artistas).Where(e => e.Artistas.Any(a => a.GeneroMusicalID == GeneroMusicalID)).ToList();
                     }
-                    else if (!(GeneroMusicalID == null && ConteudoPesquisa == "") && ListaPesquisa == "2")
+                    else
                     {
-                        result = evento.Include(c => c.Artistas.Select(a => a.GeneroMusicalID == GeneroMusicalID)).ToList().Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower()).ToList();
+                        result = evento.Include(e => e.Artistas).Where(e => e.Artistas.Any(a => a.GeneroMusicalID == GeneroMusicalID)).ToList();
                     }
-                    else 
+                    break;
+
+                case "3":
+                    if (Dia == "")
                     {
-                        result = evento.Include(c => c.Artistas.Select(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower())).ToList().Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower()).ToList();
+                        result = evento.ToList();
                     }
-                break;
+                    else
+                    {
+                        result = evento.ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
+                    }
+                    break;
+
+                case "4":
+                    evento = db.Eventos.OrderBy(e => e.Morada.Cidade);
+                    if (PointA == "")
+                    {
+                        
+                        result = evento.ToList();
+                    }
+                    else
+                    {
+                        result = evento.ToList().Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower()).ToList();
+                    }
+                    break;
             }
 
             return PartialView("_ResultadosPesquisa", result);

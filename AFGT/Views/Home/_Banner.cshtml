@@ -15,10 +15,17 @@
             </div>
         </div>
 
+        <div class="hidden" id="Data">
+            @Html.Partial("_Data")
+        </div>
+
+        <div class="hidden" id="Local">
+            @Html.Partial("_Local")
+        </div>
+
         <div class="col-md-10">
             @Html.DropDownList("ListaPesquisa", new SelectList(ViewBag.ListaPesquisa, "Value", "Text"), new { onchange = @"TipoPesquisa(this.value);" })
             <button class="btn btn-default">Ir</button>
         </div>
-
     </div>
 </div>

@@ -222,6 +222,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArtistasController.cs" />
     <Compile Include="Controllers\EventoesController.cs" />
     <Compile Include="Controllers\GeneroMusicalsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -409,6 +410,12 @@
     <Content Include="Views\Rumo\Index.cshtml" />
     <Content Include="Views\Home\_ResultadosPesquisa.cshtml" />
     <Content Include="Views\Home\_Banner.cshtml" />
+    <Content Include="Views\Artistas\Create.cshtml" />
+    <Content Include="Views\Artistas\Delete.cshtml" />
+    <Content Include="Views\Artistas\Details.cshtml" />
+    <Content Include="Views\Artistas\Edit.cshtml" />
+    <Content Include="Views\Artistas\Index.cshtml" />
+    <Content Include="Views\Date.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
