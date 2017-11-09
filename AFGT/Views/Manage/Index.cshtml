@@ -1,5 +1,4 @@
-﻿
-    @model AFGT.Models.IndexViewModel
+﻿@model AFGT.Models.IndexViewModel
 @{
     ViewBag.Title = "Hello " + @Html.DisplayFor(model => model.UserName);
 }
@@ -9,7 +8,7 @@
 <p class="text-success">@ViewBag.StatusMessage</p>
 
 
- 
+
 
 <h3>
     <img src="@Model.LinkFotoUser" style="width:200px;height:200px; background: #FFFFFF;
@@ -28,7 +27,7 @@
     <div>
         <p>Change Photo</p>
         @Html.TextBox("file", "", new { type = "file" })  <br />
-        
+
     </div>
     <div class="form-horizontal">
 
@@ -38,8 +37,8 @@
 
         <div class="form-group">
             <label class="control-label col-md-2">Name</label>
-            <div class="col-md-10">  
-                
+            <div class="col-md-10">
+
                 @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
             </div>
@@ -65,15 +64,15 @@
             <dt>Password:</dt>
             <dd>
                 [
-                    @Html.ActionLink("Change your password", "ChangePassword")
-               
+                @Html.ActionLink("Change your password", "ChangePassword")
+
                 ]
             </dd>
-           
+
             <!-- <dd>
-            @*Model.Logins.Count [
-            @Html.ActionLink("Manage", "ManageLogins") ]
-        </dd>*@ -->
+                @*Model.Logins.Count [
+                @Html.ActionLink("Manage", "ManageLogins") ]
+            </dd>*@ -->
 
         </dl>
 
@@ -86,6 +85,3 @@
         </div>
     </div>
 }
-
-       
-

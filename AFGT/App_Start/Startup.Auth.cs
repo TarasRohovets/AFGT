@@ -56,9 +56,18 @@ namespace AFGT
             //   consumerKey: "",
             //   consumerSecret: "");
 
+            //app.UseFacebookAuthentication(
+            //   appId: "",
+            //   appSecret: "");
+
+            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            //{
+            //    ClientId = "",
+            //    ClientSecret = ""
+            //});
             app.UseFacebookAuthentication(
-               appId: "127323857985489",
-               appSecret: "70e2162ad0a20f6e68c273da0c9c9cd2");
+                appId: "127323857985489",
+                appSecret: "70e2162ad0a20f6e68c273da0c9c9cd2");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
