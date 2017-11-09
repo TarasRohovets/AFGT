@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AFGT.Models;
+using System.IO;
+using System.Data.Entity;
 
 namespace AFGT.Controllers
 {
@@ -15,6 +17,7 @@ namespace AFGT.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private afgtEntities db = new afgtEntities();
 
         public ManageController()
         {
@@ -64,16 +67,56 @@ namespace AFGT.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId<int>();
+            AspNetUser aspNetUser = db.AspNetUsers.Find(userId);
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId())
+                
+                //PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                //TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                //Logins = await UserManager.GetLoginsAsync(userId),
+                //BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId()),
+                Id = aspNetUser.Id,
+                PhoneNumber = aspNetUser.PhoneNumber,
+                UserName = aspNetUser.UserName,
+                LinkFotoUser = aspNetUser.LinkFotoUser,
+                Email = aspNetUser.Email,
+                
             };
             return View(model);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index([Bind(Include = "OrgID,UserName,Email,PhoneNumber")] IndexViewModel aspNetUser, HttpPostedFileBase file)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                //
+                var userId = User.Identity.GetUserId<int>();      /////   ID do User Logado
+                AspNetUser NetUser = db.AspNetUsers.Find(userId); /////    Procura o ID na tabela AspNetUsers 
+
+                if (file.ContentLength > 0)
+                    {
+                        string _FileName = Path.GetFileName(file.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/Images/"), _FileName);
+                        file.SaveAs(_path);            
+                        NetUser.LinkFotoUser = "/Images/" + _FileName;      //////    Adiciono o link a tabela AspNetUsers
+ 
+                    }
+                NetUser.UserName = aspNetUser.UserName;               //        "        Nome
+                NetUser.Email = aspNetUser.Email;                      //        "       Email  
+                NetUser.PhoneNumber = aspNetUser.PhoneNumber;           //        "      Tlmv
+
+                db.Entry(NetUser).State = EntityState.Modified;      /////     Faz Alteracoes na Base de Dados 
+                db.SaveChanges();                                      /////     Grava as altereacoes 
+
+                return View(aspNetUser); //////????? qual return eh aqui?
+                
+            }
+            return View(aspNetUser);
+        }
+
 
         //
         // POST: /Manage/RemoveLogin

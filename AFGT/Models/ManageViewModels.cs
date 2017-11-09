@@ -12,6 +12,12 @@ namespace AFGT.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        public string UserName { get; set; }     //Adicionei
+         public string LinkFotoUser { get; set; }  //Adicionei
+        public int Id { get; set; }  // Adicionei
+        public string Email { get; set; }
+        //public string NameUser { get; set; }
+
     }
 
     public class ManageLoginsViewModel
