@@ -614,6 +614,10 @@
     <Content Include="Views\Organizadores\Edit.cshtml" />
     <Content Include="Views\Organizadores\Index.cshtml" />
     <Content Include="Views\Rumo\Index.cshtml" />
+    <Content Include="Views\Home\_ResultadosPesquisa.cshtml" />
+    <Content Include="Views\Home\_Local.cshtml" />
+    <Content Include="Views\Home\_Data.cshtml" />
+    <Content Include="Views\Home\_Banner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
