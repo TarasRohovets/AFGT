@@ -58,7 +58,9 @@ textarea {
 table.hidden {
     display: none;
 }
-
+div.banner{
+    padding-bottom: 500px;
+}
 
 
 
