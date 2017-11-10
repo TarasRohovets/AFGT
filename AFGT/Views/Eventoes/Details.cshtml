@@ -98,9 +98,24 @@
             @*@Html.DisplayNameFor(model => model.Artistas)*@
         </dt>
 
-        <dd>
+        <dd id="Opiniao">
+
+         
+              @if (ViewContext.HttpContext.User.IsInRole("Manager"))
+              {
+                  using (Ajax.BeginForm("Details", new {id = Model.EventosID },new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "Opiniao" })) {
+
+                          <button name="Opiniao" type="submit" id="like" value="Like">Like</button>
+                          <button name="Opiniao" type="submit" id="dislike" value="DisLike">DisLike</button>
+                  }
+
             @Html.DisplayFor(model => model.Likes)
+         }
+           
         </dd>
+
+   
+
     </dl>
 </div>
 <p>

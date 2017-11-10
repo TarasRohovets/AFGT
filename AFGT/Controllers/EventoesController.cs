@@ -29,6 +29,8 @@ namespace AFGT.Controllers
         // GET: Eventoes/Details/5
         public ActionResult Details(int? id)
         {
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,8 +40,51 @@ namespace AFGT.Controllers
             {
                 return HttpNotFound();
             }
+
+
+
+
+
             return View(evento);
         }
+
+
+        [HttpPost]                       //SHIIT LOOOOOOOOOOOOLmLIKESSSS       
+        public ActionResult Details(int id, string Opiniao)    // Preencho isto ou fica vasio???!!!!!!
+        {
+ 
+            if (ModelState.IsValid )
+            {
+                var like = new Like();
+                like.UserID = Convert.ToInt32(User.Identity.GetUserId()); //  id do user
+                like.EventosID = id;   //        id do evento 
+                
+                  // opiniao como       ???????????????????????????
+                if(Opiniao == "Like")    //  se opiniao yes 
+                {
+                    like.Opiniao = true;
+                }
+                if (Opiniao == "DisLike")    //  se opiniao yes 
+                {
+                    like.Opiniao = false;
+                }
+                ///if likes present 
+                db.Likes.Add(like);
+                db.SaveChanges();
+
+            };
+
+                   return View();
+        }
+        
+
+
+
+
+
+
+
+
 
         // GET: Eventoes/Create
         public ActionResult Create()
@@ -187,6 +232,14 @@ namespace AFGT.Controllers
                     evento.MoradaID = morada.MoradaID;
                 }
                 /*Fim de verificaçao morada inserida*/
+
+
+                
+
+
+
+
+
 
                 /*organizadores*/
                 evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());
