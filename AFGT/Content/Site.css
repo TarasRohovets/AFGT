@@ -1,7 +1,40 @@
-﻿body {
+﻿
+
+.custom-navbar {
+    background-color: rgba(0,0,0,0.5);
+    height: 50px;
+    border-bottom: 0px;
+    transition: background-color .5s ease 0s;
+}
+
+    .custom-navbar.opaque {
+        background-color: black;
+        height: 50px;
+        transition: background-color .5s ease 0s;
+    }
+
+
+
+    .banner .row {
+        margin-top: 200px;
+    }
+
+body {
+    background: url("../../Images/Background.jpg") no-repeat;
     padding-top: 50px;
     padding-bottom: 20px;
-    /*background-image:url("Images/Eventos.jpeg");*/
+    min-height: 600px;
+    position: relative;
+    
+    /****************************************************
+  * set the backround image to 100% width of the screen 
+  *****************************************************/
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    background-size: cover !important;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -27,6 +60,9 @@ textarea {
 .hidden {
     display: none;
 }
+div.banner{
+    padding-bottom: 500px;
+}
 
 
 
@@ -46,8 +82,9 @@ textarea {
     border: none;
     cursor: pointer;
 }
+
 a {
-    color: forestgreen;
+    color: dimgrey;
 }
 
 

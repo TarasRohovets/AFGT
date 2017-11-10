@@ -7,21 +7,22 @@
 <h2>Lista Eventos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Novo Evento", "Create")
 </p>
 <table class="table">
-
-       
+    
+       <!--falta ciclo para o organizador-->
     @foreach (var item in Model)
     {
-        if(item.Data > System.DateTime.Now) { 
-         
+
+            if (item.Data > System.DateTime.Now) {
+                
             <div class="col-sm-4">
                 <div class="thumbnail">
-                    <img alt="..." src="~/Content/Images/default.jpg"> <!--falta fazer upload-->
+                    <img alt="..." src=@Html.DisplayFor(modelItem => item.Link)> <!--falta fazer upload-->
                     <div class="caption">
                         <h2>@Html.DisplayFor(modelItem => item.NomeEvento)</h2>
-                        <h3>@Html.DisplayFor(modelItem => item.Data)</h3>
+                        <h3>@Html.DisplayFor(modelItem => item.Data) @*| @Html.DisplayFor(modelItem => item.Data.TimeOfDay)*@</h3>                   
                         <br/>
                         <strong>@Html.LabelFor(modelItem => item.Descricao)</strong>
                         <p>@Html.DisplayFor(modelItem => item.Descricao)</p>
@@ -32,18 +33,15 @@
                         <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) @Html.DisplayFor(modelItem => item.Morada.CodPostal)</p>
                        
                         <p>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.EventosID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.EventosID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.EventosID })
+                            @Html.ActionLink("Editar", "Edit", new { id = item.EventosID }) |
+                            @Html.ActionLink("Detalhes", "Details", new { id = item.EventosID }) |
+                            @Html.ActionLink("Apagar", "Delete", new { id = item.EventosID })
                         </p>
                     </div>
                 </div>
             </div>
-        }
+            }
     }
 
 
 </table>
-
-
-

@@ -1,0 +1,26 @@
+﻿<div class="jumbotron">
+    <div class="row">
+
+        
+
+     <div class="active" id="Artista">
+      
+           <div class="search-box">
+                <input name="ConteudoPesquisa" type="text" class="form-control" placeholder="O que procuras?" />
+           <span></span>
+            </div>
+        </div>  
+
+        <div class="hidden" id="Genero">
+            <div class="col-md-10">
+                @Html.Action("Index", "GeneroMusicals", new { id = ViewBag.GeneroMusicalID })
+            </div>
+        </div>
+
+        <div class="col-md-10">
+            @Html.DropDownList("ListaPesquisa", new SelectList(ViewBag.ListaPesquisa, "Value", "Text"), new { onchange = @"TipoPesquisa(this.value);" })
+            <button class="btn btn-default">Ir</button>
+        </div>
+
+    </div>
+</div>

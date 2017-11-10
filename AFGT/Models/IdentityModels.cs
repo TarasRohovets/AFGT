@@ -10,7 +10,6 @@ namespace AFGT.Models
     public class ApplicationUser : IdentityUser<int, CustomUserLogin, CustomUserRole,
     CustomUserClaim>
     {
-        //public string NameUser { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -18,6 +17,9 @@ namespace AFGT.Models
             // Add custom user claims here
             return userIdentity;
         }
+        
+
+       // public string NameUser { get; set; }// Adicionei uma extra property
         public string LinkFotoUser { get; set; } //Adicionei uma extra property
     }
 

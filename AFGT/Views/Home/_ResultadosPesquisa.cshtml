@@ -1,0 +1,45 @@
+﻿@model IEnumerable<AFGT.Models.Evento>
+
+<div id="resultadosPesquisa">
+
+    <div class="active" id="Data">
+        @Html.Partial("_Data")
+    </div>
+
+    <div class="hidden" id="Local">
+        @Html.Partial("_Local")
+    </div>
+    <br>
+    @if (Model.Count() == 0)
+    {
+        <strong> Upss!!!!  Não foram encontrados eventos para esta pesquisa! Tenta outra vez! </strong>
+    }
+
+    @foreach (var item in Model)
+    {
+        if (item.Data > System.DateTime.Now)
+        {
+
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img alt="..." src=@Html.DisplayFor(modelItem => item.Link)> <!--falta fazer upload-->
+                    <div class="caption">
+                        <h2>@Html.DisplayFor(modelItem => item.NomeEvento)</h2>
+                        <h3>@Html.DisplayFor(modelItem => item.Data) @*| @Html.DisplayFor(modelItem => item.Data.TimeOfDay)*@</h3>
+                        <br />
+                        <strong>@Html.LabelFor(modelItem => item.Descricao)</strong>
+                        <p>@Html.DisplayFor(modelItem => item.Descricao)</p>
+                        <strong>@Html.LabelFor(modelItem => item.Artistas)</strong>
+                        <p>@Html.DisplayFor(modelItem => item.Artistas)</p>
+                        <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) </p>
+                        <p>@Html.ActionLink("Ver percurso","Index","Rumo")</p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>
+
+
+

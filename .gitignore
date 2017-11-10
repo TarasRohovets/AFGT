@@ -431,3 +431,8 @@ __pycache__/
 # should be stored in the .pubxml.user file.
 
 # End of https://www.gitignore.io/api/csharp,visualstudio
+*.ide
+*.ide
+*.ide
+*.ide
+*.ide

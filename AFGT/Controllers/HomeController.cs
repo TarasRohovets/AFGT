@@ -3,144 +3,92 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
-
-using System.Threading.Tasks;
+using System.Data.Entity;
+using System.Globalization;
 
 namespace AFGT.Controllers
 {
     public class HomeController : Controller
     {
-
-        
-
         private afgtEntities db = new afgtEntities();
 
+        List<SelectListItem> list = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "1", Text = "Artista" },
+                new SelectListItem { Value = "2", Text = "Estilo Musical" }
+            };
 
         public ActionResult Index()
         {
-            List<SelectListItem> list = new List<SelectListItem>();
-            list.Add(new SelectListItem { Value = "1", Text = "Artista" });
-            list.Add(new SelectListItem { Value = "2", Text = "Estilo Musical" });
-
+            var result = db.Eventos.OrderBy(evento => evento.Data).ToList();
             ViewBag.ListaPesquisa = list;
-
-            //string ConteudoPesquisa = Request.Form["ConteudoPesquisa"].ToString();
-            //string TipoPesquisa = Request.Form["ListaPesquisa"].ToString();
-
-
-            
-            //GetAuthURI();
-            return View();
+            return View(result);
         }
 
-        [HttpPost, ActionName("Index")]
-        public ActionResult Data(DateTime Dia, string TipoPesquisa, string ConteudoPesquisa)
-        {
-            List<Models.Evento> Evento = new List<Models.Evento>();
-
-            while (ConteudoPesquisa != null)
-            { 
-                if (TipoPesquisa == "Estilo Musical")
-                {
-                    return View(db.Eventos.Where(model => model.Data == Dia || Dia == null).ToList());//.Where(model => model.Artistas.GeneroMusical.NomeEstilo.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
-                }
-                else
-                {
-                    return View(db.Eventos.Where(model => model.Data == Dia || Dia == null).ToList()); //.Where(model => model.Artistas.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
-                }
-            }
-
-            return View(db.Eventos.Where(model => model.Data == Dia || Dia == null).ToList());
-        }
-
-        [HttpPost, ActionName("Index")]
-        public ActionResult Local(string PointA, string TipoPesquisa, string ConteudoPesquisa)
+        [HttpPost]
+        public ActionResult Index(string ConteudoPesquisa, string GeneroMusicalID, string ListaPesquisa, string Dia, string PointA, string TipoOpcao)
         {
             List<Evento> Evento = new List<Evento>();
 
-            while (ConteudoPesquisa != null)
+            var evento = db.Eventos.OrderBy(e => e.Data);
+            var result = evento.ToList();
+
+
+            ViewBag.ListaPesquisa = list;
+
+            TempData["PointA"] = PointA;
+
+            switch (TipoOpcao)
             {
-                if (TipoPesquisa == "Estilo Musical")
-                {
-                    return View(db.Eventos.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).ToList());//.Where(model => model.Artistas.GeneroMusical.NomeEstilo.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
-                }
-                else
-                {
-                    return View(db.Eventos.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).ToList()); //.Where(model => model.Artistas.ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == null));
-                }
+                case "Data":
+
+                    while (Dia == null)
+                    {
+                        result = evento.ToList();
+                    }
+                    if (GeneroMusicalID == "" && ConteudoPesquisa == "")
+                    {
+                        result = evento.ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
+                    }
+                    else if (!(GeneroMusicalID == "" && ConteudoPesquisa == "") && ListaPesquisa == "2")
+                    {
+                        result = evento.Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
+                    }
+                    else
+                    {
+                        result = evento.Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == "")).ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
+                    }
+                    break;
+
+                case "Local":
+                    while (PointA == "")
+                    {
+                        result = evento.OrderBy(e => e.Morada.Cidade).ToList();
+                    }
+                    if (GeneroMusicalID == "" && ConteudoPesquisa == "")
+                    {
+                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == "").ToList();
+                    }
+                    else if (!(GeneroMusicalID == "" && ConteudoPesquisa == "") && ListaPesquisa == "2")
+                    {
+                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == "").Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList();
+                    }
+                    else
+                    {
+                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == "").Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == "")).ToList();
+                    }
+                    break;
             }
 
-            return View(db.Eventos.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == null).ToList());
+            return PartialView("_ResultadosPesquisa", result);
         }
 
-
-
-
-
-
-
-
-
-
-
-        //TENTIVA DE METODOS PARA POR OS PEDIDOS AO API A FUNCIONAR
-
-
-        //public ActionResult Busca(string filtro, string inputDePesquisa)
-        //{
-        //    switch (filtro)
-        //    {
-        //        case "Artist":
-        //            { 
-        //     var inp = SpotifyWebAPI.Artist.Search(inputDePesquisa).Result;
-        //                return ViewBag.Message = inp.ToString();
-        //     //var temp = SpotifyWebAPI.Artist.GetArtist(inputDePesquisa);
-        //            }
-        //        case "Event":
-        //            {
-        //                return ViewBag.Message ="TestandoaBuscadeEventos";
-        //            }
-
-
-        //    }
-
-
-        //        return View(); //How many results are there in total? NOTE: item.Tracks = item.Artists = null
-        //    }
-
-        //public async Task<ActionResult> Busca()
-        //{
-
-        //    var artSearch = await SpotifyWebAPI.Artist.Search();
-        //    var temp;
-        //    var output = await SpotifyWebAPI.Artist.GetArtist();
-            
-            
-
-        //    return View(output);
-
-        //}
-
-        //
-        //public ActionResult getArtist()
-        //{
-        //    string token = SpotifyWebAPI.Authentication.ClientId{ };
-        //    return string bla;
-        //}
-
-
-
-        ////isto obtem a autentificacao do URI do spotify
-
-        //private string GetAuthURI()
-        //{
-        //    string clientID ="382266817b35478eba309a571cb4c22b";
-        //    //string redirectURI = "http://localhost:50210/Home/AuthResponse";
-        //    //Scope scope = Scope.PLAYLIST_MODIFY_PRIVATE;
-
-        //    return "https://accounts.spotify.com/en/authorize?client_id=" + clientID "&response_type=token&redirect_uri=" + redirectUrl + "&state=&scope=" + scope.GetStringAttribute(" ") + "&show_dialog=true";
-        //}
+        public ActionResult _Local()
+        {
+            return View();
+        }
 
     }
 }

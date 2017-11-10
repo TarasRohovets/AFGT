@@ -4,23 +4,27 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalhes</h2>
 
 <div>
     <h4>Evento</h4>
     <hr />
     <dl class="dl-horizontal">
-        <!-- falta a parte da imagem
+
         <dt>
-            @Html.DisplayNameFor(model => model.Link)
+             <label class="control-label ">Imagem do Evento</label>
+            @*@Html.DisplayNameFor(model => model.Link)*@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Link)
+        <h3><img src=@Html.DisplayFor(model => model.Link) style=" width:280px; height:160px; background: #ffffff; margin: auto; -moz-border-radius: 0px; border-radius: 0px; padding: 6px; box-shadow: 0px 0px 20px #888;" /></h3>
+         @*  @Html.DisplayFor(model => model.Link)*@
         </dd>
--->
+
+       
         <dt>
-            @Html.DisplayNameFor(model => model.NomeEvento)
+            <label class="control-label ">Nome do Evento</label>     
+            @*@Html.DisplayNameFor(model => model.NomeEvento)*@
         </dt>
 
         <dd>
@@ -28,15 +32,35 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Morada)
+            @*@Html.DisplayNameFor(model => model.Morada)*@
+            <label class="control-label ">Endereço</label>  
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Morada)
+            @Html.DisplayFor(model => model.Morada.Endereco)          
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
+            <label class="control-label ">Cidade</label>
+            @*@Html.DisplayNameFor(model => model.Morada.Cidade)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Morada.Cidade)
+        </dd>
+
+        <dt>
+            <label class="control-label ">Código Postal</label>
+            @*@Html.DisplayNameFor(model => model.Morada)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Morada.CodPostal)
+        </dd>
+
+        <dt>
+            <label class="control-label ">Descrição</label>
+            @*@Html.DisplayNameFor(model => model.Descricao)*@
         </dt>
 
         <dd>
@@ -44,7 +68,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Data)
+            <label class="control-label ">Data</label>
+            @*@Html.DisplayNameFor(model => model.Data)*@
         </dt>
 
         <dd>
@@ -52,24 +77,33 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Artistas)
+            <label class="control-label ">Artistas</label>
+            @*@Html.DisplayNameFor(model => model.Artistas)*@
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Artistas)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.Organizadore.NomeOrg)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Organizadore.NomeOrg)
-        </dd>
+        </dd>*@
 
+        <dt>
+            <label class="control-label ">Likes</label>
+            @*@Html.DisplayNameFor(model => model.Artistas)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Likes)
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.EventosID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.EventosID }) |
+    @Html.ActionLink("Voltar a lista de Eventos", "Index")
 </p>
