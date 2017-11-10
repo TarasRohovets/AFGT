@@ -41,64 +41,43 @@ namespace AFGT.Controllers
         {
             List<Evento> Evento = new List<Evento>();
 
-            var eventos = db.Eventos.OrderBy(e => e.Data).ToList();
+            var evento = db.Eventos.OrderBy(e => e.Data).ToList();
+            var result = db.Eventos.ToList();
 
             ViewBag.ListaPesquisa = listPesquisa;
             ViewBag.ListaOpcao = listOpcao;
 
             switch (ListaPesquisa)
             {
+                //result = db.Eventos.ToList();
                 case "1":
-                    //if (ConteudoPesquisa == "" && PointA == "")
-                    //{
-                    //    result = evento;
-                    //}
-                    //
-
-                    //se a caixa tiver preenchida artista
-                    if ()
+                    if (ConteudoPesquisa != "")
                     {
-                        eventos = eventos.Where( a => a.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower()
-                    }
-
-
-                    if ((ConteudoPesquisa != "" && PointA != "") && ListaOpcao == "Local")
-                    {
-                        foreach ( Evento item in evento) {
-                            if (item.Morada.Cidade.ToLower() == PointA.ToLower() && item.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower()))
-                            {
-                                Evento.Add(item);
-                            };
-                        }
-                        result = Evento;
-                    }
-                    else if (!(ConteudoPesquisa != "" && PointA != "") && ListaOpcao == "Local")
-                    {
-                        foreach (Evento item in evento)
+                        if (ListaOpcao == "Local")
                         {
-                            if (item.Morada.Cidade.ToLower() == PointA.ToLower() || item.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower()))
+                            if (PointA != "")
+                            {
+                                foreach (Evento item in evento)
+                                {
+                                    if (item.Morada.Cidade.ToLower() == PointA.ToLower() && item.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower()))
+                                    {
+                                        Evento.Add(item);
+                                    }
+                                }
+                            }
+                            else
                             {
                                 Evento.Add(item);
-                            };
-                        }
-                        result = Evento;
+                            }
+
+                            result = Evento;
                     }
-                    else if ((ConteudoPesquisa != "" && PointA != "") && ListaOpcao == "Data")
-                    {
-                        foreach (Evento item in evento)
-                        {
-                            if (item.Data.Value.ToString("yyyy-MM-dd") == Dia && item.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower()))
-                            {
-                                Evento.Add(item);
-                            };
-                        }
-                        result = Evento;
                     }
                     else
                     {
                         foreach (Evento item in evento)
                         {
-                            if (item.Data.Value.ToString("yyyy-MM-dd") == Dia || item.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower()))
+                            if (item.Data.Value.ToString("yyyy-MM-dd") == Dia && item.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower()))
                             {
                                 Evento.Add(item);
                             };
