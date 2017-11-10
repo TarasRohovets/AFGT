@@ -13,21 +13,18 @@ namespace AFGT.Controllers
         // GET: Rumo
         private afgtEntities db = new afgtEntities();
         string key = "AIzaSyDBY66jDfPCD2B_rIRaQnIJW_x2xC - i7Xc";//WebConfigurationManager.AppSettings["GoogleMapsAPIKey"];
- 
-        public ActionResult Index(int id)
-        {
-            Evento evento = db.Eventos.Find(id);
-            string PointB = evento.Morada.Endereco+","+evento.Morada.CodPostal+ ","+evento.Morada.Cidade;
+        string PointB = "Lisboa";//evento.Morada.ToString()+","+evento.Morada.Cidade+","+evento.Morada.CodPostal;
 
+        public ActionResult Index()
+        {
             ViewBag.Link = "https://www.google.com/maps/embed/v1/place?key=" + key + " &q=" + PointB;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Index(string PointA, int id)
+        public ActionResult Index(string PointA)
         {
-            Evento evento = db.Eventos.Find(id);
-            string PointB = evento.Morada.Endereco + "," + evento.Morada.CodPostal + "," + evento.Morada.Cidade;
+            //Evento evento = db.Eventos.Find(id);
             string url1 = "https://www.google.com/maps/embed/v1/directions?key=";
 
             if (PointA != null)
