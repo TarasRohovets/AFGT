@@ -17,6 +17,10 @@ namespace AFGT.Models
             // Add custom user claims here
             return userIdentity;
         }
+        
+
+       // public string NameUser { get; set; }// Adicionei uma extra property
+        public string LinkFotoUser { get; set; } //Adicionei uma extra property
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, CustomRole,
