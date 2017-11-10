@@ -10,11 +10,13 @@
         <div class="form-group">
             @Html.Partial("_Banner")
             <div class="row">
-                <p>Ordenar por:</p>
-                <select id="option" name="TipoOpcao">
-                    <option value="Data">Data</option>
-                    <option value="Local">Cidade</option>
-                </select>
+                <div id="ordenar">
+                    <p>Ordenar por:</p>
+                    <select id="option" name="TipoOpcao">
+                        <option id="optionD" value="Data">Data</option>
+                        <option id="optionL" value="Local">Cidade</option>
+                    </select>
+                </div> 
                 <br>
                 <br>
                 @Html.Partial("_ResultadosPesquisa", Model)
@@ -37,24 +39,19 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script>
-        $('#option').change(function () {
-            var TipoOpcao = $('#option').val();
-            if (TipoOpcao == 'Local') {
-                $('#Data').removeClass('active').addClass('hidden');
-                $('#Local').removeClass('hidden').addClass('active');
-            } else {
-                $('#Local').removeClass('active').addClass('hidden');
-                $('#Data').removeClass('hidden').addClass('active');
-            }
-        })
-
         function TipoPesquisa(val) {
             if (val == '2') {
-                $('#Artista').removeClass('active').addClass('hidden');
-                $('#Genero').removeClass('hidden').addClass('active');
+                $('#Artista, #Data,#Local').removeClass('active').addClass('hidden');
+                $('#Genero,#ordenar').removeClass('hidden').addClass('active');
+            } else if (val == '3'){
+                $('#Genero,#Artista,#Local,#ordenar').removeClass('active').addClass('hidden');
+                $('#Data').removeClass('hidden').addClass('active');
+            } else if (val == '4') {
+                $('#Genero,#Artista,#Data,#ordenar').removeClass('active').addClass('hidden');
+                $('#Local').removeClass('hidden').addClass('active');
             } else {
-                $('#Genero').removeClass('active').addClass('hidden');
-                $('#Artista').removeClass('hidden').addClass('active');
+                $('#Genero,#Data,#Local').removeClass('active').addClass('hidden');
+                $('#Artista,#ordenar').removeClass('hidden').addClass('active');
             }
         }
     </script>

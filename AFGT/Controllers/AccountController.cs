@@ -17,10 +17,12 @@ namespace AFGT.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private afgtEntities db = new afgtEntities();
         ApplicationDbContext context;
 
         public AccountController()
         {
+
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -213,17 +215,22 @@ namespace AFGT.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};               
                 var result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
                     await this.UserManager.AddToRoleAsync(user.Id, "Manager");
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                  
                     //Assign Role to user Here      
-                    
-                    
+
+                    var Organizador = new Organizadore();
+                    Organizador.Nipc = model.NIPC;
+                    Organizador.OrgID = user.Id;
+
+                    db.Organizadores.Add(Organizador);
+                    db.SaveChanges();
+
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
