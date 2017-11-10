@@ -118,7 +118,21 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.EventosID }) |
-    @Html.ActionLink("Voltar a lista de Eventos", "Index")
+
+@if (User.IsInRole("Manager"))
+{
+    
+    <p>
+        @Html.ActionLink("Voltar a lista de Eventos", "Index", null, new { @class = "btn btn-default" }) @Html.ActionLink("Editar", "Edit", new { id = Model.EventosID }, new { @class = "btn btn-default" }) |
+
+    </p>
+}
+else
+{
+    <p>
+    @Html.Action("Index", "Rumo", new { id = Model.EventosID });
+
+
+    @Html.ActionLink("Voltar a lista de Eventos", "Index", "Home", null, new { @class = "btn btn-default" })
 </p>
+}U
