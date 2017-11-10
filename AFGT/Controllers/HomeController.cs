@@ -54,10 +54,32 @@ namespace AFGT.Controllers
                     {
                         result = db.Eventos.ToList();
                     }
-                    if (ListaOpcao == "Local")
+                    if ((ConteudoPesquisa != "" && PointA != "") && ListaOpcao == "Local")
                     {
                         foreach ( Evento item in evento) {
                             if (item.Morada.Cidade.ToLower() == PointA.ToLower() && item.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower()))
+                            {
+                                Evento.Add(item);
+                            };
+                        }
+                        result = Evento;
+                    }
+                    else if (!(ConteudoPesquisa != "" && PointA != "") && ListaOpcao == "Local")
+                    {
+                        foreach (Evento item in evento)
+                        {
+                            if (item.Morada.Cidade.ToLower() == PointA.ToLower() || item.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower()))
+                            {
+                                Evento.Add(item);
+                            };
+                        }
+                        result = Evento;
+                    }
+                    else if ((ConteudoPesquisa != "" && PointA != "") && ListaOpcao == "Data")
+                    {
+                        foreach (Evento item in evento)
+                        {
+                            if (item.Data.Value.ToString("yyyy-MM-dd") == Dia && item.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower()))
                             {
                                 Evento.Add(item);
                             };
@@ -68,7 +90,7 @@ namespace AFGT.Controllers
                     {
                         foreach (Evento item in evento)
                         {
-                            if (item.Data.Value.ToString("yyyy-MM-dd") == Dia && item.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower()))
+                            if (item.Data.Value.ToString("yyyy-MM-dd") == Dia || item.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower()))
                             {
                                 Evento.Add(item);
                             };
@@ -83,7 +105,7 @@ namespace AFGT.Controllers
                     {
                         result = evento.ToList();
                     }
-                    if (ListaOpcao == "Local")
+                    if ((GeneroMusicalID != null && PointA != "") && ListaOpcao == "Local")
                     {
                         foreach (Evento item in evento)
                         {
@@ -94,11 +116,33 @@ namespace AFGT.Controllers
                         }
                         result = Evento;
                     }
-                    else
+                    else if (!(GeneroMusicalID != null && PointA != "") && ListaOpcao == "Local")
+                    {
+                        foreach (Evento item in evento)
+                        {
+                            if (item.Morada.Cidade.ToLower() == PointA.ToLower() || item.Artistas.Any(a => a.GeneroMusicalID == GeneroMusicalID))
+                            {
+                                Evento.Add(item);
+                            };
+                        }
+                        result = Evento;
+                    }
+                    else if ((GeneroMusicalID != null && PointA != "") && ListaOpcao == "Data")
                     {
                         foreach (Evento item in evento)
                         {
                             if (item.Data.Value.ToString("yyyy-MM-dd") == Dia && item.Artistas.Any(a => a.GeneroMusicalID == GeneroMusicalID))
+                            {
+                                Evento.Add(item);
+                            };
+                        }
+                        result = Evento;
+                    }
+                    else
+                    {
+                        foreach (Evento item in evento)
+                        {
+                            if (item.Data.Value.ToString("yyyy-MM-dd") == Dia || item.Artistas.Any(a => a.GeneroMusicalID == GeneroMusicalID))
                             {
                                 Evento.Add(item);
                             };

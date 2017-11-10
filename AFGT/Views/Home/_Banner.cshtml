@@ -15,6 +15,10 @@
             </div>
         </div>
 
+        <div class="col-md-10">
+            @Html.DropDownList("ListaPesquisa", new SelectList(ViewBag.ListaPesquisa, "Value", "Text"), new { onchange = @"TipoPesquisa(this.value);" })
+        </div>
+
         <div class="active" id="Data">
             @Html.Partial("_Data")
         </div>
@@ -24,7 +28,6 @@
         </div>
 
         <div class="col-md-10">
-            @Html.DropDownList("ListaPesquisa", new SelectList(ViewBag.ListaPesquisa, "Value", "Text"), new { onchange = @"TipoPesquisa(this.value);" })
             @Html.DropDownList("ListaOpcao", new SelectList(ViewBag.ListaOpcao, "Value", "Text"), new { onchange = @"TipoOpcao(this.value);" })
             <button class="btn btn-default">Ir</button>
         </div>
