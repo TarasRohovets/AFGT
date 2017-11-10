@@ -54,32 +54,12 @@ namespace AFGT.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NomeEvento,Descricao,Data,Artistas,Link")] Evento evento, HttpPostedFileBase file, [Bind(Include = "Endereco,Cidade,CodPostal")] Morada morada)
+        public ActionResult Create([Bind(Include = "NomeEvento,Descricao,Data,Artistas,Link")] Evento evento, [Bind(Include = "Endereco,Cidade,CodPostal")] Morada morada)
         {
 
-            try
-            {
-                if (file.ContentLength > 0)
-                {
-                    string _FileName = Path.GetFileName(file.FileName);
-                    string _path = Path.Combine(Server.MapPath("~/Images/"), _FileName);
-                    file.SaveAs(_path);
-                    
+           
+            
 
-                    evento.Link = "/Images/" + _FileName;      //////    Adiciono o link a tabela AspNetUsers
-                    
-                    db.Entry(evento).State = EntityState.Modified;      /////     Faz Alteracoes na Base de Dados 
-                    db.SaveChanges();                                      /////     Grava as altereacoes 
-
-                }
-                @ViewBag.Message = "Mission Succeded, Congtratulations!";
-                return View(evento); //////????? qual return eh aqui?
-            }
-            catch
-            {
-                @ViewBag.Message = "Abort!Emergency state!File not uploaded!";
-                return View(evento);////qual return 
-            }
 
             /*Verificar morada inserida*/
             var x = db.Moradas.FirstOrDefault(m => m.Endereco == morada.Endereco &&  m.CodPostal == morada.CodPostal && m.Cidade == morada.Cidade);
@@ -108,7 +88,7 @@ namespace AFGT.Controllers
                 return RedirectToAction("Index");
           
            
-            ViewBag.OrgID = new SelectList(db.Organizadores, "OrgID", "NomeOrg", evento.OrgID);
+          
             //return View(evento);
         }
         

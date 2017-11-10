@@ -130,11 +130,11 @@ namespace AFGT.Controllers
         
                     }
                     @ViewBag.Message = "Mission Succeded, Congtratulations!";
-                    return View(organizadore); //////????? qual return eh aqui?
+                 
                 }
                 catch{
                     @ViewBag.Message = "Abort!Emergency state!File not uploaded!";
-                    return View(organizadore);////qual return 
+                   
                 }
                
               

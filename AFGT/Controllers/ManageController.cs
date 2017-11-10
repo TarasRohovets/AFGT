@@ -57,7 +57,7 @@ namespace AFGT.Controllers
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public  ActionResult Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
@@ -82,7 +82,7 @@ namespace AFGT.Controllers
                 UserName = aspNetUser.UserName,
                 LinkFotoUser = aspNetUser.LinkFotoUser,
                 Email = aspNetUser.Email,
-                NameUser = aspNetUser.NameUser
+                NameUser = aspNetUser.UserName
             };
                //  LinkFotoUser = AspNetUser.LinkFotoUser; //LinkFoto nao ve noindexView
     
@@ -96,7 +96,7 @@ namespace AFGT.Controllers
             
             if (ModelState.IsValid)
             {
-                //
+                
                 try
                 {
                     if (file.ContentLength > 0)
@@ -111,7 +111,7 @@ namespace AFGT.Controllers
                        
                         
                         NetUser.LinkFotoUser = "/Images/" + _FileName;      //////    Adiciono o link a tabela AspNetUsers
-                        NetUser.NameUser = aspNetUser.NameUser;               //        "        Nome
+                        NetUser.UserName = aspNetUser.NameUser;               //        "        Nome
                         NetUser.Email = aspNetUser.Email;                      //        "       Email  
                         NetUser.PhoneNumber = aspNetUser.PhoneNumber;           //        "      Tlmv
 
@@ -120,7 +120,7 @@ namespace AFGT.Controllers
 
                     }
                     @ViewBag.Message = "Mission Succeded, Congtratulations!";
-                    return View(aspNetUser); //////????? qual return eh aqui?
+                   
                 }
                 catch
                 {

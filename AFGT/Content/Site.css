@@ -1,7 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background-image:url("Images/Eventos.jpeg");
+    /*background-image:url("Images/Eventos.jpeg");*/
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -24,10 +24,10 @@ textarea {
     max-width: 280px;
 }
 
-table.hidden {
+.hidden {
     display: none;
 }
-=======
+
 
 
 
@@ -57,7 +57,7 @@ a {
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
 }
     /* Links inside the dropdown */
@@ -78,4 +78,23 @@ a {
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
     background-color: #f9f9f9;
-} 
+}
+
+
+
+/*Placeholder dinamico*/
+::-webkit-input-placeholder {
+    color: transparent;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    color: transparent;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+    color: transparent;
+}
+
+:-ms-input-placeholder {
+    color: transparent;
+}
