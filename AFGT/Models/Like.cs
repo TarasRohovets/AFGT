@@ -14,9 +14,8 @@ namespace AFGT.Models
     
     public partial class Like
     {
-        public int LikesID { get; set; }
-        public byte[] varLikes { get; set; }
-        public int id { get; set; }
+        public Nullable<bool> Opiniao { get; set; }
+        public int UserID { get; set; }
         public int EventosID { get; set; }
     
         public virtual Evento Evento { get; set; }

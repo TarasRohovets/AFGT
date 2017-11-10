@@ -22,9 +22,13 @@
 
             <div class="col-sm-4">
                 <div class="thumbnail">
-                    <img alt="..." src=@Html.DisplayFor(modelItem => item.Link)> <!--falta fazer upload-->
+                    <a href='@Url.Action("Details", "Eventoes", new { id = item.EventosID })'>
+                        <img alt="..." src=@Html.DisplayFor(modelItem => item.Link)> <!--falta fazer upload-->
+                    </a>
                     <div class="caption">
-                        <h2>@Html.DisplayFor(modelItem => item.NomeEvento)</h2>
+                        <a href='@Url.Action("Details", "Eventoes", new { id = item.EventosID })'>
+                            <h2>@Html.DisplayFor(modelItem => item.NomeEvento)</h2>
+                        </a>
                         <h3>@Html.DisplayFor(modelItem => item.Data) @*| @Html.DisplayFor(modelItem => item.Data.TimeOfDay)*@</h3>
                         <br />
                         <strong>@Html.LabelFor(modelItem => item.Descricao)</strong>
@@ -32,7 +36,7 @@
                         <strong>@Html.LabelFor(modelItem => item.Artistas)</strong>
                         <p>@Html.DisplayFor(modelItem => item.Artistas)</p>
                         <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) </p>
-                        <p>@Html.ActionLink("Ver percurso","Index","Rumo")</p>
+                        <p>@Html.ActionLink("Ver percurso", "Index", "Rumo", new { @class = "btn btn-default" })</p>
                     </div>
                 </div>
             </div>
