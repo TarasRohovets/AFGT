@@ -41,8 +41,7 @@ namespace AFGT.Controllers
         {
             List<Evento> Evento = new List<Evento>();
 
-            var evento = db.Eventos.OrderBy(e => e.Data).ToList();
-            var result = db.Eventos.ToList();
+            var eventos = db.Eventos.OrderBy(e => e.Data).ToList();
 
             ViewBag.ListaPesquisa = listPesquisa;
             ViewBag.ListaOpcao = listOpcao;
@@ -50,10 +49,19 @@ namespace AFGT.Controllers
             switch (ListaPesquisa)
             {
                 case "1":
-                    if (ConteudoPesquisa == "")
+                    //if (ConteudoPesquisa == "" && PointA == "")
+                    //{
+                    //    result = evento;
+                    //}
+                    //
+
+                    //se a caixa tiver preenchida artista
+                    if ()
                     {
-                        result = db.Eventos.ToList();
+                        eventos = eventos.Where( a => a.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower()
                     }
+
+
                     if ((ConteudoPesquisa != "" && PointA != "") && ListaOpcao == "Local")
                     {
                         foreach ( Evento item in evento) {
@@ -152,7 +160,7 @@ namespace AFGT.Controllers
                     break;
             }
 
-            return PartialView("_ResultadosPesquisa", result);
+            return PartialView("_ResultadosPesquisa", eventos);
         }
 
         public ActionResult _Local()
