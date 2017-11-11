@@ -42,104 +42,100 @@ namespace AFGT.Controllers
             List<Evento> Evento = new List<Evento>();
 
             var evento = db.Eventos.OrderBy(e => e.Data).ToList();
-            var result = db.Eventos.ToList();
 
             ViewBag.ListaPesquisa = listPesquisa;
             ViewBag.ListaOpcao = listOpcao;
 
             switch (ListaPesquisa)
             {
-                //result = db.Eventos.ToList();
                 case "1":
                     if (ConteudoPesquisa != "")
                     {
-                        if (ListaOpcao == "Local")
+                        evento = evento.Where(e => e.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower())).ToList();
+
+                        if (ListaOpcao == "2")
                         {
                             if (PointA != "")
                             {
-                                foreach (Evento item in evento)
-                                {
-                                    if (item.Morada.Cidade.ToLower() == PointA.ToLower() && item.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower()))
-                                    {
-                                        Evento.Add(item);
-                                    }
-                                }
+                                evento = evento.Where(e => e.Morada.Cidade.ToLower() == PointA.ToLower()).ToList();
                             }
-                            else
-                            {
-                                Evento.Add(item);
-                            }
-
-                            result = Evento;
-                    }
-                    }
-                    else
-                    {
-                        foreach (Evento item in evento)
-                        {
-                            if (item.Data.Value.ToString("yyyy-MM-dd") == Dia && item.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower()))
-                            {
-                                Evento.Add(item);
-                            };
                         }
-                        result = Evento;
+
+                        if (ListaOpcao == "1")
+                        {
+                            if (Dia != "")
+                            {
+                                evento = evento.Where(e => e.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
+                            }
+                        }
                     }
+
+                    if (ConteudoPesquisa == "")
+                    {
+                        if (ListaOpcao == "2")
+                        {
+                            if (PointA != "")
+                            {
+                                evento = evento.Where(e => e.Morada.Cidade.ToLower() == PointA.ToLower()).ToList();
+                            }
+                        }
+
+                        if (ListaOpcao == "1")
+                        {
+                            if (Dia != "")
+                            {
+                                evento = evento.Where(e => e.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
+                            }
+                        }
+                    }
+
                     break;
 
                 case "2":
+                    if (GeneroMusicalID != null)
+                    {
+                        evento = evento.Where(e => e.Artistas.Any(a => a.GeneroMusicalID == GeneroMusicalID)).ToList();
 
-                    if (GeneroMusicalID == null)
-                    {
-                        result = evento.ToList();
-                    }
-                    if ((GeneroMusicalID != null && PointA != "") && ListaOpcao == "Local")
-                    {
-                        foreach (Evento item in evento)
+                        if (ListaOpcao == "2")
                         {
-                            if (item.Morada.Cidade.ToLower() == PointA.ToLower() && item.Artistas.Any(a => a.GeneroMusicalID == GeneroMusicalID))
+                            if (PointA != "")
                             {
-                                Evento.Add(item);
-                            };
+                                evento = evento.Where(e => e.Morada.Cidade.ToLower() == PointA.ToLower()).ToList();
+                            }
                         }
-                        result = Evento;
-                    }
-                    else if (!(GeneroMusicalID != null && PointA != "") && ListaOpcao == "Local")
-                    {
-                        foreach (Evento item in evento)
+
+                        if (ListaOpcao == "1")
                         {
-                            if (item.Morada.Cidade.ToLower() == PointA.ToLower() || item.Artistas.Any(a => a.GeneroMusicalID == GeneroMusicalID))
+                            if (Dia != "")
                             {
-                                Evento.Add(item);
-                            };
+                                evento = evento.Where(e => e.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
+                            }
                         }
-                        result = Evento;
                     }
-                    else if ((GeneroMusicalID != null && PointA != "") && ListaOpcao == "Data")
+
+                    if (GeneroMusicalID != null)
                     {
-                        foreach (Evento item in evento)
+                        if (ListaOpcao == "2")
                         {
-                            if (item.Data.Value.ToString("yyyy-MM-dd") == Dia && item.Artistas.Any(a => a.GeneroMusicalID == GeneroMusicalID))
+                            if (PointA != "")
                             {
-                                Evento.Add(item);
-                            };
+                                evento = evento.Where(e => e.Morada.Cidade.ToLower() == PointA.ToLower()).ToList();
+                            }
                         }
-                        result = Evento;
-                    }
-                    else
-                    {
-                        foreach (Evento item in evento)
+
+                        if (ListaOpcao == "1")
                         {
-                            if (item.Data.Value.ToString("yyyy-MM-dd") == Dia || item.Artistas.Any(a => a.GeneroMusicalID == GeneroMusicalID))
+                            if (Dia != "")
                             {
-                                Evento.Add(item);
-                            };
+                                evento = evento.Where(e => e.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
+                            }
                         }
-                        result = Evento;
                     }
+
                     break;
             }
 
-            return PartialView("_ResultadosPesquisa", eventos);
+            return PartialView("_ResultadosPesquisa", evento);
         }
 
         public ActionResult _Local()

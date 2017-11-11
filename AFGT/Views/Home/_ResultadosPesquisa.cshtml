@@ -1,14 +1,6 @@
 ﻿@model IEnumerable<AFGT.Models.Evento>
 
 <div id="resultadosPesquisa">
-
-    <div class="active" id="Data">
-        @Html.Partial("_Data")
-    </div>
-
-    <div class="hidden" id="Local">
-        @Html.Partial("_Local")
-    </div>
     <br>
     @if (Model.Count() == 0)
     {
