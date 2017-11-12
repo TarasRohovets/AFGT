@@ -1,80 +1,69 @@
 ﻿/****************************************************
   * Homepage search 
   *****************************************************/
-body {
-    font-size: 18px;
-    line-height: 1.4;
-    font-family: 'Inconsolata', sans-serif;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-.outer-container {
-    width: 100%;
-    min-height: 1400px;
-}
-
-.banner {
-    width: 100%;
-    height: 600px;
-    overflow: hidden;
-    position: relative;
-    background-color: #000;
-    transform-style: preserve-3d;
-    transform: translateZ(0);
-}
-
-.banner__image {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 800px;
-    z-index: 10;
-    overflow: hidden;
-    background-image: url("../../Images/Background.jpg");
-    background-position: center center;
-    background-repeat: no-repeat;
+.header,
+.footer {
+    min-height: 400px;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    background: url("../../Images/Background.jpg") no-repeat center center fixed;
     background-size: cover;
-    opacity: 0.8;
-    transform: translateZ(0);
 }
 
-.banner__caption {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: auto;
-    z-index: 20;
-    text-align: center;
-    color: #fff;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    margin-top: -10px;
-    padding-left: 20px;
-    padding-right: 20px;
+.footer {
+    min-height: 380px;
 }
 
-banner__caption.h1 {
-    font-size: 82px;
-    font-weight: 100;
-    letter-spacing: -1px;
-    font-family: 'Roboto', sans-serif;
+.form {
+    background: rgba(0,0,0,0.5) !important;
 }
 
-banner__caption.p {
-    margin-top: 20px;
+    .form > div {
+        margin-bottom: 0;
+    }
+
+    .form * {
+        transition: none;
+    }
+
+    .form select {
+        border-left-color: #dedede !important;
+    }
+
+.push-top {
+    margin-top: 90px;
+}
+
+.addon-append input,
+.addon-append .btn {
+    border-radius: 0;
+    font-size: 17px !important;
+}
+
+.social {
+    border-top: 1px solid rgba(255,255,255,0.16);
+}
+
+/* __ colors __ */
+
+.light-silver {
+    background: #e8e8e8;
+}
+
+.rgba {
+    background: rgba(0,0,0,0.7);
+    min-height: 380px;
+}
+
+@media (max-width: 800px) {
+    .navbar {
+        background: #2196F3;
+    }
 }
 
 
 /****************************************************
   * Homepage search 
-  *****************************************************/ 
-
+  *****************************************************/
 .custom-navbar {
     background-color: rgba(0,0,0,0.5);
     height: 50px;
@@ -90,16 +79,15 @@ banner__caption.p {
 
 
 
-    .banner .row {
-        margin-top: 200px;
-    }
+.banner .row {
+    margin-top: 200px;
+}
 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
     min-height: 600px;
     position: relative;
-    
     /****************************************************
   * set the backround image to 100% width of the screen 
   *****************************************************/
@@ -134,7 +122,8 @@ textarea {
 table.hidden {
     display: none;
 }
-div.banner{
+
+div.banner {
     padding-bottom: 500px;
 }
 
