@@ -575,7 +575,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -612,10 +611,7 @@
     <Content Include="Views\Artistas\Edit.cshtml" />
     <Content Include="Views\Artistas\Index.cshtml" />
     <Content Include="Views\Date.cshtml" />
-    <Content Include="Views\Home\Pesquisa.cshtml" />
-    <Content Include="Views\Home\Local.cshtml" />
     <Content Include="Views\GeneroMusicals\Index.cshtml" />
-    <Content Include="Views\Home\Data.cshtml" />
     <Content Include="Views\Organizadores\Create.cshtml" />
     <Content Include="Views\Organizadores\Delete.cshtml" />
     <Content Include="Views\Organizadores\Details.cshtml" />
@@ -629,6 +625,7 @@
     <Content Include="Views\Account\SignIn.cshtml" />
     <Content Include="Views\Account\RegisterOrg.cshtml" />
     <Content Include="Views\Account\AuthResponse.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

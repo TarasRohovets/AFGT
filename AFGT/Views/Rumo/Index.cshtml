@@ -10,7 +10,8 @@
     <div class="form-group">
         <div class="col-md-10">
             @Html.Label("Origem")
-            @Html.Action("_Local","Home")
+            @Html.TextBox("PointA", null, new { @class = "form-control", @style = "width:210px", id = "Local" })
+            <button class="btn btn-default">Ir</button>
         </div>
     </div>
 }
