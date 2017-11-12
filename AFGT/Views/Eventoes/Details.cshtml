@@ -93,17 +93,20 @@
             @Html.DisplayFor(model => model.Organizadore.NomeOrg)
         </dd>*@
 
-        <dt>
-            <label class="control-label ">Likes</label>
-            @*@Html.DisplayNameFor(model => model.Artistas)*@
-        </dt>
+        
 
         <dd id="Opiniao">
 
-         
-              @if (ViewContext.HttpContext.User.IsInRole("Manager"))
-              {
-                  using (Ajax.BeginForm("Details", new {id = Model.EventosID },new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "Opiniao" })) {
+            
+    @if(ViewContext.HttpContext.User.IsInRole("User") || ViewContext.HttpContext.User.IsInRole("Manager"))
+    {
+    <dt>
+        <label class="control-label ">Likes</label>
+        @*@Html.DisplayNameFor(model => model.Artistas)*@
+    </dt>
+
+        using (Ajax.BeginForm("Details", new { id = Model.EventosID }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "Opiniao" }))
+        {
 
                           <button name="Opiniao" type="submit" id="like" value="Like">Like</button>
                           <button name="Opiniao" type="submit" id="dislike" value="DisLike">DisLike</button>
