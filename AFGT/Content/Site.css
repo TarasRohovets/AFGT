@@ -1,16 +1,11 @@
 ﻿/****************************************************
   * Homepage search 
   *****************************************************/
-.header,
-.footer {
+.header {
     min-height: 400px;
     text-shadow: 0 1px 1px rgba(0,0,0,0.3);
     background: url("../../Images/Background.jpg") no-repeat center center fixed;
     background-size: cover;
-}
-
-.footer {
-    min-height: 380px;
 }
 
 .form {
