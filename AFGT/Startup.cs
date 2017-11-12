@@ -13,6 +13,7 @@ namespace AFGT
         {
             ConfigureAuth(app);
             createRolesandUsers();
+            app.MapSignalR();  // adicionei isto para o Chat
         }
 
 
