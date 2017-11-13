@@ -2,14 +2,13 @@
     <div class="row text-center padding-bottom-40 push-top">
         <h2 class="text-white">AFGT</h2>
         <p class="text-white">
-            AFGT guia-te pelo o que ouves!
+            Guia-te pelo o que ouves!
         </p>
     </div>
     @using (Ajax.BeginForm("Index", new AjaxOptions { UpdateTargetId = "resultadosPesquisa" }))
      {
         <div class="row text-center">
                 <form class="form form-inline" >
-
                     
                         @Html.DropDownList("ListaPesquisa", new SelectList(ViewBag.ListaPesquisa, "Value", "Text"), new { @class = "button-one", onchange = @"TipoPesquisa(this.value);" })
                         <input name="ConteudoPesquisa" type="text" class="button-four active" id="Artista" placeholder="O que queres ouvir?"/>
