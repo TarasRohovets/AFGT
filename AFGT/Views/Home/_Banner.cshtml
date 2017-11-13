@@ -12,7 +12,7 @@
 
                     
                         @Html.DropDownList("ListaPesquisa", new SelectList(ViewBag.ListaPesquisa, "Value", "Text"), new { @class = "button-one", onchange = @"TipoPesquisa(this.value);" })
-                        <input name="ConteudoPesquisa" type="text" class="button-four active" id="Artista" placeholder="O que procuras?"/>
+                        <input name="ConteudoPesquisa" type="text" class="button-four active" id="Artista" placeholder="O que queres ouvir?"/>
                         @Html.Action("Index", "GeneroMusicals", new { id = ViewBag.GeneroMusicalID })
                     
                         @Html.DropDownList("ListaOpcao", new SelectList(ViewBag.ListaOpcao, "Value", "Text"), new { @class = "button-one", onchange = @"TipoOpcao(this.value);" })
