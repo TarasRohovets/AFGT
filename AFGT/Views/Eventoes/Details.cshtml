@@ -98,14 +98,14 @@
         <dd id="Opiniao">
 
             
-    @if(ViewContext.HttpContext.User.IsInRole("User") || ViewContext.HttpContext.User.IsInRole("Manager"))
+    @if (ViewContext.HttpContext.User.IsInRole("User") || ViewContext.HttpContext.User.IsInRole("Manager"))
     {
     <dt>
         <label class="control-label ">Likes</label>
         @*@Html.DisplayNameFor(model => model.Artistas)*@
     </dt>
-
-        using (Ajax.BeginForm("Details", new { id = Model.EventosID }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "Opiniao" }))
+    
+       using (Ajax.BeginForm("Details", new { id = Model.EventosID }, new AjaxOptions { UpdateTargetId = "Opiniao" }))
         {
 
                           <button name="Opiniao" type="submit" id="like" value="Like">Like</button>
@@ -115,9 +115,9 @@
             @Html.DisplayFor(model => model.Likes)
          }
            
-        </dd>
+        
 
-   
+    }
 
     </dl>
 </div>
@@ -137,5 +137,6 @@ else
 
 
     @Html.ActionLink("Voltar a lista de Eventos", "Index", "Home", null, new { @class = "btn btn-default" })
+        
 </p>
-}U
+}

@@ -59,6 +59,8 @@ namespace AFGT.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+
+
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -85,8 +87,9 @@ namespace AFGT.Controllers
                 Email = aspNetUser.Email,
                 
             };
-           
 
+
+            ViewBag.eventos = db.Eventos.Where(e => e.Likes.Any(l => l.UserID == userId));
             return View(model);
         }
         [HttpPost]
@@ -120,17 +123,6 @@ namespace AFGT.Controllers
             }
             return View(aspNetUser);
         }
-
-
-        public ActionResult EventosListView() {
-
-            
-            var user = Convert.ToInt32(User.Identity.GetUserId());  // qqc convert into int32
-
-            var eventos = db.Eventos.Where(e => e.Likes.Any(l => l.UserID == user));
-          
-            return View(eventos); 
-        } 
 
         //
         // POST: /Manage/RemoveLogin
