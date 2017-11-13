@@ -638,6 +638,7 @@
     <Content Include="Views\Account\AuthResponse.cshtml" />
     <Content Include="Views\Chat\Chat.cshtml" />
     <Content Include="Views\Manage\EventosListView.cshtml" />
+    <Content Include="Views\Eventoes\UsersList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

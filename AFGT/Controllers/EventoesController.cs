@@ -22,6 +22,7 @@ namespace AFGT.Controllers
         public ActionResult Index()
         {
             var eventos = db.Eventos.Include(e => e.Organizadore);
+            
             var usid = Convert.ToInt32(User.Identity.GetUserId());
             return View(eventos.Where(ev => ev.OrgID == usid).ToList());
         }
@@ -41,9 +42,9 @@ namespace AFGT.Controllers
                 return HttpNotFound();
             }
 
-            
 
 
+           // ViewBag.users = db.AspNetUsers.Where(l => l.Likes.Any(l => l.UserID == userId));
 
             return View(evento);
         }
@@ -62,10 +63,8 @@ namespace AFGT.Controllers
                 {
                     Like like = new Like(); //vai dentro do if
                    
-                //like.UserID = Convert.ToInt32(User.Identity.GetUserId()); //  id do user
-                //like.EventosID = id;   //        id do evento 
-
-
+                like.UserID = userId; //  id do user
+                like.EventosID = id;   //        id do evento 
                     if (Opiniao == "Like")    //  se opiniao yes 
                     {
                         like.Opiniao = true;

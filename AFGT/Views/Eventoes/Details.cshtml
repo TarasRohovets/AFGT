@@ -7,10 +7,12 @@
 }
 
 <h2>Detalhes</h2>
-<div>     <a class="navbar-brand">@Html.ActionLink("Chat Here!", "Chat", "Chat", new { area = "" }, new { @class = "navbar-brand" })</a></div>
+
 <div>
     <h4>Evento</h4>
     <hr />
+         <a class="navbar-brand">@Html.ActionLink("Chat Here!", "Chat", "Chat", new { area = "" }, new { @class = "navbar-brand" })</a>
+
     <dl class="dl-horizontal" id="form-Horizontal">
 
         <dt>
@@ -144,4 +146,10 @@ else
         
 </p>
 }
+
+<div class="col-md-3" id="form-Horizontal">
+    <font size="4"> Events you liked:</font>
+    @Html.Partial("UsersList", (object)ViewBag.AspNetUser)
+
+</div>
 

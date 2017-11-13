@@ -5,8 +5,8 @@
     @foreach (var item in Model)
     {
         <a href="@Url.Action("Details","Eventoes",new {id = item.EventosID })">
-            <h2>@Html.DisplayFor(e => item.NomeEvento)</h2>
-            <img src="@Html.DisplayFor(e => item.Link)" />
+            <font size="2">@Html.DisplayFor(e => item.NomeEvento)</font>
+            <img src="@Html.DisplayFor(e => item.Link)" height="142" width="142"/>
         </a>
     }
 

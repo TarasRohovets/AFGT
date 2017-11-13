@@ -1,0 +1,13 @@
+﻿@model IEnumerable<AFGT.Models.AspNetUser>
+
+
+<div>
+    @foreach (var item in Model)
+    {
+        <a href="@Url.Action("Details","Eventoes",new {id = item.Id })">
+            <font size="2">@Html.DisplayFor(e => item.UserName)</font>
+            <img src="@Html.DisplayFor(e => item.LinkFotoUser)" height="142" width="142" />
+        </a>
+    }
+
+</div>

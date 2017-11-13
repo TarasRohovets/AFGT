@@ -109,8 +109,9 @@ namespace AFGT.Controllers
                         string _path = Path.Combine(Server.MapPath("~/Images/"), _FileName);
                         file.SaveAs(_path);            
                         NetUser.LinkFotoUser = "/Images/" + _FileName;      //////    Adiciono o link a tabela AspNetUsers
- 
-                    }
+
+                }
+               
                 NetUser.UserName = aspNetUser.UserName;               //        "        Nome
                 NetUser.Email = aspNetUser.Email;                      //        "       Email  
                 NetUser.PhoneNumber = aspNetUser.PhoneNumber;           //        "      Tlmv
@@ -124,6 +125,7 @@ namespace AFGT.Controllers
             return View(aspNetUser);
         }
 
+       
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
