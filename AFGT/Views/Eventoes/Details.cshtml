@@ -1,11 +1,13 @@
 ﻿@model AFGT.Models.Evento
 
+@using Microsoft.AspNet.Identity
+
 @{
     ViewBag.Title = "Details";
 }
 
 <h2>Detalhes</h2>
-
+<div>     <a class="navbar-brand">@Html.ActionLink("Chat Here!", "Chat", "Chat", new { area = "" }, new { @class = "navbar-brand" })</a></div>
 <div>
     <h4>Evento</h4>
     <hr />
@@ -104,21 +106,23 @@
         <label class="control-label ">Likes</label>
         @*@Html.DisplayNameFor(model => model.Artistas)*@
     </dt>
-    
-       using (Ajax.BeginForm("Details", new { id = Model.EventosID }, new AjaxOptions { UpdateTargetId = "Opiniao" }))
-        {
 
+    
+    
+    using (Ajax.BeginForm("Details", "Eventoes", new { id = Model.EventosID, userId = User.Identity.GetUserId() },new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "Opiniao" }))
+    {
+                             
                           <button name="Opiniao" type="submit" id="like" value="Like">Like</button>
                           <button name="Opiniao" type="submit" id="dislike" value="DisLike">DisLike</button>
-                  }
 
-            @Html.DisplayFor(model => model.Likes)
+
+
          }
-           
-        
+
+
 
     }
-
+     </dd>
     </dl>
 </div>
 
@@ -140,3 +144,4 @@ else
         
 </p>
 }
+

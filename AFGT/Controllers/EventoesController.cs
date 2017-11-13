@@ -41,7 +41,7 @@ namespace AFGT.Controllers
                 return HttpNotFound();
             }
 
-
+            
 
 
 
@@ -50,19 +50,22 @@ namespace AFGT.Controllers
 
 
         [HttpPost]                       //SHIIT LOOOOOOOOOOOOLmLIKESSSS       
-        public ActionResult Details(int id, string Opiniao, Like likes)    // Preencho isto ou fica vasio???!!!!!!
+        public ActionResult Details(int id, string Opiniao, int userId)    // Preencho isto ou fica vasio???!!!!!!
         {
             if (ModelState.IsValid )
             {
-                
-                likes.UserID = Convert.ToInt32(User.Identity.GetUserId()); //  id do user
-                likes.EventosID = id;   //        id do evento 
-
-                var x = db.Likes.FirstOrDefault(m => m.UserID == likes.UserID);
-                // opiniao como       ???????????????????????????
-                if (x == null)
+               // var userID = Convert.ToInt32(User.Identity.GetUserId());
+               // ViewBag.QualquerCoisa = userID;
+                var x = db.Likes.FirstOrDefault(m => m.UserID == userId && m.EventosID == id);
+                                                                                          // opiniao como       ???????????????????????????
+                if(x == null)
                 {
-                    var like = new Like(); //vai dentro do if
+                    Like like = new Like(); //vai dentro do if
+                   
+                //like.UserID = Convert.ToInt32(User.Identity.GetUserId()); //  id do user
+                //like.EventosID = id;   //        id do evento 
+
+
                     if (Opiniao == "Like")    //  se opiniao yes 
                     {
                         like.Opiniao = true;
@@ -73,15 +76,22 @@ namespace AFGT.Controllers
                     }
                     db.Likes.Add(like);
                     db.SaveChanges();
-                }
+                } 
                 
-                
+
+
                 ///if likes present 
-                
 
+
+            
+            
             };
-
-                   return View();
+            Evento evento = db.Eventos.Find(id);
+            if (evento == null)
+            {
+                return HttpNotFound();
+            }
+            return View(evento);
         }
         
 

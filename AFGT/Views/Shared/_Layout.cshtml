@@ -22,7 +22,7 @@
             <div class="nav navbar-nav pull-right">
                 @if (ViewContext.HttpContext.User.IsInRole("User") || ViewContext.HttpContext.User.IsInRole("Manager"))
                 {
-                    <a class="navbar-brand">@Html.ActionLink("Chat Here!", "Chat", "Chat", new { area = "" }, new { @class = "navbar-brand" })</a>
+                   // tava aqui o Chat
                 }
                 
                 <a class="navbar-brand">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</a>
