@@ -9,6 +9,8 @@ using Microsoft.Owin.Security;
 using AFGT.Models;
 using System.IO;
 using System.Data.Entity;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace AFGT.Controllers
 {
@@ -83,6 +85,8 @@ namespace AFGT.Controllers
                 Email = aspNetUser.Email,
                 
             };
+           
+
             return View(model);
         }
         [HttpPost]
@@ -117,6 +121,16 @@ namespace AFGT.Controllers
             return View(aspNetUser);
         }
 
+
+        public ActionResult EventosListView() {
+
+            
+            var user = Convert.ToInt32(User.Identity.GetUserId());  // qqc convert into int32
+
+            var eventos = db.Eventos.Where(e => e.Likes.Any(l => l.UserID == user));
+          
+            return View(eventos); 
+        } 
 
         //
         // POST: /Manage/RemoveLogin
@@ -379,6 +393,7 @@ namespace AFGT.Controllers
 #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
+        private SqlDataReader m_Reader;
 
         private IAuthenticationManager AuthenticationManager
         {

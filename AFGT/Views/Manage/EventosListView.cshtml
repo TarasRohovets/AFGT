@@ -1,0 +1,13 @@
+﻿@model IEnumerable<AFGT.Models.Evento>
+
+
+<div>
+    @foreach (var item in Model)
+    {
+        <a href="@Url.Action("Details","Eventoes",new {id = item.EventosID })">
+            <h2>@Html.DisplayFor(e => item.NomeEvento)</h2>
+            <img src="@Html.DisplayFor(e => item.Link)" />
+        </a>
+    }
+
+</div>
