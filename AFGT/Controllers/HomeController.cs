@@ -41,101 +41,44 @@ namespace AFGT.Controllers
         {
             List<Evento> Evento = new List<Evento>();
 
-            var evento = db.Eventos.OrderBy(e => e.Data).ToList();
+            var eventos = db.Eventos.OrderBy(e => e.Data).ToList();
 
             ViewBag.ListaPesquisa = listPesquisa;
             ViewBag.ListaOpcao = listOpcao;
 
             switch (ListaPesquisa)
             {
-                case "1":
+                case "1": //Artista
                     if (ConteudoPesquisa != "")
                     {
-                        evento = evento.Where(e => e.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower())).ToList();
-
-                        if (ListaOpcao == "2")
-                        {
-                            if (PointA != "")
-                            {
-                                evento = evento.Where(e => e.Morada.Cidade.ToLower() == PointA.ToLower()).ToList();
-                            }
-                        }
-
-                        if (ListaOpcao == "1")
-                        {
-                            if (Dia != "")
-                            {
-                                evento = evento.Where(e => e.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
-                            }
-                        }
+                        eventos = eventos.Where(e => e.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower())).ToList();
                     }
-
-                    if (ConteudoPesquisa == "")
-                    {
-                        if (ListaOpcao == "2")
-                        {
-                            if (PointA != "")
-                            {
-                                evento = evento.Where(e => e.Morada.Cidade.ToLower() == PointA.ToLower()).ToList();
-                            }
-                        }
-
-                        if (ListaOpcao == "1")
-                        {
-                            if (Dia != "")
-                            {
-                                evento = evento.Where(e => e.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
-                            }
-                        }
-                    }
-
                     break;
 
-                case "2":
+                case "2": //Genero Musical
                     if (GeneroMusicalID != null)
                     {
-                        evento = evento.Where(e => e.Artistas.Any(a => a.GeneroMusicalID == GeneroMusicalID)).ToList();
-
-                        if (ListaOpcao == "2")
-                        {
-                            if (PointA != "")
-                            {
-                                evento = evento.Where(e => e.Morada.Cidade.ToLower() == PointA.ToLower()).ToList();
-                            }
-                        }
-
-                        if (ListaOpcao == "1")
-                        {
-                            if (Dia != "")
-                            {
-                                evento = evento.Where(e => e.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
-                            }
-                        }
+                        eventos = eventos.Where(e => e.Artistas.Any(a => a.GeneroMusicalID == GeneroMusicalID)).ToList();
                     }
-
-                    if (GeneroMusicalID != null)
+                    break;
+            }
+            switch (ListaOpcao)
+            {
+                case "1"://data
+                    if (Dia != "")
                     {
-                        if (ListaOpcao == "2")
-                        {
-                            if (PointA != "")
-                            {
-                                evento = evento.Where(e => e.Morada.Cidade.ToLower() == PointA.ToLower()).ToList();
-                            }
-                        }
-
-                        if (ListaOpcao == "1")
-                        {
-                            if (Dia != "")
-                            {
-                                evento = evento.Where(e => e.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
-                            }
-                        }
+                        eventos = eventos.Where(e => e.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
                     }
-
+                    break;
+                case "2"://cidade
+                    if (PointA != "")
+                    {
+                        eventos = eventos.Where(e => e.Morada.Cidade.ToLower() == PointA.ToLower()).ToList();
+                    }
                     break;
             }
 
-            return PartialView("_ResultadosPesquisa", evento);
+            return PartialView("_ResultadosPesquisa", eventos);
         }
 
         public ActionResult _Local()
