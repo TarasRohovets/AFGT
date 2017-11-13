@@ -24,7 +24,7 @@
                         </a>
                         <div class="caption">
                             <a href='@Url.Action("Details", "Eventoes", new { id = item.EventosID })'>
-                                <h2>@Html.DisplayFor(modelItem => item.NomeEvento)</h2>
+                                <h2 id="evtitle">@Html.DisplayFor(modelItem => item.NomeEvento)</h2>
                                 </a>
                                 <h3>@Html.DisplayFor(modelItem => item.Data) @*| @Html.DisplayFor(modelItem => item.Data.TimeOfDay)*@</h3>
                                 <br />
@@ -36,11 +36,11 @@
                                 <p>@Html.DisplayFor(modelItem => item.Morada.Endereco)</p>
                                 <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) @Html.DisplayFor(modelItem => item.Morada.CodPostal)</p>
 
-                                <p>
+                                <div id="buttonbottom">
                                     @Html.ActionLink("Editar", "Edit", new { id = item.EventosID }, new { @class = "btn btn-default" })
                                     @Html.ActionLink("Detalhes", "Details", new { id = item.EventosID }, new { @class = "btn btn-default" })
                                     @Html.ActionLink("Apagar", "Delete", new { id = item.EventosID }, new { @class = "btn btn-default" })
-                                </p>
+                                </div>
 </div>
 </div>
             </div>
