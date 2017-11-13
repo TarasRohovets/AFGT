@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using AFGT.Models;
+using System.Web.Configuration;
+using System.Configuration;
 
 namespace AFGT
 {
@@ -36,7 +38,7 @@ namespace AFGT
                     getUserIdCallback: (id) => (id.GetUserId<int>()))
 
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.

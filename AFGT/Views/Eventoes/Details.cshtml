@@ -1,4 +1,5 @@
-﻿@model AFGT.Models.Evento
+﻿@using Microsoft.AspNet.Identity
+@model AFGT.Models.Evento
 
 @{
     ViewBag.Title = "Details";
@@ -6,7 +7,7 @@
 
 <h2>Detalhes</h2>
 
-<div>
+<div  id="form-Horizontal">
     <h4>Evento</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -103,7 +104,24 @@
         </dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.EventosID }) |
-    @Html.ActionLink("Voltar a lista de Eventos", "Index")
+
+@if (User.IsInRole("Manager"))
+{
+    
+    <p>
+        @Html.ActionLink("Voltar a lista de Eventos", "Index", null, new { @class = "btn btn-default" }) 
+         
+        @if(Convert.ToInt32(User.Identity.GetUserId()) == Model.OrgID) { 
+        @Html.ActionLink("Editar", "Edit", new { id = Model.EventosID }, new { @class = "btn btn-default" }) 
+        }
+    </p>
+}
+else
+{
+    <p>
+    @Html.Action("Index", "Rumo", new { id = Model.EventosID });
+
+
+    @Html.ActionLink("Voltar a lista de Eventos", "Index", "Home", null, new { @class = "btn btn-default" })
 </p>
+}
