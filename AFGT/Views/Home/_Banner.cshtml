@@ -1,3 +1,21 @@
+﻿<div class="jumbotron">
+    <div class="row">
+
+        
+
+     <div class="active" id="Artista">
+      
+           <div class="search-box">
+                <input name="ConteudoPesquisa" id="ConteudoPesquisa" type="text" class="form-control" placeholder="O que procuras?" />
+           <span></span>
+            </div>
+        </div>  
+
+        <div class="hidden" id="Genero">
+            <div class="col-md-10">
+                @Html.Action("Index", "GeneroMusicals", new { id = ViewBag.GeneroMusicalID })
+            </div>
+        </div>
 ﻿<div class="row header" style="padding:150px;">
     <div id="form-Horizontal">
         <div class="row text-center padding-bottom-40 push-top">

@@ -21,6 +21,7 @@ namespace AFGT
         private void createRolesandUsers()
         {
             ApplicationDbContext context = new ApplicationDbContext();
+                
 
             var roleManager = new RoleManager<CustomRole, int>(new CustomRoleStore(context));
             var UserManager = new UserManager<ApplicationUser, int>(new CustomUserStore(context));

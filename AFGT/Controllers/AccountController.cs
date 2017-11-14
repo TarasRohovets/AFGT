@@ -18,7 +18,8 @@ namespace AFGT.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private afgtEntities db = new afgtEntities();
-        ApplicationDbContext context = new ApplicationDbContext();
+        ApplicationDbContext context= new ApplicationDbContext();
+        
 
         public AccountController()
         {
@@ -365,7 +366,7 @@ namespace AFGT.Controllers
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
             var userId = await SignInManager.GetVerifiedUserIdAsync();
-            if (userId == null)
+            if (userId == 0)
             {
                 return View("Error");
             }

@@ -22,6 +22,8 @@
         </dt>
 
         <dd>
+        <h3><img src=@Html.DisplayFor(model => model.Link) style=" width:200px; height:200px; background: #ffffff; margin: auto; -moz-border-radius: 50%; border-radius: 50%; padding: 0px;" /></h3>
+         @*  @Html.DisplayFor(model => model.Link)*@
             <a href=@Html.DisplayFor(model => model.Link) data-lightbox="EvImg">
                 <h3><img src=@Html.DisplayFor(model => model.Link) style=" width:500px; height:auto; background: #ffffff; margin: auto; -moz-border-radius: 0px; border-radius: 0px; padding: 6px; box-shadow: 0px 0px 20px #888;" data-toggle="lightbox" /></h3>
             </a>
@@ -85,11 +87,12 @@
 
         <dt>
             <label class="control-label ">Artistas</label>
-            @*@Html.DisplayNameFor(model => model.Artistas)*@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Artistas)
+            <ul id="entradadetags">
+             
+            </ul>
         </dd>
 
         @*<dt>
@@ -99,6 +102,46 @@
             <dd>
                 @Html.DisplayFor(model => model.Organizadore.NomeOrg)
             </dd>*@
+
+        <dt>
+            <label class="control-label">Likes</label>
+            @*@Html.DisplayNameFor(model => model.Artistas)*@
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.Likes)*@
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.EventosID }) |
+    @Html.ActionLink("Voltar a lista de Eventos", "Index")
+</p>
+
+
+
+@section Styles {
+    <link rel="stylesheet" href="~/Content/jquery.tagit.css">
+    <link rel="stylesheet" href="~/Content/tagit.ui-zendesk.css">
+}
+
+@section Scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/Scripts/tag-it.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $("#entradadetags").tagit({
+                readOnly: true,
+                availableTags: @Html.Raw(ViewBag.Artistas),
+
+            });
+        });
+
+    </script>
+}
+
 
 
 
