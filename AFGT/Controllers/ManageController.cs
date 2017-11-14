@@ -9,6 +9,8 @@ using Microsoft.Owin.Security;
 using AFGT.Models;
 using System.IO;
 using System.Data.Entity;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace AFGT.Controllers
 {
@@ -57,6 +59,8 @@ namespace AFGT.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+
+
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -83,6 +87,9 @@ namespace AFGT.Controllers
                 Email = aspNetUser.Email,
                 
             };
+
+
+            ViewBag.eventos = db.Eventos.Where(e => e.Likes.Any(l => l.UserID == userId));
             return View(model);
         }
         [HttpPost]
@@ -102,8 +109,9 @@ namespace AFGT.Controllers
                         string _path = Path.Combine(Server.MapPath("~/Images/"), _FileName);
                         file.SaveAs(_path);            
                         NetUser.LinkFotoUser = "/Images/" + _FileName;      //////    Adiciono o link a tabela AspNetUsers
- 
-                    }
+
+                }
+               
                 NetUser.UserName = aspNetUser.UserName;               //        "        Nome
                 NetUser.Email = aspNetUser.Email;                      //        "       Email  
                 NetUser.PhoneNumber = aspNetUser.PhoneNumber;           //        "      Tlmv
@@ -117,7 +125,7 @@ namespace AFGT.Controllers
             return View(aspNetUser);
         }
 
-
+       
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
@@ -379,6 +387,7 @@ namespace AFGT.Controllers
 #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
+        
 
         private IAuthenticationManager AuthenticationManager
         {

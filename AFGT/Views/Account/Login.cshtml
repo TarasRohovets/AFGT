@@ -51,16 +51,16 @@
             }
         </section>
     </div>
-    <a class="btn">@Html.ActionLink("Register User", "Register", "Account", new { area = "" }, new { @class = "navbar-brand" })</a>
-    <a class="btn">@Html.ActionLink("Register Organizer", "RegisterOrg", "Account", new { area = "" }, new { @class = "navbar-brand" })</a>
+<a class="navbar-brand">@Html.ActionLink("Register User", "Register", "Account", new { area = "" }, new { @class = "navbar-brand" })</a>
+<a class="navbar-brand">@Html.ActionLink("Register Organizer", "RegisterOrg", "Account", new { area = "" }, new { @class = "navbar-brand" })</a>
 
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
+        <div class="col-md-4">
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>
     </div>
-</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

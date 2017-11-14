@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNet.Identity
 @model AFGT.Models.Evento
 
+@using Microsoft.AspNet.Identity
+
 @{
     ViewBag.Title = "Details";
 }
@@ -10,9 +12,9 @@
 <div  id="form-Horizontal">
     <h4>Evento</h4>
     <hr />
+         <a class="navbar-brand">@Html.ActionLink("Chat Here!", "Chat", "Chat", new { area = "" }, new { @class = "navbar-brand" })</a>
 
-    <dl class="dl-horizontal">
-    
+    <dl class="dl-horizontal" id="form-Horizontal">
 
         <dt>
             <label class="control-label ">Imagem do Evento</label>
@@ -98,11 +100,35 @@
             @Html.DisplayFor(model => model.Organizadore.NomeOrg)
         </dd>*@
 
-        <dt>
-            <label class="control-label ">Likes</label>
-            @*@Html.DisplayNameFor(model => model.Artistas)*@
-        </dt>
+        
 
+
+        <dd >
+
+            
+    @if (ViewContext.HttpContext.User.IsInRole("User") || ViewContext.HttpContext.User.IsInRole("Manager"))
+    {
+    <dt>
+        <label class="control-label ">Likes</label>
+        @*@Html.DisplayNameFor(model => model.Artistas)*@
+    </dt>
+
+    
+    
+    using (Ajax.BeginForm("Like", "Eventoes", new { id = Model.EventosID },new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Opiniao" }))
+    {
+                             
+                          <button name="Opiniao" type="submit" id="like" value="Like">Estou interessado!</button>
+                          
+
+
+
+         }
+
+
+
+    }
+     </dd>
         <dd>
             @Html.DisplayFor(model => model.Likes)
         </dd>
@@ -129,9 +155,17 @@ else
 
 
     @Html.ActionLink("Voltar a lista de Eventos", "Index", "Home", null, new { @class = "btn btn-default" })
+        
 </p>
 }
-
+<dd>
+    <div class="col-md-3" id="form-Horizontal">
+        <font size="4"> Pessoas interresadas no evento:</font>
+        <div id="Opiniao">
+            @Html.Partial("UsersList", Model.Likes)
+        </div>
+    </div>
+</dd>
 <div id="form-Horizontal">
     <h3 class="control-label ">Imagens</h3>
 
@@ -157,4 +191,5 @@ else
 @section scripts{
 @Scripts.Render("~/Scripts/Modernizr-2.8.3.js")
 @Scripts.Render("~/Scripts/lightbox-2.6.js")
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 }

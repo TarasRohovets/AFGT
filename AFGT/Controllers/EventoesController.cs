@@ -22,13 +22,19 @@ namespace AFGT.Controllers
         public ActionResult Index()
         {
             var eventos = db.Eventos.Include(e => e.Organizadore);
+            
             var usid = Convert.ToInt32(User.Identity.GetUserId());
+
+            
+
             return View(eventos.Where(ev => ev.OrgID == usid).ToList());
         }
 
         // GET: Eventoes/Details/5
         public ActionResult Details(int? id)
         {
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,8 +44,58 @@ namespace AFGT.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.users = db.AspNetUsers.Where(e => e.Likes.Any(l => l.EventosID == id));   //
+
+            // ViewBag.users = db.AspNetUsers.Where(l => l.Likes.Any(l => l.UserID == userId));
+
             return View(evento);
         }
+
+
+        [HttpPost]                       //SHIIT LOOOOOOOOOOOOLmLIKESSSS       
+        public ActionResult Like(int id, string Opiniao)    // Preencho isto ou fica vasio???!!!!!!
+        {
+            if (ModelState.IsValid )
+            {
+                // var userID = Convert.ToInt32(User.Identity.GetUserId());
+                // ViewBag.QualquerCoisa = userID;
+                var userID = Convert.ToInt32(User.Identity.GetUserId());
+                var x = db.Likes.FirstOrDefault(m => m.UserID == userID && m.EventosID == id);
+                                                                                          // opiniao como       ???????????????????????????
+                if(x == null)
+                {
+                    Like like = new Like(); //vai dentro do if
+                   
+                    like.UserID = userID; //  id do user
+                    like.EventosID = id;   //        id do evento 
+                    if (Opiniao == "Like")    //  se opiniao yes 
+                    {
+                        like.Opiniao = true;
+                    }
+                    if (Opiniao == "DisLike")    //  se opiniao yes 
+                    {
+                        like.Opiniao = false;
+                    }
+                    db.Likes.Add(like);
+                    db.SaveChanges();
+
+                    return PartialView("UsersList", db.Likes.Include("AspNetUser").Where(l => l.EventosID == id));
+                }
+
+            };
+
+            return HttpNotFound();
+        }
+        
+
+
+
+
+
+
+
+
 
         // GET: Eventoes/Create
         public ActionResult Create()
@@ -250,6 +306,14 @@ namespace AFGT.Controllers
                     evento.MoradaID = morada.MoradaID;
                 }
                 /*Fim de verificaçao morada inserida*/
+
+
+                
+
+
+
+
+
 
                 /*organizadores*/
                 evento.OrgID = Convert.ToInt32(User.Identity.GetUserId());

@@ -18,7 +18,7 @@ namespace AFGT.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private afgtEntities db = new afgtEntities();
-        ApplicationDbContext context;
+        ApplicationDbContext context = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -175,8 +175,10 @@ namespace AFGT.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
+                    await this.UserManager.AddToRoleAsync(user.Id, "User");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
 
@@ -188,8 +190,8 @@ namespace AFGT.Controllers
 
                     //Assign Role to user Here      
                     //await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
-                    ViewBag.Roles = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
-                                         .ToList(), "Id", "Name");
+                   // ViewBag.Roles = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
+                       //                  .ToList(), "Id", "Name");
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

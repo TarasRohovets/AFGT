@@ -171,6 +171,8 @@ button.validate::after{
     margin-top: 200px;
 }
 
+
+
 body {
     padding-top: 50px;
     padding-bottom: 20px;
@@ -271,9 +273,8 @@ a {
 
 }
 
-.thumbnail a > img {
-        height: 200px;
-}
+<<<<<<< HEAD
+=======
 .thumbnail img {
         height: 200px;
 }
@@ -292,6 +293,7 @@ a {
     -webkit-transition: border .2s ease-in-out;
     -o-transition: border .2s ease-in-out;
     transition: border .2s ease-in-out;
+}
 }
 
 #evtitle{

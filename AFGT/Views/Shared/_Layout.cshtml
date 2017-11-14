@@ -16,14 +16,26 @@
                 <a href='@Url.Action("Index", "Home")'>
                     <img src="~/Content/Images/afgticon.PNG" style="width: 100px; height: 55px;" />
                 </a>
+              
+
+            </div>
+            <div class="nav navbar-nav pull-right">
+                @if (ViewContext.HttpContext.User.IsInRole("User") || ViewContext.HttpContext.User.IsInRole("Manager"))
+                {
+                   // tava aqui o Chat
+                }
+                
+                <a class="navbar-brand">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</a>
+                
+                <a class="navbar-brand">@Html.Partial("_LoginPartial")</a>
+                @*<a class="navbar-brand">@Html.ActionLink("Sign In", "SignIn", "Account", new { area = "" }, new { @class = "navbar-brand" })</a>*@
+                     
             </div>
             <div class="nav navbar-nav pull-left">
                 <a class="navbar-brand">@Html.ActionLink("Leva-me a Concertos!", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</a>
                 </div>
                 <div class="nav navbar-nav pull-right">
 
-                    @*<a class="navbar-brand">@Html.ActionLink("Sign In", "SignIn", "Account", new { area = "" }, new { @class = "navbar-brand" })</a>*@
-                    <a class="navbar-brand">@Html.Partial("_LoginPartial")</a>
                 </div>
 
             </div>
