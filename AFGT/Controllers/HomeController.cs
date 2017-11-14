@@ -14,75 +14,71 @@ namespace AFGT.Controllers
     {
         private afgtEntities db = new afgtEntities();
 
-        List<SelectListItem> list = new List<SelectListItem>
+        List<SelectListItem> listPesquisa = new List<SelectListItem>
             {
                 new SelectListItem { Value = "1", Text = "Artista" },
                 new SelectListItem { Value = "2", Text = "Estilo Musical" }
             };
 
+        List<SelectListItem> listOpcao = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "1", Text = "Data" },
+                new SelectListItem { Value = "2", Text = "Cidade" }
+            };
+
         public ActionResult Index()
         {
             var result = db.Eventos.OrderBy(evento => evento.Data).ToList();
-            ViewBag.ListaPesquisa = list;
+
+            ViewBag.ListaPesquisa = listPesquisa;
+            ViewBag.ListaOpcao = listOpcao;
+
             return View(result);
         }
 
         [HttpPost]
-        public ActionResult Index(string ConteudoPesquisa, string GeneroMusicalID, string ListaPesquisa, string Dia, string PointA, string TipoOpcao)
+        public ActionResult Index(string ConteudoPesquisa, int? GeneroMusicalID, string ListaPesquisa, string Dia, string PointA, string ListaOpcao)
         {
             List<Evento> Evento = new List<Evento>();
 
-            var evento = db.Eventos.OrderBy(e => e.Data);
-            var result = evento.ToList();
+            var eventos = db.Eventos.OrderBy(e => e.Data).ToList();
 
+            ViewBag.ListaPesquisa = listPesquisa;
+            ViewBag.ListaOpcao = listOpcao;
 
-            ViewBag.ListaPesquisa = list;
-
-            TempData["PointA"] = PointA;
-
-            switch (TipoOpcao)
+            switch (ListaPesquisa)
             {
-                case "Data":
-
-                    while (Dia == null)
+                case "1": //Artista
+                    if (ConteudoPesquisa != "")
                     {
-                        result = evento.ToList();
-                    }
-                    if (GeneroMusicalID == "" && ConteudoPesquisa == "")
-                    {
-                        result = evento.ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
-                    }
-                    else if (!(GeneroMusicalID == "" && ConteudoPesquisa == "") && ListaPesquisa == "2")
-                    {
-                        result = evento.Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
-                    }
-                    else
-                    {
-                        result = evento.Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == "")).ToList().Where(model => model.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
+                        eventos = eventos.Where(e => e.Artistas.Any(a => a.Nome.ToLower() == ConteudoPesquisa.ToLower())).ToList();
                     }
                     break;
 
-                case "Local":
-                    while (PointA == "")
+                case "2": //Genero Musical
+                    if (GeneroMusicalID != null)
                     {
-                        result = evento.OrderBy(e => e.Morada.Cidade).ToList();
+                        eventos = eventos.Where(e => e.Artistas.Any(a => a.GeneroMusicalID == GeneroMusicalID)).ToList();
                     }
-                    if (GeneroMusicalID == "" && ConteudoPesquisa == "")
+                    break;
+            }
+            switch (ListaOpcao)
+            {
+                case "1"://data
+                    if (Dia != "")
                     {
-                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == "").ToList();
+                        eventos = eventos.Where(e => e.Data.Value.ToString("yyyy-MM-dd") == Dia).ToList();
                     }
-                    else if (!(GeneroMusicalID == "" && ConteudoPesquisa == "") && ListaPesquisa == "2")
+                    break;
+                case "2"://cidade
+                    if (PointA != "")
                     {
-                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == "").Include(c => c.Artistas.Select(a => a.GeneroMusicalID.ToString() == GeneroMusicalID)).ToList();
-                    }
-                    else
-                    {
-                        result = evento.Where(model => model.Morada.Cidade.ToLower() == PointA.ToLower() || PointA == "").Include(c => c.Artistas.Select(a => a.Nome.ToString().ToLower() == ConteudoPesquisa.ToLower() || ConteudoPesquisa == "")).ToList();
+                        eventos = eventos.Where(e => e.Morada.Cidade.ToLower() == PointA.ToLower()).ToList();
                     }
                     break;
             }
 
-            return PartialView("_ResultadosPesquisa", result);
+            return PartialView("_ResultadosPesquisa", eventos);
         }
 
         public ActionResult _Local()

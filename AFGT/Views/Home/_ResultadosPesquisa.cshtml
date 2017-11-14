@@ -1,18 +1,10 @@
 ﻿@model IEnumerable<AFGT.Models.Evento>
 
 <div id="resultadosPesquisa">
-
-    <div class="active" id="Data">
-        @Html.Partial("_Data")
-    </div>
-
-    <div class="hidden" id="Local">
-        @Html.Partial("_Local")
-    </div>
     <br>
     @if (Model.Count() == 0)
     {
-        <strong> Upss!!!!  Não foram encontrados eventos para esta pesquisa! Tenta outra vez! </strong>
+        <strong> Upss!!!!  Não foram encontrados eventos para esta pesquisa! @Html.ActionLink("Tenta outra vez!", "Index", "Home")! </strong>
     }
 
     @foreach (var item in Model)
