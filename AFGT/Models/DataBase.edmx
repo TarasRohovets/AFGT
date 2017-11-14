@@ -96,6 +96,14 @@
           <Property Name="ArtistasID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EventosID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="FotoGallery">
+          <Key>
+            <PropertyRef Name="FotoID" />
+          </Key>
+          <Property Name="FotoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventoID" Type="int" Nullable="false" />
+          <Property Name="FotoURL" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
         <EntityType Name="GeneroMusical">
           <Key>
             <PropertyRef Name="GeneroMusicalID" />
@@ -264,6 +272,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FotoGallery_Eventos">
+          <End Role="Eventos" Type="Self.Eventos" Multiplicity="1" />
+          <End Role="FotoGallery" Type="Self.FotoGallery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Eventos">
+              <PropertyRef Name="EventosID" />
+            </Principal>
+            <Dependent Role="FotoGallery">
+              <PropertyRef Name="EventoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Likes_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Likes" Type="Self.Likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Likes">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Likes_Eventos">
           <End Role="Eventos" Type="Self.Eventos" Multiplicity="1" />
           <End Role="Likes" Type="Self.Likes" Multiplicity="*" />
@@ -298,6 +330,7 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Eventos" EntityType="Self.Eventos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EventosArtistas" EntityType="Self.EventosArtistas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FotoGallery" EntityType="Self.FotoGallery" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GeneroMusical" EntityType="Self.GeneroMusical" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Likes" EntityType="Self.Likes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Morada" EntityType="Self.Morada" Schema="dbo" store:Type="Tables" />
@@ -340,6 +373,14 @@
             <End Role="Eventos" EntitySet="Eventos" />
             <End Role="EventosArtistas" EntitySet="EventosArtistas" />
           </AssociationSet>
+          <AssociationSet Name="FK_FotoGallery_Eventos" Association="Self.FK_FotoGallery_Eventos">
+            <End Role="Eventos" EntitySet="Eventos" />
+            <End Role="FotoGallery" EntitySet="FotoGallery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Likes_AspNetUsers" Association="Self.FK_Likes_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Likes" EntitySet="Likes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Likes_Eventos" Association="Self.FK_Likes_Eventos">
             <End Role="Eventos" EntitySet="Eventos" />
             <End Role="Likes" EntitySet="Likes" />
@@ -361,6 +402,7 @@
           <EntitySet Name="AspNetUserLogins" EntityType="afgtModel.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="afgtModel.AspNetUser" />
           <EntitySet Name="Eventos" EntityType="afgtModel.Evento" />
+          <EntitySet Name="FotoGalleries" EntityType="afgtModel.FotoGallery" />
           <EntitySet Name="GeneroMusicals" EntityType="afgtModel.GeneroMusical" />
           <EntitySet Name="Likes" EntityType="afgtModel.Like" />
           <EntitySet Name="Moradas" EntityType="afgtModel.Morada" />
@@ -379,6 +421,10 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
           </AssociationSet>
+          <AssociationSet Name="FK_Likes_AspNetUsers" Association="afgtModel.FK_Likes_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Like" EntitySet="Likes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Organizadores_AspNetUsers" Association="afgtModel.FK_Organizadores_AspNetUsers">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Organizadore" EntitySet="Organizadores" />
@@ -390,6 +436,10 @@
           <AssociationSet Name="FK_Eventos_Organizadores" Association="afgtModel.FK_Eventos_Organizadores">
             <End Role="Organizadore" EntitySet="Organizadores" />
             <End Role="Evento" EntitySet="Eventos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FotoGallery_Eventos" Association="afgtModel.FK_FotoGallery_Eventos">
+            <End Role="Evento" EntitySet="Eventos" />
+            <End Role="FotoGallery" EntitySet="FotoGalleries" />
           </AssociationSet>
           <AssociationSet Name="FK_Likes_Eventos" Association="afgtModel.FK_Likes_Eventos">
             <End Role="Evento" EntitySet="Eventos" />
@@ -473,6 +523,7 @@
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="afgtModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="afgtModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="Likes" Relationship="afgtModel.FK_Likes_AspNetUsers" FromRole="AspNetUser" ToRole="Like" />
           <NavigationProperty Name="Organizadore" Relationship="afgtModel.FK_Organizadores_AspNetUsers" FromRole="AspNetUser" ToRole="Organizadore" />
           <NavigationProperty Name="AspNetRoles" Relationship="afgtModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
@@ -489,8 +540,18 @@
           <Property Name="Link" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Morada" Relationship="afgtModel.FK_Eventos_Morada" FromRole="Evento" ToRole="Morada" />
           <NavigationProperty Name="Organizadore" Relationship="afgtModel.FK_Eventos_Organizadores" FromRole="Evento" ToRole="Organizadore" />
+          <NavigationProperty Name="FotoGalleries" Relationship="afgtModel.FK_FotoGallery_Eventos" FromRole="Evento" ToRole="FotoGallery" />
           <NavigationProperty Name="Likes" Relationship="afgtModel.FK_Likes_Eventos" FromRole="Evento" ToRole="Like" />
           <NavigationProperty Name="Artistas" Relationship="afgtModel.EventosArtistas" FromRole="Evento" ToRole="Artista" />
+        </EntityType>
+        <EntityType Name="FotoGallery">
+          <Key>
+            <PropertyRef Name="FotoID" />
+          </Key>
+          <Property Name="FotoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventoID" Type="Int32" Nullable="false" />
+          <Property Name="FotoURL" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Evento" Relationship="afgtModel.FK_FotoGallery_Eventos" FromRole="FotoGallery" ToRole="Evento" />
         </EntityType>
         <EntityType Name="GeneroMusical">
           <Key>
@@ -508,6 +569,7 @@
           <Property Name="Opiniao" Type="Boolean" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="EventosID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="afgtModel.FK_Likes_AspNetUsers" FromRole="Like" ToRole="AspNetUser" />
           <NavigationProperty Name="Evento" Relationship="afgtModel.FK_Likes_Eventos" FromRole="Like" ToRole="Evento" />
         </EntityType>
         <EntityType Name="Morada">
@@ -589,6 +651,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Likes_AspNetUsers">
+          <End Type="afgtModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="afgtModel.Like" Role="Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Organizadores_AspNetUsers">
           <End Type="afgtModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
           <End Type="afgtModel.Organizadore" Role="Organizadore" Multiplicity="0..1" />
@@ -622,6 +696,18 @@
             </Principal>
             <Dependent Role="Evento">
               <PropertyRef Name="OrgID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FotoGallery_Eventos">
+          <End Type="afgtModel.Evento" Role="Evento" Multiplicity="1" />
+          <End Type="afgtModel.FotoGallery" Role="FotoGallery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="EventosID" />
+            </Principal>
+            <Dependent Role="FotoGallery">
+              <PropertyRef Name="EventoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -727,6 +813,15 @@
                 <ScalarProperty Name="MoradaID" ColumnName="MoradaID" />
                 <ScalarProperty Name="OrgID" ColumnName="OrgID" />
                 <ScalarProperty Name="EventosID" ColumnName="EventosID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FotoGalleries">
+            <EntityTypeMapping TypeName="afgtModel.FotoGallery">
+              <MappingFragment StoreEntitySet="FotoGallery">
+                <ScalarProperty Name="FotoURL" ColumnName="FotoURL" />
+                <ScalarProperty Name="EventoID" ColumnName="EventoID" />
+                <ScalarProperty Name="FotoID" ColumnName="FotoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

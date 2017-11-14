@@ -253,6 +253,9 @@
     <Compile Include="Models\Evento.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FotoGallery.cs">
+      <DependentUpon>DataBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GeneroMusical.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>

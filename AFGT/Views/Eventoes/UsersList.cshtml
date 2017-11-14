@@ -1,12 +1,13 @@
-﻿@model IEnumerable<AFGT.Models.AspNetUser>
+﻿@model AFGT.Models.Evento
 
 
 <div>
-    @foreach (var item in Model)
+    @foreach (var like in Model.Likes)
     {
-        <a href="@Url.Action("Details","Eventoes",new {id = item.Id })">
-            <font size="2">@Html.DisplayFor(e => item.UserName)</font>
-            <img src="@Html.DisplayFor(e => item.LinkFotoUser)" height="142" width="142" />
+       
+        <a href="@Url.Action("Index", "Manage", new { like.AspNetUser.Id })" >
+           <font size="2">@like.AspNetUser.UserName</font>
+            <img src=" @like.AspNetUser.LinkFotoUser" height="142" width="142" />
         </a>
     }
 

@@ -12,13 +12,12 @@ namespace AFGT.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Like
+    public partial class FotoGallery
     {
-        public Nullable<bool> Opiniao { get; set; }
-        public int UserID { get; set; }
-        public int EventosID { get; set; }
+        public int FotoID { get; set; }
+        public int EventoID { get; set; }
+        public string FotoURL { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Evento Evento { get; set; }
     }
 }

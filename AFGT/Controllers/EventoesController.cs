@@ -24,6 +24,9 @@ namespace AFGT.Controllers
             var eventos = db.Eventos.Include(e => e.Organizadore);
             
             var usid = Convert.ToInt32(User.Identity.GetUserId());
+
+            
+
             return View(eventos.Where(ev => ev.OrgID == usid).ToList());
         }
 
@@ -42,9 +45,9 @@ namespace AFGT.Controllers
                 return HttpNotFound();
             }
 
+            ViewBag.users = db.AspNetUsers.Where(e => e.Likes.Any(l => l.EventosID == id));   //
 
-
-           // ViewBag.users = db.AspNetUsers.Where(l => l.Likes.Any(l => l.UserID == userId));
+            // ViewBag.users = db.AspNetUsers.Where(l => l.Likes.Any(l => l.UserID == userId));
 
             return View(evento);
         }

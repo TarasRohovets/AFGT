@@ -114,8 +114,8 @@
     using (Ajax.BeginForm("Details", "Eventoes", new { id = Model.EventosID, userId = User.Identity.GetUserId() },new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "Opiniao" }))
     {
                              
-                          <button name="Opiniao" type="submit" id="like" value="Like">Like</button>
-                          <button name="Opiniao" type="submit" id="dislike" value="DisLike">DisLike</button>
+                          <button name="Opiniao" type="submit" id="like" value="Like">Estou interessado!</button>
+                          
 
 
 
@@ -148,8 +148,9 @@ else
 }
 
 <div class="col-md-3" id="form-Horizontal">
-    <font size="4"> Events you liked:</font>
-    @Html.Partial("UsersList", (object)ViewBag.AspNetUser)
+    <font size="4"> Pessoas interresadas no evento:</font>
+    
+    @Html.Partial("UsersList", Model)
 
 </div>
 
