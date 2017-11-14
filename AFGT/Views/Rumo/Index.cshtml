@@ -3,16 +3,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Teste Rumo</h2>
+    <h3>Teste Rumo</h3>
 
-@using (Ajax.BeginForm("Index", "Rumo", new AjaxOptions { UpdateTargetId = "mapa" }))
-{
-    <div class="form-group">
-        <div class="col-md-10">
-            @Html.Label("Origem")
-            @Html.Action("_Local","Home")
+    @using (Ajax.BeginForm("Index", "Rumo", new AjaxOptions { UpdateTargetId = "mapa" }))
+    {
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.Label("Origem")
+                @Html.Action("_Local", "Home")
+            </div>
         </div>
-    </div>
-}
+    }
 
-<iframe id="mapa" width="600" height="450" frameborder="0" style="border:0" src="@(ViewBag.Link)" allowfullscreen></iframe>
+    <iframe id="mapa" width="600" height="450" frameborder="0" style="border:0" src="@(ViewBag.Link)" allowfullscreen></iframe>

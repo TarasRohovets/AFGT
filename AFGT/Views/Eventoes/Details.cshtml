@@ -10,19 +10,23 @@
 <div  id="form-Horizontal">
     <h4>Evento</h4>
     <hr />
+
     <dl class="dl-horizontal">
+    
 
         <dt>
-             <label class="control-label ">Imagem do Evento</label>
+            <label class="control-label ">Imagem do Evento</label>
             @*@Html.DisplayNameFor(model => model.Link)*@
         </dt>
 
         <dd>
-        <h3><img src=@Html.DisplayFor(model => model.Link) style=" width:280px; height:160px; background: #ffffff; margin: auto; -moz-border-radius: 0px; border-radius: 0px; padding: 6px; box-shadow: 0px 0px 20px #888;" /></h3>
-         @*  @Html.DisplayFor(model => model.Link)*@
+            <a href=@Html.DisplayFor(model => model.Link) data-lightbox="EvImg">
+                <h3><img src=@Html.DisplayFor(model => model.Link) style=" width:500px; height:auto; background: #ffffff; margin: auto; -moz-border-radius: 0px; border-radius: 0px; padding: 6px; box-shadow: 0px 0px 20px #888;" data-toggle="lightbox" /></h3>
+            </a>
+            @*  @Html.DisplayFor(model => model.Link)*@
         </dd>
 
-       
+
         <dt>
             <label class="control-label ">Nome do Evento</label>     
             @*@Html.DisplayNameFor(model => model.NomeEvento)*@
@@ -102,6 +106,8 @@
         <dd>
             @Html.DisplayFor(model => model.Likes)
         </dd>
+
+
     </dl>
 </div>
 
@@ -125,3 +131,30 @@ else
     @Html.ActionLink("Voltar a lista de Eventos", "Index", "Home", null, new { @class = "btn btn-default" })
 </p>
 }
+
+<div id="form-Horizontal">
+    <h3 class="control-label ">Images</h3>
+
+
+
+    <div class="row justify-content-center">
+       
+            
+                @foreach (var item in Model.FotoGalleries.Where(i => i.EventoID == Model.EventosID))
+            { <div class="col-md-4">
+
+            <a href=@Html.DisplayFor(modelItem => item.FotoURL) data-lightbox="example-set" >
+                <img src=@Html.DisplayFor(modelItem => item.FotoURL)  height="auto" width="200"  class="img-fluid">
+            </a>
+        </div>
+                }
+
+        
+
+    </div>
+</div>
+
+@section scripts{
+@Scripts.Render("~/Scripts/Modernizr-2.8.3.js")
+    @Scripts.Render("~/Scripts/lightbox-2.6.js")
+    }

@@ -21,24 +21,26 @@
         {
 
             <div class="col-sm-4">
-                <div class="thumbnail">
-                    <a href='@Url.Action("Details", "Eventoes", new { id = item.EventosID })'>
+                <a href='@Url.Action("Details", "Eventoes", new { id = item.EventosID })'>
+                    <div class="thumbnail">
+
                         <img alt="..." src=@Html.DisplayFor(modelItem => item.Link) id="img"> <!--falta fazer upload-->
-                    </a>
-                    <div class="caption">
-                        <a href='@Url.Action("Details", "Eventoes", new { id = item.EventosID })'>
-                            <h2 id="evtitle">@Html.DisplayFor(modelItem => item.NomeEvento)</h2>
-                        </a>
-                        <h3>@Html.DisplayFor(modelItem => item.Data) @*| @Html.DisplayFor(modelItem => item.Data.TimeOfDay)*@</h3>
-                        <br />
-                        <strong>@Html.LabelFor(modelItem => item.Descricao)</strong>
-                        <p>@Html.DisplayFor(modelItem => item.Descricao)</p>
-                        <strong>@Html.LabelFor(modelItem => item.Artistas)</strong>
-                        <p>@Html.DisplayFor(modelItem => item.Artistas)</p>
-                        <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) </p>
-                        <div id="buttonbottom">@Html.ActionLink("Ver percurso", "Index", "Rumo", new { @class = "btn btn-default" })</div>
+
+                        <div class="caption">
+                            @*<a href='@Url.Action("Details", "Eventoes", new { id = item.EventosID })'></a>*@
+                                <h2 id="evtitle">@Html.DisplayFor(modelItem => item.NomeEvento)</h2>
+                            
+                            <h3>@Html.DisplayFor(modelItem => item.Data) @*| @Html.DisplayFor(modelItem => item.Data.TimeOfDay)*@</h3>
+                            <br />
+                            <strong>@Html.LabelFor(modelItem => item.Descricao)</strong>
+                            <p>@Html.DisplayFor(modelItem => item.Descricao)</p>
+                            <strong>@Html.LabelFor(modelItem => item.Artistas)</strong>
+                            <p>@Html.DisplayFor(modelItem => item.Artistas)</p>
+                            <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) </p>
+                            @*<div id="buttonbottom">@Html.ActionLink("Ver percurso", "Index", "Rumo", new { @class = "btn btn-default" })</div>*@
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         }
     }
