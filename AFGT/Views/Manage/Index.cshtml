@@ -23,7 +23,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6" id="form-Horizontal">
+                <div class="col-md-12" id="form-Horizontal">
 
                     @using (Html.BeginForm("Index", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
@@ -92,7 +92,7 @@
             </div>
 
 
-            <div class="col-md-3" style="overflow-y:scroll; max-height:700px;">
+            <div class="col-md-3" style="overflow-y:scroll; max-height:700px;" id="form-Horizontal">
 
                 <b style="font-size:25px;"> Eventos que te interessaram:</b>
                 @Html.Partial("EventosListView", (object)ViewBag.eventos)
