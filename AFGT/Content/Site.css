@@ -1,6 +1,8 @@
 ﻿/****************************************************
   * Homepage search 
   *****************************************************/
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700italic);
+
 .header {
     min-height: 400px;
     width: 100%;
@@ -19,7 +21,7 @@ select.button-four {
     text-indent: 35%;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700italic);
+
 
 * {
     margin: 0px;
@@ -185,6 +187,9 @@ body {
     background-position: center center;
     background-size: cover !important;
 }
+.sidebar{
+    width: 14%;
+}
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -273,8 +278,7 @@ a {
 
 }
 
-<<<<<<< HEAD
-=======
+
 .thumbnail img {
         height: 200px;
 }
@@ -294,7 +298,8 @@ a {
     -o-transition: border .2s ease-in-out;
     transition: border .2s ease-in-out;
 }
-}
+
+
 
 #evtitle{
     color:black;
@@ -311,3 +316,8 @@ a {
 h2{
     color:white;
 }
+
+#special{
+    color:black;
+}
+
