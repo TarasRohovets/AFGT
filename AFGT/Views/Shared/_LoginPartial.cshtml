@@ -4,7 +4,7 @@
 
     <div class="dropdown" style="float:right;">
 
-        <div class="dropbtn">@Html.ActionLink("HELLO " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</div>
+        <div class="dropbtn">@Html.ActionLink("Olá " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</div>
         <div class="dropdown-content">
 
             @Html.ActionLink("Account Settings", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
