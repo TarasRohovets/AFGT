@@ -109,7 +109,7 @@ namespace AFGT.Controllers
             //evento.OrgID = 1;
                 db.Eventos.Add(evento);
                 db.SaveChanges();
-
+            /*imagens do slideshow*/
             if (files != null)
             {
                 foreach (var foto in files)
@@ -138,7 +138,7 @@ namespace AFGT.Controllers
                     }
                 }
             }
-
+            /*fim imagens do slideshow*/
 
 
             return RedirectToAction("Index");
@@ -202,6 +202,7 @@ namespace AFGT.Controllers
                     evento.Link = "/Content/Images/default.jpg";
                 }
                 /*Fim de verificaçao morada inserida*/
+                /*imagens do slideshow*/
                 if (files != null)
                 {
                     foreach (var foto in files)
@@ -230,7 +231,7 @@ namespace AFGT.Controllers
                         }
                     }
                 }
-
+                /*fim imagens do slideshow*/
                 /*Verificar morada inserida*/
                 var x = db.Moradas.FirstOrDefault(m => m.Endereco == morada.Endereco && m.CodPostal == morada.CodPostal && m.Cidade == morada.Cidade);
 

@@ -284,6 +284,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Likes_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Likes" Type="Self.Likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Likes">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Likes_Eventos">
           <End Role="Eventos" Type="Self.Eventos" Multiplicity="1" />
           <End Role="Likes" Type="Self.Likes" Multiplicity="*" />
@@ -365,6 +377,10 @@
             <End Role="Eventos" EntitySet="Eventos" />
             <End Role="FotoGallery" EntitySet="FotoGallery" />
           </AssociationSet>
+          <AssociationSet Name="FK_Likes_AspNetUsers" Association="Self.FK_Likes_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Likes" EntitySet="Likes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Likes_Eventos" Association="Self.FK_Likes_Eventos">
             <End Role="Eventos" EntitySet="Eventos" />
             <End Role="Likes" EntitySet="Likes" />
@@ -404,6 +420,10 @@
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="afgtModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Likes_AspNetUsers" Association="afgtModel.FK_Likes_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Like" EntitySet="Likes" />
           </AssociationSet>
           <AssociationSet Name="FK_Organizadores_AspNetUsers" Association="afgtModel.FK_Organizadores_AspNetUsers">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
@@ -503,6 +523,7 @@
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="afgtModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="afgtModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="Likes" Relationship="afgtModel.FK_Likes_AspNetUsers" FromRole="AspNetUser" ToRole="Like" />
           <NavigationProperty Name="Organizadore" Relationship="afgtModel.FK_Organizadores_AspNetUsers" FromRole="AspNetUser" ToRole="Organizadore" />
           <NavigationProperty Name="AspNetRoles" Relationship="afgtModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
@@ -548,6 +569,7 @@
           <Property Name="Opiniao" Type="Boolean" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="EventosID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="afgtModel.FK_Likes_AspNetUsers" FromRole="Like" ToRole="AspNetUser" />
           <NavigationProperty Name="Evento" Relationship="afgtModel.FK_Likes_Eventos" FromRole="Like" ToRole="Evento" />
         </EntityType>
         <EntityType Name="Morada">
@@ -626,6 +648,18 @@
             </Principal>
             <Dependent Role="AspNetUserLogin">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Likes_AspNetUsers">
+          <End Type="afgtModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="afgtModel.Like" Role="Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

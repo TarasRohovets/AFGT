@@ -18,6 +18,7 @@ namespace AFGT.Models
         public int UserID { get; set; }
         public int EventosID { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Evento Evento { get; set; }
     }
 }
