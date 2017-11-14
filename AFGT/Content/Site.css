@@ -397,3 +397,27 @@ a {
     color:black;
 }
 
+legend{
+    margin-left:28%;
+}
+
+#label1{
+    margin-left:28%;
+}
+#message{
+    margin-left:28%;
+    
+   
+    
+}
+
+#sendmessage {
+    margin-left: 28%;
+}
+
+#label2 {
+    margin-left: 28%;
+}
+#discussion {
+    margin-left: 50%;
+}

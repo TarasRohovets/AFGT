@@ -2,17 +2,17 @@
     ViewBag.Title = "Chat";
 }
 <fieldset>
-    <legend style="color:orangered">Welcome to Eventos chat</legend>
+    <legend style="color:darkslategrey; font:500;">Bem-vindo ao Chat do Evento</legend>
 </fieldset>
-<div class="form-group col-xl-12">
-    <label style="color: blue; font-style: oblique;font-size: medium" id="label1">Write Your Message Here!</label><br />
-    <textarea class="form-control" rows="4" cols="40" id="message" placeholder="Share what's in your mind..."></textarea>
+<div class="form-group col-xl-12" style="justify-content:center;">
+    <label style="color: darkolivegreen; font-style: oblique;font-size: medium" id="label1">Escreve a sua mensagem aqui!</label><br />
+    <textarea class="form-control" rows="4" cols="40" id="message" placeholder="Partilha o que pensas..."></textarea>
     <br />
-    <input type="button" class="btn btn-primary" id="sendmessage" value="Send" />
+    <input type="button" class="btn btn-primary" id="sendmessage" value="Enviar" />
     <br />
     <br />
     <label style="color: blue;font-style:oblique;font-size:medium" id="label2">Group Chat Conversations History</label>
-    <div class="container chatArea">
+    <div class="container chatArea" style="background-color:aliceblue;">
         <input type="hidden" id="displayname" />
         <ul id="discussion"></ul>
     </div>
