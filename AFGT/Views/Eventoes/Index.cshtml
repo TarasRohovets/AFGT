@@ -21,13 +21,19 @@
                 <div class="thumbnail">
                     <img alt="..." src=@Html.DisplayFor(modelItem => item.Link)> <!--falta fazer upload-->
                     <div class="caption">
+                        @*<div align="center"><a href="https://twitter.com/minimalmonkey" class="icon-button twitter"><i class="icon-twitter"></i><span></span></a>
+                            <a href="https://facebook.com" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a>
+                            <a href="https://plus.google.com" class="icon-button google-plus"><i class="icon-google-plus"></i><span></span></a></div>*@
                         <h2>@Html.DisplayFor(modelItem => item.NomeEvento)</h2>
                         <h3>@Html.DisplayFor(modelItem => item.Data) @*| @Html.DisplayFor(modelItem => item.Data.TimeOfDay)*@</h3>                   
                         <br/>
                         <strong>@Html.LabelFor(modelItem => item.Descricao)</strong>
                         <p>@Html.DisplayFor(modelItem => item.Descricao)</p>
                         <strong>@Html.LabelFor(modelItem => item.Artistas)</strong>
-                        <p>@Html.DisplayFor(modelItem => item.Artistas)</p>
+                        
+                        @foreach(var i in item.Artistas) { 
+                        <p>@Html.DisplayFor(modelItem => i.Nome)</p>
+                        }
                         <strong>@Html.LabelFor(modelItem => item.Morada)</strong>
                         <p>@Html.DisplayFor(modelItem => item.Morada.Endereco)</p>
                         <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) @Html.DisplayFor(modelItem => item.Morada.CodPostal)</p>
@@ -38,8 +44,10 @@
                             @Html.ActionLink("Apagar", "Delete", new { id = item.EventosID })
                         </p>
                     </div>
-                </div>
+                <div>
             </div>
+        </div>
+    </div>
             }
     }
 

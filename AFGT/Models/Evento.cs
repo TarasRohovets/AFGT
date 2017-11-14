@@ -17,6 +17,7 @@ namespace AFGT.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Evento()
         {
+            this.FotoGalleries = new HashSet<FotoGallery>();
             this.Likes = new HashSet<Like>();
             this.Artistas = new HashSet<Artista>();
         }
@@ -31,6 +32,8 @@ namespace AFGT.Models
     
         public virtual Morada Morada { get; set; }
         public virtual Organizadore Organizadore { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FotoGallery> FotoGalleries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Like> Likes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

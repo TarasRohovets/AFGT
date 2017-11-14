@@ -98,15 +98,15 @@
                 <!--artista-->
                 @Html.LabelFor(model => model.Artistas, htmlAttributes: new { @class = "control-label col-md-2" })
                
-                <div class="control-label col-md-10" id="tagsssbox">
+                <div class="control-label col-md-4" id="tagsssbox">
                     @*@Html.EditorFor(model => model.Artistas, new { htmlAttributes = new { @class = "form-control" } })*@
 
                   
                         
-                      <ul id="xcxcxc" placeholder="Insert artists here...">
-                       
-                       
-                      </ul>
+                     
+                      
+                     <input name="entradadetags" id="entradadetags"/>
+                   
                    
                        
                     
@@ -122,7 +122,7 @@
           
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" /><span><input type="submit" value="Add Artists" class="btn btn-default" /></span>
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
 
@@ -140,6 +140,7 @@
 
 
 @section Styles {
+
     <link rel="stylesheet" href="~/Content/jquery.tagit.css">
     <link rel="stylesheet" href="~/Content/tagit.ui-zendesk.css">
 }
@@ -153,19 +154,19 @@
     <script>
         $("a.tooltipLink").tooltip();
 
-        
+
         $('.datetimepicker').datetimepicker({
-            
+
             format: "DD-MM-YYYY HH:mm",
-           
-           
+
+
                 sideBySide: true,
                 showClose: true,
-                showClear: true,              
+                showClear: true,
                 toolbarPlacement: 'top',
                 stepping: 15,
                 locale: moment.locale('pt'),
-                tooltips: {                    
+                tooltips: {
                     clear: 'Limpar',
                     close: 'Fechar',
                     selectMonth: 'Escolha Mês',
@@ -173,7 +174,7 @@
                     nextMonth: 'Proximo Mês',
                     selectYear: 'Escolha Ano',
                     prevYear: 'Ano anterior',
-                    nextYear: 'Proximo Ano',      
+                    nextYear: 'Proximo Ano',
                     incrementHour: 'Aumentar as horas',
                     pickHour: 'Escolha a Hora',
                     decrementHour: 'Diminuir as horas',
@@ -194,17 +195,31 @@
                 $('.datatimepicker').val(output);
                 console.log($('.datatimepicker').val());
             } else {
-      
+
             }
 
-        
-        
-        
+
+
+
         });
+
+
+        $(document).ready(function () {
+            $("#entradadetags").tagit({
+                allowSpaces: true,
+                singleField: false,
+                availableTags: @Html.Raw(ViewBag.Artistas),
+                
+            });
+        });
+
+
+
 
     </script>
 
-        var z = $(document).ready(function () {
+        
+        @*var z = $(document).ready(function () {
             $('#xcxcxc').tagit({
                
                 allowSpaces: true,
@@ -213,10 +228,10 @@
                  
 
             });
-        });
-        //z.appendTo("<button>"); 
+        });*@
+        
 
-        //afterTagAdded(funcion (){
+        @*//afterTagAdded(funcion (){
         //      fazer funcao para elogiar asescolhas dos artistas depois de introduzidas as tags
         //}): 
 
@@ -230,8 +245,8 @@
         //            availableTags: data
         //        });
         //    }
-        //});
+        //});*@
 
-    </script>
+    
     
 }

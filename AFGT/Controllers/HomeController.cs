@@ -7,12 +7,39 @@ using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Data.Entity;
 using System.Globalization;
+using Newtonsoft.Json;
 
 namespace AFGT.Controllers
 {
     public class HomeController : Controller
     {
         private afgtEntities db = new afgtEntities();
+
+
+
+        //Métodos para Autocomplete da pesquisa (pode ser integrado na pesquisa ou separado). Falta script AJAX na vista e corrigir a chamada da base de dados de Artista para a Lista abaixo
+
+
+        //[HttpGet]
+        //public ActionResult CompletaBusca()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public JsonResult CompletaBusca(string ConteudoPesquisa, string term = "")
+        //{
+        //    var NomeDeArtista = db.Artistas.Where(c => c.Nome.ToUpper()
+        //                    .Contains(term.ToUpper()))
+        //                    .Select(c => new { Name = c.Nome, ID = c.ArtistasID })
+        //                    .Distinct().ToList();
+
+
+
+        //    return Json(NomeDeArtista, JsonRequestBehavior.AllowGet);
+
+        //}
+
 
         List<SelectListItem> list = new List<SelectListItem>
             {
@@ -24,6 +51,20 @@ namespace AFGT.Controllers
         {
             var result = db.Eventos.OrderBy(evento => evento.Data).ToList();
             ViewBag.ListaPesquisa = list;
+
+
+
+            var Artistas = db.Artistas.ToList();
+            List<string> Art = new List<string>();
+            Artistas.ForEach(a => Art.Add(a.Nome));
+            ViewBag.Artistas = JsonConvert.SerializeObject(Art);
+
+            //var Eventos = db.Eventos.ToList();
+            //List<string> Eve = new List<string>();
+            //Eventos.ForEach(a => Eve.Add(a.NomeEvento));
+            //ViewBag.Eventos = JsonConvert.SerializeObject(Eve);
+
+
             return View(result);
         }
 
@@ -89,6 +130,9 @@ namespace AFGT.Controllers
         {
             return View();
         }
+
+
+
 
     }
 }

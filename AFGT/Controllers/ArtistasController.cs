@@ -74,7 +74,7 @@ namespace AFGT.Controllers
                 }
                 else
                 {
-                    artista.LinkFoto = "/Content/Images/default.jpg";
+                    artista.LinkFoto = "/Content/Images/defaultArt.png";
                 }
 
                 //Verificar artista inserido

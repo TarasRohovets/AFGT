@@ -1,4 +1,7 @@
 ﻿using Microsoft.Owin;
+using AFGT.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(AFGT.Startup))]
