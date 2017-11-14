@@ -32,6 +32,7 @@ namespace AFGT.Models
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Evento> Eventos { get; set; }
+        public virtual DbSet<FotoGallery> FotoGalleries { get; set; }
         public virtual DbSet<GeneroMusical> GeneroMusicals { get; set; }
         public virtual DbSet<Like> Likes { get; set; }
         public virtual DbSet<Morada> Moradas { get; set; }

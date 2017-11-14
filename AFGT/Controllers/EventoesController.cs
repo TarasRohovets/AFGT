@@ -53,8 +53,9 @@ namespace AFGT.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NomeEvento,Descricao,Data,Link")] Evento evento, HttpPostedFileBase file, [Bind(Include = "Endereco,Cidade,CodPostal")] Morada morada)
+        public ActionResult Create([Bind(Include = "NomeEvento,Descricao,Data,Link")] Evento evento, HttpPostedFileBase file, [Bind(Include = "Endereco,Cidade,CodPostal")] Morada morada, HttpPostedFileBase[] files, [Bind(Include = "EventoID,FotoURL")] FotoGallery fotoGallery)
         {
+            /*imagem principal*/
             var _path = "";
             var _FileName = "";
             if (file != null)
@@ -77,7 +78,8 @@ namespace AFGT.Controllers
             {
                 evento.Link = "/Content/Images/default.jpg";
             }
-           
+            /*fim imagem principal*/
+            
             /*Verificar morada inserida*/
             var x = db.Moradas.FirstOrDefault(m => m.Endereco == morada.Endereco &&  m.CodPostal == morada.CodPostal && m.Cidade == morada.Cidade);
 
@@ -107,7 +109,39 @@ namespace AFGT.Controllers
             //evento.OrgID = 1;
                 db.Eventos.Add(evento);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+            if (files != null)
+            {
+                foreach (var foto in files)
+                {
+                    var _fotopath = "";
+                    var _fotoFileName = "";
+                    if (foto != null)
+                    {
+                        if (foto.ContentLength > 0)
+                        {
+                            //verifica se o ficheiro é imagem
+                            if (Path.GetExtension(foto.FileName).ToLower() == ".jpg" ||
+                                Path.GetExtension(foto.FileName).ToLower() == ".png" ||
+                                Path.GetExtension(foto.FileName).ToLower() == ".jpeg")
+                            {
+
+                                _fotoFileName = Path.GetFileName(foto.FileName);
+                                _fotopath = Path.Combine(Server.MapPath("~/Content/Images/"), _fotoFileName);
+                                foto.SaveAs(_fotopath);
+                                fotoGallery.FotoURL = "/Content/Images/" + _fotoFileName;
+                                fotoGallery.EventoID = evento.EventosID;
+                                db.FotoGalleries.Add(fotoGallery);
+                                db.SaveChanges();
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+            return RedirectToAction("Index");
           
            
             //ViewBag.OrgID = new SelectList(db.Organizadores, "OrgID", "NomeOrg", evento.OrgID);
@@ -139,11 +173,11 @@ namespace AFGT.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrgID,EventosID,NomeEvento,Descricao,Data,Link")] Evento evento, HttpPostedFileBase file, [Bind(Include = "Endereco,Cidade,CodPostal")] Morada morada)
+        public ActionResult Edit([Bind(Include = "OrgID,EventosID,NomeEvento,Descricao,Data,Link")] Evento evento, HttpPostedFileBase file, [Bind(Include = "Endereco,Cidade,CodPostal")] Morada morada, HttpPostedFileBase[] files, [Bind(Include = "EventoID,FotoURL")] FotoGallery fotoGallery)
         {
             if (ModelState.IsValid)
             {
-
+                /*verificaçao morada inserida*/
                 var _path = "";
                 var _FileName = "";
                 if (file != null)
@@ -166,6 +200,35 @@ namespace AFGT.Controllers
                 else
                 {
                     evento.Link = "/Content/Images/default.jpg";
+                }
+                /*Fim de verificaçao morada inserida*/
+                if (files != null)
+                {
+                    foreach (var foto in files)
+                    {
+                        var _fotopath = "";
+                        var _fotoFileName = "";
+                        if (foto != null)
+                        {
+                            if (foto.ContentLength > 0)
+                            {
+                                //verifica se o ficheiro é imagem
+                                if (Path.GetExtension(foto.FileName).ToLower() == ".jpg" ||
+                                    Path.GetExtension(foto.FileName).ToLower() == ".png" ||
+                                    Path.GetExtension(foto.FileName).ToLower() == ".jpeg")
+                                {
+
+                                    _fotoFileName = Path.GetFileName(foto.FileName);
+                                    _fotopath = Path.Combine(Server.MapPath("~/Content/Images/"), _fotoFileName);
+                                    foto.SaveAs(_fotopath);
+                                    fotoGallery.FotoURL = "/Content/Images/" + _fotoFileName;
+                                    fotoGallery.EventoID = evento.EventosID;
+                                    db.FotoGalleries.Add(fotoGallery);
+                                    db.SaveChanges();
+                                }
+                            }
+                        }
+                    }
                 }
 
                 /*Verificar morada inserida*/
