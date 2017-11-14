@@ -1,5 +1,157 @@
-﻿
+﻿/****************************************************
+  * Homepage search 
+  *****************************************************/
+.header {
+    min-height: 400px;
+    width: 100%;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    background: url("../../Images/Background.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
 
+/* __ teste butoes __ */
+
+select.button-one {
+    text-indent: 25%;
+}
+
+select.button-four {
+    text-indent: 35%;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700italic);
+
+* {
+    margin: 0px;
+    padding: 0px
+}
+
+button {
+    outline: none;
+    height: 40px;
+    text-align: center;
+    width: 130px;
+    border-radius: 40px;
+    background: #fff;
+    border: 2px solid green;
+    color: green;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+
+
+.button-one {
+    outline: none;
+    height: 40px;
+    text-align: center;
+    width: 200px;
+    border-radius: 40px;
+    background: #fff;
+    border: 2px solid green;
+    color: green;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.button-three {
+    color: white;
+    background: green;
+    outline: none;
+    height: 40px;
+    text-align: center;
+    width: 160px;
+    border-radius: 40px;
+    border: 2px solid white;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.button-four {
+    color: white;
+    background: green;
+    outline: none;
+    height: 40px;
+    text-align: center;
+    width: 660px;
+    border-radius: 40px;
+    border: 2px solid white;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+button:hover {
+    color: white;
+    background: green;
+}
+
+button:hover:active {
+    letter-spacing: 2px;
+    letter-spacing: 2px;
+}
+
+button.onclic {
+    width: 40px;
+    border-color: gray;
+    border-width: 3px;
+    font-size: 0;
+    border-left-color: green;
+    animation: rotating 2s 0.25s linear infinite;
+}
+
+button.onclic:hover {
+    color: green;
+    background: white;
+}
+
+button.validate {
+        font-size: 13px;
+        color: white;
+        background: green;
+}        
+
+button.validate::after{
+    font-family: 'FontAwesome';
+    content: "\f00c";
+}
+
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: white;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: white;
+    opacity: 1;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: white;
+    opacity: 1;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white;
+}
+
+
+
+/****************************************************
+  * Homepage search 
+  *****************************************************/
 .custom-navbar {
     background-color: rgba(0,0,0,0.5);
     height: 50px;
@@ -7,7 +159,7 @@
     transition: background-color .5s ease 0s;
 }
 
-    .custom-navbar.opaque {
+.custom-navbar.opaque {
         background-color: black;
         height: 50px;
         transition: background-color .5s ease 0s;
@@ -15,27 +167,22 @@
 
 
 
-    .banner .row {
-        margin-top: 200px;
-    }
+.banner .row {
+    margin-top: 200px;
+}
 
 
 
 body {
-    background: url("../../Images/Background.jpg") no-repeat;
     padding-top: 50px;
     padding-bottom: 20px;
     min-height: 600px;
     position: relative;
-    
     /****************************************************
   * set the backround image to 100% width of the screen 
   *****************************************************/
     background-repeat: no-repeat;
     background-position: center center;
-    -webkit-background-size: cover !important;
-    -moz-background-size: cover !important;
-    -o-background-size: cover !important;
     background-size: cover !important;
 }
 
@@ -62,7 +209,8 @@ textarea {
 table.hidden {
     display: none;
 }
-div.banner{
+
+div.banner {
     padding-bottom: 500px;
 }
 
@@ -118,10 +266,21 @@ a {
     background-color: #f9f9f9;
 }
 
+/*thumbnails do foreach da listagem de enventos*/
 .thumbnail{
     width: 360px;
     height: 600px;
 
+}
+
+<<<<<<< HEAD
+=======
+.thumbnail img {
+        height: 200px;
+}
+#buttonbottom {
+    vertical-align:bottom;
+    position:absolute;
 }
 
 #form-Horizontal {
@@ -135,3 +294,21 @@ a {
     -o-transition: border .2s ease-in-out;
     transition: border .2s ease-in-out;
 }
+}
+
+#evtitle{
+    color:black;
+}
+
+#temcerteza {
+    height: 2px;
+    color: red;
+    background-color: red;
+    border-style: solid;
+    border: none;
+}
+
+h2{
+    color:white;
+}
+

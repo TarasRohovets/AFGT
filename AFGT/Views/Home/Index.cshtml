@@ -1,71 +1,75 @@
 ﻿@model IEnumerable<AFGT.Models.Evento>
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Concertful";
 }
 
-<div>
-    @using (Ajax.BeginForm("Index", new AjaxOptions { UpdateTargetId = "resultadosPesquisa" }))
-    {
-        <div class="form-group">
-            @Html.Partial("_Banner")
-            <div class="row">
-                <p>Ordenar por:</p>
-                <select id="option" name="TipoOpcao">
-                    <option value="Data">Data</option>
-                    <option value="Local">Cidade</option>
-                </select>
-                <br>
-                <br>
-                @Html.Partial("_ResultadosPesquisa", Model)
-                </div>
-            </div>
-}
-                </div>
- <!-- BANNER
-<header class="banner">
-    <div class="container text-center" ">
-        <div class="row">
-            <h1>AFGT Project</h1>
-            <p>AFGT guia-te pelo o que ouves! xD</p>
-        </div>
+<div class="container-fluid h-100">
+    @Html.Partial("_Banner")
+</div>
+<div class="container-fluid h-100">
+    <div class="row">
+        <br>
+        <br>
+        @Html.Partial("_ResultadosPesquisa", Model)
     </div>
-</header> -->
+</div>
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+        <script>
+            function TipoPesquisa(val) {
+                if (val == '2') {
+                    $('#Artista').removeClass('active').addClass('hidden');
+                    $('#Genero').removeClass('hidden').addClass('active');
+                } else {
+                    $('#Genero').removeClass('active').addClass('hidden');
+                    $('#Artista').removeClass('hidden').addClass('active');
+                }
+            }
+
+            function TipoOpcao(val) {
+                if (val == '2') {
+                    $('#Data').removeClass('active').addClass('hidden');
+                    $('#Local').removeClass('hidden').addClass('active');
+                } else {
+                    $('#Local').removeClass('active').addClass('hidden');
+                    $('#Data').removeClass('hidden').addClass('active');
+                }
+            }
+
+            $(function () {
+                $("#button").click(function () {
+                    $("#button").addClass("onclic", 250, validate);
+                });
+
+                function validate() {
+                    setTimeout(function () {
+                        $("#button").removeClass("onclic");
+                        $("#button").addClass("validate", 450, callback);
+                    }, 2250);
+                }
+                function callback() {
+                    setTimeout(function () {
+                        $("#button").removeClass("validate");
+                    }, 1250);
+                }
+            });
+
+        </script>
+    }
+
+    <!--
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+    <script src="js/skrollr.js"></script>
+    <script src="js/_main.js"></script>
     <script>
-        $('#option').change(function () {
-            var TipoOpcao = $('#option').val();
-            if (TipoOpcao == 'Local') {
-                $('#Data').removeClass('active').addClass('hidden');
-                $('#Local').removeClass('hidden').addClass('active');
-            } else {
-                $('#Local').removeClass('active').addClass('hidden');
-                $('#Data').removeClass('hidden').addClass('active');
-            }
-        })
-
-        function TipoPesquisa(val) {
-            if (val == '2') {
-                $('#Artista').removeClass('active').addClass('hidden');
-                $('#Genero').removeClass('hidden').addClass('active');
-            } else {
-                $('#Genero').removeClass('active').addClass('hidden');
-                $('#Artista').removeClass('hidden').addClass('active');
-            }
-        }
+        var s = skrollr.init({
+            smoothScrolling: false,
+            forceHeight: false
+    });
     </script>
-    <script>
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 50)  /*height in pixels when the navbar becomes non opaque*/ {
-                $('.custom-navbar').addClass('opaque');
-            } else {
-                $('.custom-navbar').removeClass('opaque');
-            }
-        });
-  </script>
-  
-}
+    -->

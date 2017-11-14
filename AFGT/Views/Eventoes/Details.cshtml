@@ -1,4 +1,5 @@
-﻿@model AFGT.Models.Evento
+﻿@using Microsoft.AspNet.Identity
+@model AFGT.Models.Evento
 
 @using Microsoft.AspNet.Identity
 
@@ -8,7 +9,7 @@
 
 <h2>Detalhes</h2>
 
-<div>
+<div  id="form-Horizontal">
     <h4>Evento</h4>
     <hr />
          <a class="navbar-brand">@Html.ActionLink("Chat Here!", "Chat", "Chat", new { area = "" }, new { @class = "navbar-brand" })</a>
@@ -16,16 +17,18 @@
     <dl class="dl-horizontal" id="form-Horizontal">
 
         <dt>
-             <label class="control-label ">Imagem do Evento</label>
+            <label class="control-label ">Imagem do Evento</label>
             @*@Html.DisplayNameFor(model => model.Link)*@
         </dt>
 
         <dd>
-        <h3><img src=@Html.DisplayFor(model => model.Link) style=" width:280px; height:160px; background: #ffffff; margin: auto; -moz-border-radius: 0px; border-radius: 0px; padding: 6px; box-shadow: 0px 0px 20px #888;" /></h3>
-         @*  @Html.DisplayFor(model => model.Link)*@
+            <a href=@Html.DisplayFor(model => model.Link) data-lightbox="EvImg">
+                <h3><img src=@Html.DisplayFor(model => model.Link) style=" width:500px; height:auto; background: #ffffff; margin: auto; -moz-border-radius: 0px; border-radius: 0px; padding: 6px; box-shadow: 0px 0px 20px #888;" data-toggle="lightbox" /></h3>
+            </a>
+            @*  @Html.DisplayFor(model => model.Link)*@
         </dd>
 
-       
+
         <dt>
             <label class="control-label ">Nome do Evento</label>     
             @*@Html.DisplayNameFor(model => model.NomeEvento)*@
@@ -99,6 +102,7 @@
 
         
 
+<<<<<<< HEAD
         <dd id="Opiniao">
 
             
@@ -125,6 +129,11 @@
 
     }
      </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Likes)
+        </dd>
+
+
     </dl>
 </div>
 
@@ -132,8 +141,11 @@
 {
     
     <p>
-        @Html.ActionLink("Voltar a lista de Eventos", "Index", null, new { @class = "btn btn-default" }) @Html.ActionLink("Editar", "Edit", new { id = Model.EventosID }, new { @class = "btn btn-default" }) |
-
+        @Html.ActionLink("Voltar a lista de Eventos", "Index", null, new { @class = "btn btn-default" }) 
+         
+        @if(Convert.ToInt32(User.Identity.GetUserId()) == Model.OrgID) { 
+        @Html.ActionLink("Editar", "Edit", new { id = Model.EventosID }, new { @class = "btn btn-default" }) 
+        }
     </p>
 }
 else
@@ -154,3 +166,29 @@ else
 
 </div>
 
+<div id="form-Horizontal">
+    <h3 class="control-label ">Images</h3>
+
+
+
+    <div class="row justify-content-center">
+       
+            
+                @foreach (var item in Model.FotoGalleries.Where(i => i.EventoID == Model.EventosID))
+            { <div class="col-md-4">
+
+            <a href=@Html.DisplayFor(modelItem => item.FotoURL) data-lightbox="example-set" >
+                <img src=@Html.DisplayFor(modelItem => item.FotoURL)  height="auto" width="200"  class="img-fluid">
+            </a>
+        </div>
+                }
+
+        
+
+    </div>
+</div>
+
+@section scripts{
+@Scripts.Render("~/Scripts/Modernizr-2.8.3.js")
+@Scripts.Render("~/Scripts/lightbox-2.6.js")
+}

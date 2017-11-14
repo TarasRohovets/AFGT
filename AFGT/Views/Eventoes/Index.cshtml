@@ -10,42 +10,44 @@
     @Html.ActionLink("Novo Evento", "Create", null, new { @class = "btn btn-default" })
 </p>
 <table class="table">
-    
-       <!--falta ciclo para o organizador-->
+
+    <!--falta ciclo para o organizador-->
     @foreach (var item in Model)
     {
 
-            if (item.Data > System.DateTime.Now) {
-                
+        if (item.Data > System.DateTime.Now)
+        {
+
             <div class="col-sm-4">
                 <div class="thumbnail">
                     <a href='@Url.Action("Details", "Eventoes", new { id = item.EventosID })'>
                         <img alt="..." src=@Html.DisplayFor(modelItem => item.Link)> <!--falta fazer upload-->
+                    </a>
+                    <div class="caption">
+                        <a href='@Url.Action("Details", "Eventoes", new { id = item.EventosID })'>
+                            <h2 id="evtitle">@Html.DisplayFor(modelItem => item.NomeEvento)</h2>
                         </a>
-                        <div class="caption">
-                            <a href='@Url.Action("Details", "Eventoes", new { id = item.EventosID })'>
-                                <h2>@Html.DisplayFor(modelItem => item.NomeEvento)</h2>
-                                </a>
-                                <h3>@Html.DisplayFor(modelItem => item.Data) @*| @Html.DisplayFor(modelItem => item.Data.TimeOfDay)*@</h3>
-                                <br />
-                                <strong>@Html.LabelFor(modelItem => item.Descricao)</strong>
-                                <p>@Html.DisplayFor(modelItem => item.Descricao)</p>
-                                <strong>@Html.LabelFor(modelItem => item.Artistas)</strong>
-                                <p>@Html.DisplayFor(modelItem => item.Artistas)</p>
-                                <strong>@Html.LabelFor(modelItem => item.Morada)</strong>
-                                <p>@Html.DisplayFor(modelItem => item.Morada.Endereco)</p>
-                                <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) @Html.DisplayFor(modelItem => item.Morada.CodPostal)</p>
+                        <h3>@Html.DisplayFor(modelItem => item.Data) @*| @Html.DisplayFor(modelItem => item.Data.TimeOfDay)*@</h3>
+                        <br />
+                        <strong>@Html.LabelFor(modelItem => item.Descricao)</strong>
+                        <p>@Html.DisplayFor(modelItem => item.Descricao)</p>
+                        <strong>@Html.LabelFor(modelItem => item.Artistas)</strong>
+                        <p>@Html.DisplayFor(modelItem => item.Artistas)</p>
+                        <strong>@Html.LabelFor(modelItem => item.Morada)</strong>
+                        <p>@Html.DisplayFor(modelItem => item.Morada.Endereco)</p>
+                        <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) @Html.DisplayFor(modelItem => item.Morada.CodPostal)</p>
 
-                                <p>
-                                    @Html.ActionLink("Editar", "Edit", new { id = item.EventosID }, new { @class = "btn btn-default" })
-                                    @Html.ActionLink("Detalhes", "Details", new { id = item.EventosID }, new { @class = "btn btn-default" })
-                                    @Html.ActionLink("Apagar", "Delete", new { id = item.EventosID }, new { @class = "btn btn-default" })
-                                </p>
-</div>
-</div>
+                        <div id="buttonbottom">
+                            @Html.ActionLink("Editar", "Edit", new { id = item.EventosID }, new { @class = "btn btn-default" })
+                            @Html.ActionLink("Detalhes", "Details", new { id = item.EventosID }, new { @class = "btn btn-default" })
+                            @Html.ActionLink("Apagar", "Delete", new { id = item.EventosID }, new { @class = "btn btn-default" })
+                        </div>
+                    </div>
+                </div>
             </div>
-            }
+        }
     }
 
 
 </table>
+

@@ -415,6 +415,7 @@
     <Content Include="Content\Images\enventsdefault.jpg" />
     <Content Include="Content\Images\testeupload.jpg" />
     <Content Include="Content\Images\índice.jpg" />
+    <Content Include="Content\lightbox.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -424,6 +425,10 @@
     <Content Include="Images\Goku-Super-Saiyan-3-dragon-ball-z-38357471-900-600.jpg" />
     <Content Include="Images\NoPhoto.png" />
     <Content Include="Images\tree.jpg" />
+    <Content Include="img\close.png" />
+    <Content Include="img\loading.gif" />
+    <Content Include="img\next.png" />
+    <Content Include="img\prev.png" />
     <Content Include="Models\DataBase.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DataBase.edmx</DependentUpon>
@@ -540,6 +545,9 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="sass\_variables.sass" />
+    <Content Include="sass\screen.sass" />
+    <Content Include="sass\lightbox.sass" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
@@ -561,6 +569,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\lightbox-2.6.js" />
+    <Content Include="Scripts\lightbox-2.6.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
@@ -585,7 +595,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -622,10 +631,7 @@
     <Content Include="Views\Artistas\Edit.cshtml" />
     <Content Include="Views\Artistas\Index.cshtml" />
     <Content Include="Views\Date.cshtml" />
-    <Content Include="Views\Home\Pesquisa.cshtml" />
-    <Content Include="Views\Home\Local.cshtml" />
     <Content Include="Views\GeneroMusicals\Index.cshtml" />
-    <Content Include="Views\Home\Data.cshtml" />
     <Content Include="Views\Organizadores\Create.cshtml" />
     <Content Include="Views\Organizadores\Delete.cshtml" />
     <Content Include="Views\Organizadores\Details.cshtml" />
@@ -642,6 +648,7 @@
     <Content Include="Views\Chat\Chat.cshtml" />
     <Content Include="Views\Manage\EventosListView.cshtml" />
     <Content Include="Views\Eventoes\UsersList.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

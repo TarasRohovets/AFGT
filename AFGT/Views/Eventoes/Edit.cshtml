@@ -4,14 +4,14 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Editar</h2>
+<h2 id="pagetitle">Editar</h2>
 
 
 @using (Html.BeginForm("Edit", "Eventoes", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
+    <div class="form-horizontal" id="form-Horizontal">
         <h4>Evento</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -21,7 +21,7 @@
             <label class="control-label col-md-2">Imagem do Evento</label>         
             <div class="col-md-10">             
                 <h3><img src=@Html.DisplayFor(model => model.Link) style=" width:280px; height:160px; background: #ffffff; margin: auto; -moz-border-radius: 0px; border-radius: 0px; padding: 6px; box-shadow: 0px 0px 20px #888;" /></h3>
-                <input type="file" name="file" value="Browse" class="btn btn-default" />
+                <input type="file" name="file" value="Browse" class="button-two" />
                 </div>
         </div>
 
@@ -101,7 +101,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="button-two" />
             </div>
         </div>
     </div>
