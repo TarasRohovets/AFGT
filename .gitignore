@@ -440,3 +440,4 @@ __pycache__/
 *.ide
 *.ide
 .vs/AFGT/v15/sqlite3/storage.ide
+*.ide
