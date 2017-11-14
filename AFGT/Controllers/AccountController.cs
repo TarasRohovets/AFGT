@@ -19,9 +19,7 @@ namespace AFGT.Controllers
         private ApplicationUserManager _userManager;
         private afgtEntities db = new afgtEntities();
         ApplicationDbContext context= new ApplicationDbContext();
-
-
-        ApplicationDbContext context = new ApplicationDbContext();
+        
 
         public AccountController()
         {
