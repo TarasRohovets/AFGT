@@ -102,8 +102,8 @@
 
         
 
-<<<<<<< HEAD
-        <dd id="Opiniao">
+
+        <dd >
 
             
     @if (ViewContext.HttpContext.User.IsInRole("User") || ViewContext.HttpContext.User.IsInRole("Manager"))
@@ -115,7 +115,7 @@
 
     
     
-    using (Ajax.BeginForm("Details", "Eventoes", new { id = Model.EventosID, userId = User.Identity.GetUserId() },new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "Opiniao" }))
+    using (Ajax.BeginForm("Like", "Eventoes", new { id = Model.EventosID },new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Opiniao" }))
     {
                              
                           <button name="Opiniao" type="submit" id="like" value="Like">Estou interessado!</button>
@@ -158,14 +158,14 @@ else
         
 </p>
 }
-
-<div class="col-md-3" id="form-Horizontal">
-    <font size="4"> Pessoas interresadas no evento:</font>
-    
-    @Html.Partial("UsersList", Model)
-
-</div>
-
+<dd>
+    <div class="col-md-3" id="form-Horizontal">
+        <font size="4"> Pessoas interresadas no evento:</font>
+        <div id="Opiniao">
+            @Html.Partial("UsersList", Model.Likes)
+        </div>
+    </div>
+</dd>
 <div id="form-Horizontal">
     <h3 class="control-label ">Images</h3>
 
@@ -191,4 +191,5 @@ else
 @section scripts{
 @Scripts.Render("~/Scripts/Modernizr-2.8.3.js")
 @Scripts.Render("~/Scripts/lightbox-2.6.js")
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 }

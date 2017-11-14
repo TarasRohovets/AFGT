@@ -1,14 +1,11 @@
-﻿@model AFGT.Models.Evento
+﻿@model IEnumerable<AFGT.Models.Like>
 
 
 <div>
-    @foreach (var like in Model.Likes)
-    {
-       
-        <a href="@Url.Action("Index", "Manage", new { like.AspNetUser.Id })" >
-           <font size="2">@like.AspNetUser.UserName</font>
+        @foreach (var like in Model)
+        {
+            <font size="2">@like.AspNetUser.UserName</font>
             <img src=" @like.AspNetUser.LinkFotoUser" height="142" width="142" />
-        </a>
-    }
+        }
 
 </div>
