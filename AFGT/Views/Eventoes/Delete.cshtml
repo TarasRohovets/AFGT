@@ -5,9 +5,9 @@
 }
 
 <h2>Apagar</h2>
-<hr id="temcerteza"/>
+
 <h1>Tem a certeza que quer apagar este Evento?</h1>
-<hr id="temcerteza"/>
+
 <div  id="form-Horizontal">
     <h4>Evento</h4>
     <hr />
@@ -109,8 +109,15 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Apagar" class="btn btn-default" /> 
+            
+            
             @Html.ActionLink("Voltar a Lista", "Index", null, new { @class = "btn btn-default" })
+            <input type="submit" value="Apagar" class="btn btn-default pull-right" onclick="return confirm('Tem a certeza que quer apagar este evento?');" /> 
         </div>
     }
 </div>
+
+
+    
+    
+    }

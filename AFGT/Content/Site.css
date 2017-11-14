@@ -125,8 +125,10 @@ a {
 
 .thumbnail a > img {
         height: 200px;
-    }
-
+}
+.thumbnail img {
+        height: 200px;
+}
 #buttonbottom {
     vertical-align:bottom;
     position:absolute;
@@ -159,3 +161,4 @@ a {
 h2{
     color:white;
 }
+
