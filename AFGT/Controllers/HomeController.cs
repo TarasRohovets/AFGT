@@ -41,8 +41,8 @@ namespace AFGT.Controllers
         //}
 
 
-        List<SelectListItem> list = new List<SelectListItem>
-        List<SelectListItem> listPesquisa = new List<SelectListItem>
+        List<SelectListItem> list = new List<SelectListItem>();
+        List<SelectListItem> listPesquisa = new List<SelectListItem>()
             {
                 new SelectListItem { Value = "1", Text = "Artista" },
                 new SelectListItem { Value = "2", Text = "Estilo Musical" }
