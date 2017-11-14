@@ -4,18 +4,18 @@
 
 
 .header {
-    min-height: 560px;
+    min-height: 600px;
     width: 100%;
     text-shadow: 0 1px 1px rgba(0,0,0,0.3);
     background: url("../../Images/Background.jpg") no-repeat center center;
     background-size: cover;
 }
 
-h, p {
+p {
     font-family: 'Alice', serif;
 }
 
-.h1 {
+h {
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
     font-size: 60px;
@@ -23,8 +23,8 @@ h, p {
 }
 
 .p {
-    font-family: 'Alice', serif;
-    font-weight: 200;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
     font-size: 60px;
     line-height: 72px;
 }
