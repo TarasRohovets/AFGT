@@ -3,13 +3,33 @@
   *****************************************************/
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700italic);
 
+
 .header {
-    min-height: 400px;
+    min-height: 560px;
     width: 100%;
     text-shadow: 0 1px 1px rgba(0,0,0,0.3);
     background: url("../../Images/Background.jpg") no-repeat center center;
     background-size: cover;
 }
+
+h, p {
+    font-family: 'Alice', serif;
+}
+
+.h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 60px;
+    line-height: 72px;
+}
+
+.p {
+    font-family: 'Alice', serif;
+    font-weight: 200;
+    font-size: 60px;
+    line-height: 72px;
+}
+
 
 /* __ teste butoes __ */
 
@@ -19,6 +39,7 @@ select.button-one {
 
 select.button-four {
     text-indent: 35%;
+    
 }
 
 
@@ -26,6 +47,7 @@ select.button-four {
 * {
     margin: 0px;
     padding: 0px
+    
 }
 
 button {
