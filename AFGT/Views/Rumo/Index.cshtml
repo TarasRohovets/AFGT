@@ -3,14 +3,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Teste Rumo</h2>
+
 
 @using (Ajax.BeginForm("Index", "Rumo", new AjaxOptions { UpdateTargetId = "mapa" }))
 {
     <div class="form-group">
         <div class="col-md-10">
             @Html.Label("Origem")
-            @Html.Action("_Local","Home")
+            @Html.TextBox("PointA", null, new { @class = "form-control", @style = "width:210px", id = "Local" })
+            <button class="button-two">Ir</button>
         </div>
     </div>
 }

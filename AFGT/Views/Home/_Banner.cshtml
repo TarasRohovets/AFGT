@@ -16,11 +16,32 @@
                 @Html.Action("Index", "GeneroMusicals", new { id = ViewBag.GeneroMusicalID })
             </div>
         </div>
-
-        <div class="col-md-10">
-            @Html.DropDownList("ListaPesquisa", new SelectList(ViewBag.ListaPesquisa, "Value", "Text"), new { onchange = @"TipoPesquisa(this.value);" })
-            <button class="btn btn-default">Ir</button>
-        </div>
-
+﻿<div class="row header" style="padding:150px;">
+    <div class="row text-center padding-bottom-40 push-top" >
+        <h1 class="text-white h1">Concertful</h1>
+        <p class="text-white p">
+            Guia-te pelo o que ouves!
+        </p>
     </div>
+    @using (Ajax.BeginForm("Index", new AjaxOptions { UpdateTargetId = "resultadosPesquisa" }))
+     {
+        <div class="row text-center">
+                <form class="form" >
+                    <div class="col-md-12">
+                        @Html.DropDownList("ListaPesquisa", new SelectList(ViewBag.ListaPesquisa, "Value", "Text"), new { @class = "button-one", onchange = @"TipoPesquisa(this.value);" })
+                        <input name="ConteudoPesquisa" type="text" class="button-four active" id="Artista" placeholder="O que queres ouvir?" />
+                        @Html.Action("Index", "GeneroMusicals", new { id = ViewBag.GeneroMusicalID })
+                        @Html.DropDownList("ListaOpcao", new SelectList(ViewBag.ListaOpcao, "Value", "Text"), new { @class = "button-one", onchange = @"TipoOpcao(this.value);" })
+                        @Html.Partial("_Data")
+                        @Html.Partial("_Local")
+                    </div>
+
+                    <div class="col-md-12">
+                        <button class="button-two">Ir</button>
+                    </div>
+                  </form>
+        </div>
+    }
 </div>
+
+        

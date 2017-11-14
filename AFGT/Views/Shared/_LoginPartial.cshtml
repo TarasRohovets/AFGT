@@ -4,7 +4,7 @@
 
     <div class="dropdown" style="float:right;">
 
-        <div class="dropbtn">@Html.ActionLink("HELLO " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</div>
+        <div class="dropbtn">@Html.ActionLink("Olá " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</div>
         <div class="dropdown-content">
 
             @Html.ActionLink("Account Settings", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
@@ -29,13 +29,11 @@
 else
 {
 
-    <a class="navbar-brand">@Html.ActionLink("Sign In", "SignIn", "Account", new { area = "" }, new { @class = "navbar-brand" })</a>
-    @*<div class="nav navbar-nav pull-right">
-        <a class="navbar-brand">@Html.ActionLink("Register User", "Register", "Account", new { area = "" }, new { @class = "navbar-brand" })</a>
-        <a class="navbar-brand">@Html.ActionLink("Register Organizer", "RegisterOrg", "Account", new { area = "" }, new { @class = "navbar-brand" })</a>
-        <a class="navbar-brand">@Html.ActionLink("Log in", "Login", "Account", new { area = "" }, new { @class = "navbar-brand" })</a>                    <!--APAGEI ISTO routeValues: null, htmlAttributes: new { id = "loginLink" }-->
-    </div>
-*@
-
+            <div class="nav navbar-nav pull-right">
+                <a class="navbar-brand">@Html.ActionLink("Sign In", "SignIn", "Account", new { area = "" }, new { @class = "navbar-brand" })</a>
+                @*<a class="navbar-brand">@Html.ActionLink("Register User", "Register", "Account", new { area = "" }, new { @class = "navbar-brand" })</a>*@
+                @*<a class="navbar-brand">@Html.ActionLink("Register Organizer", "RegisterOrg", "Account", new { area = "" }, new { @class = "navbar-brand" })</a>
+                <a class="navbar-brand">@Html.ActionLink("Log in", "Login", "Account", new { area = "" }, new { @class = "navbar-brand" })</a>*@                    <!--APAGEI ISTO routeValues: null, htmlAttributes: new { id = "loginLink" }-->  
+</div>
 
 }

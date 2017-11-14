@@ -1,0 +1,11 @@
+﻿@model IEnumerable<AFGT.Models.Like>
+
+
+<div>
+        @foreach (var like in Model)
+        {
+            <font size="2">@like.AspNetUser.UserName</font>
+            <img src=" @like.AspNetUser.LinkFotoUser" height="142" width="142" />
+        }
+
+</div>

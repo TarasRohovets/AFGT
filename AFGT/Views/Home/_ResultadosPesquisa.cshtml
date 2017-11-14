@@ -1,18 +1,10 @@
 ﻿@model IEnumerable<AFGT.Models.Evento>
 
 <div id="resultadosPesquisa">
-
-    <div class="active" id="Data">
-        @Html.Partial("_Data")
-    </div>
-
-    <div class="hidden" id="Local">
-        @Html.Partial("_Local")
-    </div>
     <br>
     @if (Model.Count() == 0)
     {
-        <strong> Upss!!!!  Não foram encontrados eventos para esta pesquisa! Tenta outra vez! </strong>
+        <strong> Upss!!!!  Não foram encontrados eventos para esta pesquisa! @Html.ActionLink("Tenta outra vez!", "Index", "Home")! </strong>
     }
 
     @foreach (var item in Model)
@@ -33,8 +25,27 @@
                         <p>@Html.DisplayFor(modelItem => item.Artistas)</p>
                         <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) </p>
                         <p>@Html.ActionLink("Ver percurso","Index","Rumo")</p>
+                <a href='@Url.Action("Details", "Eventoes", new { id = item.EventosID })'>
+                    <div class="thumbnail">
+
+                        <img alt="..." src=@Html.DisplayFor(modelItem => item.Link) id="img"> <!--falta fazer upload-->
+
+                        <div class="caption">
+                            @*<a href='@Url.Action("Details", "Eventoes", new { id = item.EventosID })'></a>*@
+                                <h2 id="evtitle">@Html.DisplayFor(modelItem => item.NomeEvento)</h2>
+                            
+                            <h3>@Html.DisplayFor(modelItem => item.Data) @*| @Html.DisplayFor(modelItem => item.Data.TimeOfDay)*@</h3>
+                            <br />
+                            <strong>@Html.LabelFor(modelItem => item.Descricao)</strong>
+                            <p>@Html.DisplayFor(modelItem => item.Descricao)</p>
+                            <strong>@Html.LabelFor(modelItem => item.Artistas)</strong>
+                            <p>@Html.DisplayFor(modelItem => item.Artistas)</p>
+                            <strong>Local</strong>
+                            <p>@Html.DisplayFor(modelItem => item.Morada.Cidade) </p>
+                            @*<div id="buttonbottom">@Html.ActionLink("Ver percurso", "Index", "Rumo", new { @class = "btn btn-default" })</div>*@
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         }
     }

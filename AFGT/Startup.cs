@@ -13,6 +13,7 @@ namespace AFGT
         {
             ConfigureAuth(app);
             createRolesandUsers();
+            app.MapSignalR();  // adicionei isto para o Chat
         }
 
 
@@ -21,6 +22,7 @@ namespace AFGT
         {
             ApplicationDbContext context = new ApplicationDbContext();
                 
+
             var roleManager = new RoleManager<CustomRole, int>(new CustomRoleStore(context));
             var UserManager = new UserManager<ApplicationUser, int>(new CustomUserStore(context));
 
