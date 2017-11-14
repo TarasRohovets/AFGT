@@ -439,4 +439,9 @@ __pycache__/
 *.ide
 *.ide
 *.ide
+<<<<<<< HEAD
+*.ide
+=======
+.vs/AFGT/v15/sqlite3/storage.ide
+>>>>>>> BranchFrancisco
 *.ide
