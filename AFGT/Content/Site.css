@@ -1,7 +1,6 @@
 ﻿/****************************************************
   * Homepage search 
   *****************************************************/
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700italic);
 
 
 .header {
@@ -443,3 +442,10 @@ legend{
 #discussion {
     margin-left: 50%;
 }
+
+#loginForm{
+    margin-left:30%;
+    
+}
+
+
